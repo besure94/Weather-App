@@ -16,7 +16,6 @@ function WeatherForecast() {
       })
       .then((jsonifiedResponse) => {
         setWeatherForecast(jsonifiedResponse.list)
-        console.log(jsonifiedResponse);
         setIsLoaded(true)
       })
       .catch((error) => {
@@ -25,7 +24,6 @@ function WeatherForecast() {
       });
   }, [])
 
-  console.log(weatherForecast);
   if (error) {
     return <h1>Error: {error}</h1>;
   } else if (!isLoaded) {
