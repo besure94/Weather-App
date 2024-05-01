@@ -14,7 +14,7 @@ function WeatherForecast() {
   }, [city]);
 
   const getWeather = (city) => {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&id=524901&appid=${process.env.REACT_APP_API_KEY}`)
+    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`${response.status}: ${response.statusText}`);
