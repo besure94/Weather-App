@@ -45,15 +45,14 @@ function WeatherForecast() {
       {isLoaded && (
         <React.Fragment>
           <h3>Weather Forecast for {city}</h3>
-          <ul>
-            {weatherForecast.map((forecast, index) =>
-              <li key={index}>
-                <h3>Date: {forecast.dt_txt}</h3>
-                <p>Temperature: {forecast.main.temp} degrees</p>
-                <p>Description: {forecast.weather[0].description}</p>
-              </li>
-            )}
-          </ul>
+          {weatherForecast.map((forecast, index) =>
+            <div key={index}>
+              <h3>Date: {forecast.dt_txt}</h3>
+              <p>Temperature: {forecast.main.temp} degrees</p>
+              <p>Description: {forecast.weather[0].description}</p>
+              <hr/>
+            </div>
+          )}
         </React.Fragment>
       )}
     </div>
