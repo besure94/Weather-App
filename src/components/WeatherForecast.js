@@ -47,6 +47,7 @@ function WeatherForecast() {
       {isLoaded && (
         <React.Fragment>
           <h2>Five Day Forecast for {city}</h2>
+          <p>Each day contains the forecast in 3 hour steps.</p>
           {weatherForecast.map((forecast, index) =>
             <div key={index}>
               <h3>Date: {forecast.dt_txt}</h3>
