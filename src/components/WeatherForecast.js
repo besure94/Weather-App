@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SearchForm from './SearchForm';
+import getWeather from '../api-call/weather-api-call';
 
 function WeatherForecast() {
   const [error, setError] = useState(null);
@@ -8,37 +9,28 @@ function WeatherForecast() {
   const [city, setCity] = useState("");
 
   useEffect(() => {
+    async function getWeatherApiData() {
+      setError(null);
+      const result = await getWeather(city);
+      if (result instanceof Error) {
+        setError(result.message);
+        setIsLoaded(false);
+        return;
+      }
+      setWeatherForecast(result.list);
+      setIsLoaded(true);
+    }
+
     if (city) {
-      getWeather(city);
+      getWeatherApiData(city);
     }
   }, [city]);
-
-  const getWeather = (city) => {
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`${response.status}: ${response.statusText}`);
-        } else {
-          return response.json();
-        }
-      })
-      .then((jsonifiedResponse) => {
-        setWeatherForecast(jsonifiedResponse.list);
-        setIsLoaded(true);
-        setError(null);
-      })
-      .catch((error) => {
-        setError(error.message);
-        setIsLoaded(false);
-      });
-  };
 
   const handleFormSubmission = (formInput) => {
     const { city } = formInput;
     setCity(city);
   }
 
-  console.log(weatherForecast);
   return (
     <div>
       <h1>Get Weather Forecasts From Anywhere!</h1>
