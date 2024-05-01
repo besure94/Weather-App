@@ -25,10 +25,11 @@ function WeatherForecast() {
       .then((jsonifiedResponse) => {
         setWeatherForecast(jsonifiedResponse.list);
         setIsLoaded(true);
+        setError(null);
       })
       .catch((error) => {
         setError(error.message);
-        setIsLoaded(true);
+        setIsLoaded(false);
       });
   };
 
@@ -37,9 +38,10 @@ function WeatherForecast() {
     setCity(city);
   }
 
+  console.log(weatherForecast);
   return (
     <div>
-      <h1>Get Weather Forecasts From Anywhere</h1>
+      <h1>Get Weather Forecasts From Anywhere!</h1>
       <SearchForm onFormSubmission={handleFormSubmission}/>
       {error && <h2>Error: {error}</h2>}
       {isLoaded && (
