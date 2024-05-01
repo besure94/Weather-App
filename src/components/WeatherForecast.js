@@ -44,7 +44,7 @@ function WeatherForecast() {
       {error && <h2>Error: {error}</h2>}
       {isLoaded && (
         <React.Fragment>
-          <h3>Weather Forecast for {city}</h3>
+          <h2>Five Day Forecast for {city}</h2>
           {weatherForecast.map((forecast, index) =>
             <div key={index}>
               <h3>Date: {forecast.dt_txt}</h3>
