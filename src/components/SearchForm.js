@@ -16,7 +16,7 @@ function SearchForm(props) {
         <input
           type="text"
           name="city"
-          placeholder="Enter city and/or country"
+          placeholder="Enter a city"
           required/>
         <br/>
         <button type="submit">Get Weather</button>
