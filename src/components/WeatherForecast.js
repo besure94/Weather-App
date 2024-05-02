@@ -31,6 +31,7 @@ function WeatherForecast() {
     setCity(city);
   }
 
+  console.log(weatherForecast);
   return (
     <div>
       <h1>Get Weather Forecasts From Anywhere!</h1>
@@ -47,11 +48,56 @@ function WeatherForecast() {
           {weatherForecast.map((forecast, index) =>
             <div key={index}>
               <h3>Date: {forecast.dt_txt}</h3>
-              <p>Temperature: {forecast.main.temp} degrees Fahrenheit / {((forecast.main.temp - 32) / 1.8).toFixed(2)} degrees Celsius</p>
-              <p>Humidity: {forecast.main.humidity}%</p>
-              <p>Feels like: {forecast.main.feels_like} degrees</p>
               <p>Description: {forecast.weather[0].description}</p>
-              <p>Wind speed: {forecast.wind.speed} mph / {(forecast.wind.speed * 1.609).toFixed(2)} kph</p>
+              <div className='table-container'>
+                <div className='row justify-content-center'>
+                  <div className='col-6'>
+                    <table className='table'>
+                      <thead>
+                        <tr>
+                          <th colSpan="4">Forecast Details</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr className='forecast-details'>
+                          <th>Current Temp (Celsius)</th>
+                          <td>{((forecast.main.temp - 32) / 1.8).toFixed(1)}{'\u00b0'}
+                          <br/>
+                          Feels like {((forecast.main.feels_like - 32) / 1.8).toFixed(1)}{'\u00b0'}
+                          </td>
+                        </tr>
+                        <tr className='forecast-details'>
+                          <th>Current Temp (Fahrenheit)</th>
+                          <td>{forecast.main.temp.toFixed(1)}{'\u00b0'}
+                          <br/>
+                          Feels like {forecast.main.feels_like.toFixed(1)}{'\u00b0'}
+                          </td>
+                        </tr>
+                        <tr className='forecast-details'>
+                          <th>High/Low (Celsius)</th>
+                          <td>{((forecast.main.temp_max - 32) / 1.8).toFixed(1)}{'\u00b0'}/{((forecast.main.temp_min - 32) / 1.8).toFixed(1)}{'\u00b0'}</td>
+                        </tr>
+                        <tr className='forecast-details'>
+                          <th>High/Low (Fahrenheit)</th>
+                          <td>{forecast.main.temp_max.toFixed(1)}{'\u00b0'}/{forecast.main.temp_min.toFixed(1)}{'\u00b0'}</td>
+                        </tr>
+                        <tr className='forecast-details'>
+                          <th>Humidity</th>
+                          <td>{forecast.main.humidity}%</td>
+                        </tr>
+                        <tr className='forecast-details'>
+                          <th>Wind speed (kmph)</th>
+                          <td>{(forecast.wind.speed * 1.609).toFixed(1)}</td>
+                        </tr>
+                        <tr className='forecast-details'>
+                          <th>Wind speed (mph)</th>
+                          <td>{forecast.wind.speed.toFixed(1)}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
               <hr/>
             </div>
           )}

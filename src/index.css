@@ -18,3 +18,7 @@ code {
   margin-right: 1.25rem;
   text-align: center;
 }
+
+.table th, .table td {
+  border: 0.125rem solid black;
+}
