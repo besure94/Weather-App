@@ -7,6 +7,7 @@ function WeatherForecast() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [weatherForecast, setWeatherForecast] = useState([]);
   const [city, setCity] = useState("");
+  const [selectedForecastDetails, setSelectedForecastDetails] = useState(null);
 
   useEffect(() => {
     async function getWeatherApiData() {
@@ -31,7 +32,10 @@ function WeatherForecast() {
     setCity(city);
   }
 
-  console.log(weatherForecast);
+  const handleForecastClick = (selectedForecast) => {
+    setSelectedForecastDetails(selectedForecast === selectedForecastDetails ? null : selectedForecast);
+  };
+
   return (
     <div>
       <h1>Get Weather Forecasts From Anywhere!</h1>
@@ -47,9 +51,10 @@ function WeatherForecast() {
           <hr/>
           {weatherForecast.map((forecast, index) =>
             <div key={index}>
-              <h3>Date: {forecast.dt_txt}</h3>
-              <p>Description: {forecast.weather[0].description.charAt(0).toUpperCase() + forecast.weather[0].description.slice(1)}</p>
-              <div className='table-container'>
+              <h3 onClick={() => handleForecastClick(index)}>Date: {forecast.dt_txt}</h3>
+              <p>{forecast.weather[0].description.charAt(0).toUpperCase() + forecast.weather[0].description.slice(1)}</p>
+              {selectedForecastDetails === index && (
+                <div className='table-container'>
                 <div className='row justify-content-center'>
                   <div className='col-6'>
                     <table className='table'>
@@ -98,6 +103,7 @@ function WeatherForecast() {
                   </div>
                 </div>
               </div>
+              )}
               <hr/>
             </div>
           )}
