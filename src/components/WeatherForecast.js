@@ -34,10 +34,12 @@ function WeatherForecast() {
   return (
     <div>
       <h1>Get Weather Forecasts From Anywhere!</h1>
+      <br/>
       <SearchForm onFormSubmission={handleFormSubmission}/>
       {error && <h2>Error: {error}</h2>}
       {isLoaded && (
         <React.Fragment>
+          <br/>
           <h2>Five Day Forecast for {city}</h2>
           <p>Each day contains the forecast in 3 hour steps.</p>
           {weatherForecast.map((forecast, index) =>

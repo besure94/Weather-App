@@ -12,15 +12,23 @@ function SearchForm(props) {
 
   return (
     <React.Fragment>
-      <form onSubmit={handleFormSubmission}>
-        <input
-          type="text"
-          name="city"
-          placeholder="Enter a city"
-          required/>
-        <br/>
-        <button type="submit">Get Weather</button>
-      </form>
+      <div className="form-container">
+        <div className="row justify-content-center">
+          <div className="col-md-6">
+            <form onSubmit={handleFormSubmission}>
+              <input
+                type="text"
+                name="city"
+                placeholder="Enter a city"
+                className="form-control"
+                required/>
+              <br/>
+              <button className="btn btn-primary form-control" type="submit">Get Weather</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <hr/>
     </React.Fragment>
   )
 }
