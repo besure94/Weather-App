@@ -31,6 +31,7 @@ function WeatherForecast() {
     setCity(city);
   }
 
+  console.log(weatherForecast);
   return (
     <div>
       <h1>Get Weather Forecasts From Anywhere!</h1>
@@ -42,10 +43,14 @@ function WeatherForecast() {
           <br/>
           <h2>Five Day Forecast for {city}</h2>
           <p>Each day contains the forecast in 3 hour steps.</p>
+          <br/>
+          <hr/>
           {weatherForecast.map((forecast, index) =>
             <div key={index}>
               <h3>Date: {forecast.dt_txt}</h3>
               <p>Temperature: {forecast.main.temp} degrees</p>
+              <p>Humidity: {forecast.main.humidity}%</p>
+              <p>Feels like: {forecast.main.feels_like} degrees</p>
               <p>Description: {forecast.weather[0].description}</p>
               <hr/>
             </div>
