@@ -48,10 +48,11 @@ function WeatherForecast() {
           {weatherForecast.map((forecast, index) =>
             <div key={index}>
               <h3>Date: {forecast.dt_txt}</h3>
-              <p>Temperature: {forecast.main.temp} degrees</p>
+              <p>Temperature: {forecast.main.temp} degrees Fahrenheit / {((forecast.main.temp - 32) / 1.8).toFixed(2)} degrees Celsius</p>
               <p>Humidity: {forecast.main.humidity}%</p>
               <p>Feels like: {forecast.main.feels_like} degrees</p>
               <p>Description: {forecast.weather[0].description}</p>
+              <p>Wind speed: {forecast.wind.speed} mph / {(forecast.wind.speed * 1.609).toFixed(2)} kph</p>
               <hr/>
             </div>
           )}
