@@ -48,7 +48,7 @@ function WeatherForecast() {
           {weatherForecast.map((forecast, index) =>
             <div key={index}>
               <h3>Date: {forecast.dt_txt}</h3>
-              <p>Description: {forecast.weather[0].description}</p>
+              <p>Description: {forecast.weather[0].description.charAt(0).toUpperCase() + forecast.weather[0].description.slice(1)}</p>
               <div className='table-container'>
                 <div className='row justify-content-center'>
                   <div className='col-6'>
