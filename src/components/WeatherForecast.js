@@ -31,7 +31,6 @@ function WeatherForecast() {
     setCity(city);
   }
 
-  console.log(weatherForecast);
   return (
     <div>
       <h1>Get Weather Forecasts From Anywhere!</h1>
