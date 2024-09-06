@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchForm from './SearchForm';
 import getWeather from '../api-call/weather-api-call';
+import { format } from 'date-fns';
 
 function WeatherForecast() {
   const [error, setError] = useState(null);
@@ -18,13 +19,19 @@ function WeatherForecast() {
         setIsLoaded(false);
         return;
       }
-      setWeatherForecast(result.list);
+
+      const formattedForecast = result.list.map((forecast) => ({
+        ...forecast,
+        formattedDate: convertDateFormat(forecast.dt_txt)
+      }));
+      setWeatherForecast(formattedForecast);
       setIsLoaded(true);
     }
 
     if (city) {
       getWeatherApiData(city);
     }
+
   }, [city]);
 
   const handleFormSubmission = (formInput) => {
@@ -35,6 +42,10 @@ function WeatherForecast() {
   const handleForecastClick = (selectedForecast) => {
     setSelectedForecastDetails(selectedForecast === selectedForecastDetails ? null : selectedForecast);
   };
+
+  const convertDateFormat = (date) => {
+    return format(new Date(date), 'MMMM d, yyyy h:mm a');
+  }
 
   return (
     <div>
@@ -51,7 +62,7 @@ function WeatherForecast() {
           <hr/>
           {weatherForecast.map((forecast, index) =>
             <div key={index}>
-              <h3 onClick={() => handleForecastClick(index)}>Date: {forecast.dt_txt}</h3>
+              <h3 onClick={() => handleForecastClick(index)}>{forecast.formattedDate}</h3>
               <p>{forecast.weather[0].description.charAt(0).toUpperCase() + forecast.weather[0].description.slice(1)}</p>
               {selectedForecastDetails === index && (
                 <div className='table-container'>
