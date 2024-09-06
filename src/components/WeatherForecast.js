@@ -49,7 +49,6 @@ function WeatherForecast() {
 
   return (
     <div>
-      <h1>Get Weather Forecasts From Anywhere!</h1>
       <br/>
       <SearchForm onFormSubmission={handleFormSubmission}/>
       {error && <h2>Error: {error}</h2>}
