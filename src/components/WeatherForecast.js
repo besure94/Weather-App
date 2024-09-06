@@ -8,7 +8,7 @@ function WeatherForecast() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [weatherForecast, setWeatherForecast] = useState([]);
   const [city, setCity] = useState("");
-  const [selectedForecastDetails, setSelectedForecastDetails] = useState(null);
+  const [selectedDay, setSelectedDay] = useState(null);
 
   useEffect(() => {
     async function getWeatherApiData() {
@@ -22,9 +22,16 @@ function WeatherForecast() {
 
       const formattedForecast = result.list.map((forecast) => ({
         ...forecast,
-        formattedDate: convertDateFormat(forecast.dt_txt)
+        formattedDate: convertDateFormat(forecast.dt_txt),
+        date: new Date(forecast.dt_txt).toLocaleDateString()
       }));
-      setWeatherForecast(formattedForecast);
+
+      const groupForecastByDay = formattedForecast.reduce((acc, forecast) => {
+        (acc[forecast.date] = acc[forecast.date] || []).push(forecast);
+        return acc;
+      }, {});
+
+      setWeatherForecast(groupForecastByDay);
       setIsLoaded(true);
     }
 
@@ -39,8 +46,8 @@ function WeatherForecast() {
     setCity(city);
   }
 
-  const handleForecastClick = (selectedForecast) => {
-    setSelectedForecastDetails(selectedForecast === selectedForecastDetails ? null : selectedForecast);
+  const handleCardClick = (day) => {
+    setSelectedDay(selectedDay === day ? null : day);
   };
 
   const convertDateFormat = (date) => {
@@ -55,11 +62,30 @@ function WeatherForecast() {
       {isLoaded && (
         <React.Fragment>
           <br/>
-          <h2>Five Day Forecast for {city}</h2>
+          <h2>{city}</h2>
           <p>Each day contains the forecast in 3 hour steps.</p>
           <br/>
-          <hr/>
-          {weatherForecast.map((forecast, index) =>
+
+          <div className='forecast-container'>
+            {Object.keys(weatherForecast).map(date => (
+              <div key={date} className='card'>
+                <h3 onClick={() => handleCardClick(date)}> {date} <span>{selectedDay === date ? '-' : '+'}</span>
+                </h3>
+                {selectedDay === date && (
+                  <div className='card-details'>
+                    {weatherForecast[date].map((forecast, index) => (
+                      <div key={index}>
+                        <p>{forecast.formattedDate}</p>
+                        <p>{forecast.weather[0].description.charAt(0).toUpperCase() + forecast.weather[0].description.slice(1)}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* {weatherForecast.map((forecast, index) =>
             <div key={index}>
               <h3 onClick={() => handleForecastClick(index)}>{forecast.formattedDate}</h3>
               <p>{forecast.weather[0].description.charAt(0).toUpperCase() + forecast.weather[0].description.slice(1)}</p>
@@ -116,7 +142,7 @@ function WeatherForecast() {
               )}
               <hr/>
             </div>
-          )}
+          )} */}
         </React.Fragment>
       )}
     </div>
