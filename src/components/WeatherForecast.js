@@ -62,8 +62,8 @@ function WeatherForecast() {
       {isLoaded && (
         <React.Fragment>
           <br/>
-          <h2>{city}</h2>
-          <p>Each day contains the forecast in 3 hour steps.</p>
+          <h2>Weather Forecast For {city}</h2>
+          <p>Each date contains the forecast in 3 hour steps.</p>
           <br/>
 
           <div className='forecast-container'>

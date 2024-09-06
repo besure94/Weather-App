@@ -22,3 +22,19 @@ code {
 .table th, .table td {
   border: 0.125rem solid black;
 }
+
+/* card styling */
+.forecast-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 1.5rem;
+  cursor: pointer;
+  background-color: #eeeeee;
+}
