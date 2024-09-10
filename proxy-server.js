@@ -5,7 +5,6 @@ const app = express();
 
 app.get('/weather/:city', async (request, response) => {
   const city = request.params.city;
-  // const city = 'London';
   const apiCallUrl = `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_API_KEY}&q=${city}&aqi=yes`;
 
   try {
