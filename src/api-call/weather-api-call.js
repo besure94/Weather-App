@@ -1,6 +1,5 @@
 export const getWeather = async (city) => {
   const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${city}&days=1&aqi=yes&alerts=no`);
-  console.log(response);
   if (!response.ok) {
     throw new Error(`${response.status} ${response.statusText}`);
   } else {

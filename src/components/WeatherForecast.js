@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import SearchForm from './SearchForm';
 import { getWeather } from '../api-call/weather-api-call';
+import { format } from 'date-fns';
 
 function WeatherForecast() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [currentWeather, setCurrentWeather] = useState([]);
   const [city, setCity] = useState("");
-  const [currentDate, setCurrentDate] = useState(null);
+  const [localTime, setLocalTime] = useState(null);
 
   useEffect(() => {
     async function getWeatherApiData() {
@@ -15,7 +16,9 @@ function WeatherForecast() {
       try {
         const response = await getWeather(city);
         console.log(response);
+        const weatherWithFormattedDate = convertDateFormat(response.location.localtime);
         setCurrentWeather(response);
+        setLocalTime(weatherWithFormattedDate);
         setIsLoaded(true);
       } catch (error) {
         setError(error.message);
@@ -30,9 +33,11 @@ function WeatherForecast() {
 
   const handleFormSubmission = (formInput) => {
     const { city } = formInput;
-    const todaysDate = new Date();
     setCity(city);
-    setCurrentDate(todaysDate);
+  }
+
+  const convertDateFormat = (date) => {
+    return format(new Date(date), 'M/dd/yyyy h:mm a');
   }
 
   return (
@@ -42,10 +47,10 @@ function WeatherForecast() {
       {error && <h2>Error: {error}</h2>}
       {isLoaded && (
         <React.Fragment>
-          <h4>{currentWeather.location.name}, {currentWeather.location.country}</h4>
+          <h4>{currentWeather.location.name}, {currentWeather.location.region}, {currentWeather.location.country}</h4>
           <br/>
           <div className='current-weather'>
-            <h3>{currentDate.toLocaleString()}</h3>
+            <h3>{localTime}</h3>
             <br/>
             <h3>{currentWeather.current.temp_f}{'\u00b0'}F</h3>
             <h4>{currentWeather.current.condition.text}</h4>
