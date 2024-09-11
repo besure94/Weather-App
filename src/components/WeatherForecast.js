@@ -59,7 +59,7 @@ function WeatherForecast() {
                 </div>
                 <div className='weather-icon'>
                   {/* <img src={currentWeather.current.condition.icon}/> */}
-                  <img src={currentWeather.forecast.forecastday[0].day.condition.icon}/>
+                  <img src={currentWeather.forecast.forecastday[0].day.condition.icon} alt="An icon showing the weather forecast."/>
                 </div>
               </div>
               <div className='high-and-low'>
@@ -98,34 +98,6 @@ function WeatherForecast() {
                 </div>
               </div>
             </div>
-            {/* <div className='current-weather-details'>
-              <div className='details'>
-                <h5>Feels Like</h5>
-                <p>{currentWeather.current.feelslike_f}{'\u00b0'}F</p>
-              </div>
-              <div className='details'>
-                <h5>Humidity</h5>
-                <p>{currentWeather.current.humidity}%</p>
-              </div>
-              <div className='details'>
-                <h5>Wind</h5>
-                <p>{currentWeather.current.wind_mph}mph</p>
-              </div>
-            </div>
-            <div className='current-weather-details'>
-              <div className='details'>
-                  <h5>Rain</h5>
-                  <p>{currentWeather.forecast.forecastday[0].day.daily_chance_of_rain}%</p>
-              </div>
-              <div className='details'>
-                  <h5>Snow</h5>
-                  <p>{currentWeather.forecast.forecastday[0].day.daily_chance_of_snow}%</p>
-              </div>
-              <div className='details'>
-                  <h5>Air Quality</h5>
-                  <p>{currentWeather.current.air_quality["us-epa-index"]}</p>
-              </div>
-            </div> */}
           </div>
         </React.Fragment>
       )}
