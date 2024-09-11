@@ -1,15 +1,10 @@
-const getWeather = (city) => {
-  return fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`${response.status} ${response.statusText}`);
-      } else {
-        return response.json();
-      }
-    })
-    .catch(function(error) {
-      return error;
-    });
+export const getWeather = async (city) => {
+  const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${process.env.REACT_APP_API_KEY}&q=${city}&days=1&aqi=yes&alerts=no`);
+  console.log(response);
+  if (!response.ok) {
+    throw new Error(`${response.status} ${response.statusText}`);
+  } else {
+    const data = await response.json();
+    return data;
+  }
 };
-
-export default getWeather;

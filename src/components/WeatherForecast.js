@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SearchForm from './SearchForm';
-import getWeather from '../api-call/weather-api-call';
-
-// find better API that can handle high/low, precipitation %, and other weather info
+import { getWeather } from '../api-call/weather-api-call';
 
 function WeatherForecast() {
   const [error, setError] = useState(null);
@@ -14,21 +12,20 @@ function WeatherForecast() {
   useEffect(() => {
     async function getWeatherApiData() {
       setError(null);
-      const result = await getWeather(city);
-      if (result instanceof Error) {
-        setError(result.message);
+      try {
+        const response = await getWeather(city);
+        console.log(response);
+        setCurrentWeather(response);
+        setIsLoaded(true);
+      } catch (error) {
+        setError(error.message);
         setIsLoaded(false);
-        return;
       }
-
-      setCurrentWeather(result);
-      setIsLoaded(true);
     }
 
     if (city) {
       getWeatherApiData(city);
     }
-
   }, [city]);
 
   const handleFormSubmission = (formInput) => {
@@ -45,26 +42,40 @@ function WeatherForecast() {
       {error && <h2>Error: {error}</h2>}
       {isLoaded && (
         <React.Fragment>
-          <h4>{city}</h4>
+          <h4>{currentWeather.location.name}, {currentWeather.location.country}</h4>
           <br/>
           <div className='current-weather'>
             <h3>{currentDate.toLocaleString()}</h3>
             <br/>
-            <h3>{currentWeather.main.temp.toFixed(1)}{'\u00b0'}F</h3>
-            <h4>{currentWeather.weather[0].main}</h4>
+            <h3>{currentWeather.current.temp_f}{'\u00b0'}F</h3>
+            <h4>{currentWeather.current.condition.text}</h4>
             <br/>
             <div className='current-weather-details'>
               <div className='details'>
                 <h5>Feels Like</h5>
-                <p>{currentWeather.main.feels_like}{'\u00b0'}F</p>
+                <p>{currentWeather.current.feelslike_f}{'\u00b0'}F</p>
               </div>
               <div className='details'>
                 <h5>Humidity</h5>
-                <p>{currentWeather.main.humidity}%</p>
+                <p>{currentWeather.current.humidity}%</p>
               </div>
               <div className='details'>
                 <h5>Wind</h5>
-                <p>{currentWeather.wind.speed}mph</p>
+                <p>{currentWeather.current.wind_mph}mph</p>
+              </div>
+            </div>
+            <div className='current-weather-details'>
+              <div className='details'>
+                  <h5>Rain</h5>
+                  <p>{currentWeather.forecast.forecastday[0].day.daily_chance_of_rain}%</p>
+              </div>
+              <div className='details'>
+                  <h5>Snow</h5>
+                  <p>{currentWeather.forecast.forecastday[0].day.daily_chance_of_snow}%</p>
+              </div>
+              <div className='details'>
+                  <h5>Air Quality</h5>
+                  <p>{currentWeather.current.air_quality["us-epa-index"]}</p>
               </div>
             </div>
           </div>
