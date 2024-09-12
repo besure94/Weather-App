@@ -9,9 +9,13 @@ function HourlyForecast(props) {
     <React.Fragment>
       <br/>
       <br/>
-      <div className="hourly-forecast">
-        <h5>Hourly Forecast</h5>
+      <div className='current-weather'>
+        <div className='location-weather'>
+        <div className="hourly-forecast">
+          <h5>Hourly Forecast</h5>
 
+        </div>
+        </div>
       </div>
     </React.Fragment>
   )

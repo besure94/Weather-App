@@ -57,6 +57,11 @@ code {
   gap: 0.5rem;
 }
 
+.hourly-forecast {
+  display: flex;
+  flex-direction: row;
+}
+
 .location-weather {
   float: left;
 }
