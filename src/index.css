@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-/* container styling  */
+/* root container styling  */
 #root {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
@@ -57,10 +57,20 @@ code {
   gap: 0.5rem;
 }
 
+/* .hour {
+  width: 30vw;
+} */
+
 .hourly-forecast {
   display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
   flex-direction: row;
 }
+
+/* .hourly-forecast-h5 {
+  align-self: flex-start;
+} */
 
 .location-weather {
   float: left;
