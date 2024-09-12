@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import SearchForm from '../main-components/SearchForm';
+import SearchForm from '../main/SearchForm';
 import { getWeather } from '../api-call/weather-api-call';
 import { format } from 'date-fns';
 import CurrentConditionsDetails from './CurrentConditionsDetails';
 import CurrentWeather from './CurrentWeather';
+import HourlyForecast from './HourlyForecast';
 
 function WeatherForecast() {
   const [error, setError] = useState(null);
@@ -50,6 +51,7 @@ function WeatherForecast() {
       {isLoaded && (
         <React.Fragment>
           <CurrentWeather currentWeatherConditions={currentWeather} locationTime={localTime}/>
+          <HourlyForecast twentyFourHourForecast={currentWeather}/>
           <CurrentConditionsDetails conditionsDetails={currentWeather}/>
         </React.Fragment>
       )}
