@@ -21,8 +21,11 @@ code {
 
 /* weather details styling */
 .current-weather {
-  padding-left: 5rem;
-  padding-right: 5rem;
+  padding-left: 15rem;
+  padding-right: 15rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .current-weather-details {
@@ -34,6 +37,14 @@ code {
 .current-conditions {
   display: flex;
   flex-direction: row;
+}
+
+/* .details {
+  background-color: #eeeeee;
+} */
+
+.feels-like {
+  float: right;
 }
 
 .feels-like-header {

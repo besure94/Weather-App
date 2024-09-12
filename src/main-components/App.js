@@ -1,10 +1,10 @@
 import React from "react";
-import WeatherForecast from './WeatherForecast';
+import Weather from './../weather-details/Weather';
 
 function App() {
   return (
     <React.Fragment>
-      <WeatherForecast/>
+      <Weather/>
     </React.Fragment>
   );
 }

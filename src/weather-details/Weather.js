@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import SearchForm from './SearchForm';
+import SearchForm from '../main-components/SearchForm';
 import { getWeather } from '../api-call/weather-api-call';
 import { format } from 'date-fns';
-import DisplayedWeatherData from './DisplayedWeatherData';
+import CurrentConditionsDetails from './CurrentConditionsDetails';
+import CurrentWeather from './CurrentWeather';
 
 function WeatherForecast() {
   const [error, setError] = useState(null);
@@ -47,7 +48,10 @@ function WeatherForecast() {
       <SearchForm onFormSubmission={handleFormSubmission}/>
       {error && <h2>Error: {error}</h2>}
       {isLoaded && (
-        <DisplayedWeatherData weatherDataToDisplay={currentWeather} localTime={localTime}/>
+        <React.Fragment>
+          <CurrentWeather currentWeatherConditions={currentWeather} locationTime={localTime}/>
+          <CurrentConditionsDetails conditionsDetails={currentWeather}/>
+        </React.Fragment>
       )}
     </div>
   )
