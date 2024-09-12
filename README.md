@@ -1,6 +1,6 @@
-# Weather Forecast
+# Weather App
 
-#### An application that allows a user to search for a five day weather forecast for a specific city.
+#### A work-in-progress application that allows a user to search for current weather conditions and forecasts for a specific city or region.
 
 #### By Brian Scherner
 
@@ -8,7 +8,6 @@
 
 * React
 * JavaScript
-* JSX
 * HTML
 * Webpack
 * Node Package Manager
@@ -16,21 +15,19 @@
 * ES Lint
 * Bootstrap
 * CSS
-* OpenWeatherMap API
+* Weather API
 
 ## Description
 
-This application presents users with a form, where they enter a city. After submitting the form, they are shown a five day weather forecast for that city, which contains the weather for each day in 3 hour steps (8 total for each day).
-
-Users can click on a specific forecast in the weather forecast list, which will show a table displaying important weather information for that specific forecast.
+This application presents users with a form, where they enter a city or region. The current weather conditions for that city/region are then shown, along with other weather information that users commonly like to know. The weather conditions are retrieved from the Weather API.
 
 ## Setup/Installation Requirements
 
 #### Getting an API key
 
-In order to use this application, you will also need an API key from the `OpenWeatherMap API`. Follow the instructions below:
+In order to use this application, you will also need an API key from the `Weather API`. Follow the instructions below:
 
-* Go to [openweathermap.org](https://openweathermap.org/api), and click `sign up`.
+* Go to [WeatherAPI](https://www.weatherapi.com/), and click `Sign Up`.
 
 * Create an account.
 
@@ -52,7 +49,7 @@ In order to use this application, you will also need an API key from the `OpenWe
 
 ## Known Bugs
 
-None.
+No bugs, but changes to the UI are necessary and will be added soon.
 
 ## License
 
