@@ -19,6 +19,18 @@ code {
   text-align: center;
 }
 
+/* form styling */
+.row > * {
+  flex-shrink: 0;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-top: var(--bs-gutter-y);
+}
+
+.search-form {
+  width: 30%;
+}
+
 /* weather details styling */
 .current-weather {
   padding-left: 1.5rem;
