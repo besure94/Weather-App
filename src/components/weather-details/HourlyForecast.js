@@ -9,7 +9,6 @@ function HourlyForecast(props) {
   return (
     <React.Fragment>
       <br/>
-      <br/>
       <div className='weather-forecast'>
         <div className='location-weather-forecast'>
           {/* need to stop h5 from moving with the container */}
