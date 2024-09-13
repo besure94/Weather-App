@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import SearchIcon from '@mui/icons-material/Search';
 
+// figure out why form is so wide
 function SearchForm(props) {
 
   function handleFormSubmission(event) {

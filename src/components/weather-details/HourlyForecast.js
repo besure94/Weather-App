@@ -10,10 +10,11 @@ function HourlyForecast(props) {
     <React.Fragment>
       <br/>
       <br/>
-      <div className='current-weather'>
-        <div className='location-weather'>
+      <div className='weather-forecast'>
+        <div className='location-weather-forecast'>
           {/* need to stop h5 from moving with the container */}
-        <h5>Hourly Forecast</h5>
+        <h4>Hourly Forecast</h4>
+        <br/>
           <div className="hourly-forecast">
             <React.Fragment>
               {/* Each hour needs to show the temp, an icon, and the time - time needs to be rounded to the hour */}
