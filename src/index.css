@@ -39,27 +39,11 @@ code {
   flex-direction: row;
 }
 
-/* .details {
-  background-color: #eeeeee;
-} */
-
-.feels-like {
-  float: right;
-}
-
-.feels-like-header {
-  align-self: flex-start;
-}
-
 .high-and-low {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
 }
-
-/* .hour {
-  width: 30vw;
-} */
 
 .hourly-forecast {
   display: flex;
@@ -68,14 +52,8 @@ code {
   flex-direction: row;
 }
 
-/* .hourly-forecast-h5 {
-  align-self: flex-start;
-} */
-
-.location-weather {
-  float: left;
-}
-
-.now-header {
-  float: left;
+.temp-and-conditions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }

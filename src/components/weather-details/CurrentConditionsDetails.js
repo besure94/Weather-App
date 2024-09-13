@@ -11,16 +11,6 @@ function CurrentConditionsDetails(props) {
         <div className='location-weather'>
           <div className='current-weather-details'>
             <div className='details'>
-              <h5>Humidity</h5>
-              <p>{conditionsDetails.current.humidity}%</p>
-            </div>
-            <div className='details'>
-              <h5>Wind</h5>
-              <p>{conditionsDetails.current.wind_mph}mph</p>
-            </div>
-          </div>
-          <div className='current-weather-details'>
-            <div className='details'>
               <h5>Rain</h5>
               <p>{conditionsDetails.forecast.forecastday[0].day.daily_chance_of_rain}%</p>
             </div>
