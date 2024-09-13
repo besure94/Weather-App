@@ -9,7 +9,7 @@ function CurrentConditionsDetails(props) {
       <br/>
       <div className='current-weather'>
         <div className='location-weather'>
-          <div className='current-weather-details'>
+          {/* <div className='current-weather-details'>
             <div className='details'>
               <h5>Rain</h5>
               <p>{conditionsDetails.forecast.forecastday[0].day.daily_chance_of_rain}%</p>
@@ -22,7 +22,7 @@ function CurrentConditionsDetails(props) {
               <h5>Air Quality</h5>
               <p>{conditionsDetails.current.air_quality["us-epa-index"]}</p>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </React.Fragment>

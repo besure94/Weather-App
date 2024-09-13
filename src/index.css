@@ -21,22 +21,36 @@ code {
 
 /* weather details styling */
 .current-weather {
-  padding-left: 15rem;
-  padding-right: 15rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-}
-
-.current-weather-details {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
+  justify-content: center;
 }
 
 .current-conditions {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
+  gap: 10rem;
+}
+
+.current-weather-details {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.details {
+  background-color: #eee;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.25rem;
+}
+
+img.current-weather-icon {
+  width: 100px; /* Increases the width by 50% */
+  height: auto;
 }
 
 .high-and-low {
