@@ -14,6 +14,16 @@ function HourlyForecast(props) {
 
   }
 
+  // loop through 24 hour forecast array, identify time in each index, and convert the time using convertDateFormat
+
+  // compare time for each index to locationLocalTime
+
+  // if the index is equal to locationLocalTime, cut off all indexes prior to it
+
+  // make a new array, and use this to loop through and display (for starters)
+
+  // then need a way to access the following day in the 3 day forecast array, identify the time (24 hours from locationLocalTime), and display that
+
   return (
     <React.Fragment>
       <br/>
@@ -23,14 +33,6 @@ function HourlyForecast(props) {
         <br/>
           <div className="hourly-forecast">
             <React.Fragment>
-              {/*
-                - time needs to be rounded to the hour
-                - need to identify the current time, and display that first.
-                - needs to run for 24 hours from current time to 24 hours from then
-                - need a condition/function that identifies current time
-                - time needs to run for 24 hours from current time
-                - time 24 hours from then will be in different array, so need to account for that
-              */}
               {currentDay24HourForecast.map((hour, index) =>
                 <div key={index}>
                   <div className="hour">
