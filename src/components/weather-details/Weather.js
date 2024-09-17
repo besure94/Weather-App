@@ -8,19 +8,18 @@ import HourlyForecast from './HourlyForecast';
 function WeatherForecast() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const [currentWeather, setCurrentWeather] = useState([]);
+  const [weatherApiObject, setCurrentWeather] = useState([]);
   const [city, setCity] = useState("");
-  const [localTime, setLocalTime] = useState(null);
+  const [locationLocalTime, setLocationLocalTime] = useState(null);
 
   useEffect(() => {
     async function getWeatherApiData() {
       setError(null);
       try {
         const response = await getWeather(city);
-        console.log(response);
-        const weatherWithFormattedDate = convertDateFormat(response.location.localtime);
+        const formattedDate = convertDateFormat(response.location.localtime);
         setCurrentWeather(response);
-        setLocalTime(weatherWithFormattedDate);
+        setLocationLocalTime(formattedDate);
         setIsLoaded(true);
       } catch (error) {
         setError(error.message);
@@ -39,7 +38,7 @@ function WeatherForecast() {
   }
 
   const convertDateFormat = (date) => {
-    return format(new Date(date), 'M/d/yyyy h:mm a');
+    return format(new Date(date), 'M/d/yyyy h:mma');
   }
 
   return (
@@ -49,8 +48,12 @@ function WeatherForecast() {
       {error && <h2>Error: {error}</h2>}
       {isLoaded && (
         <React.Fragment>
-          <CurrentWeather currentWeatherConditions={currentWeather} locationTime={localTime}/>
-          <HourlyForecast twentyFourHourForecast={currentWeather}/>
+          <CurrentWeather
+            weatherApiObject={weatherApiObject} locationLocalTime={locationLocalTime}/>
+          <HourlyForecast
+            weatherApiObject={weatherApiObject}
+            locationLocalTime={locationLocalTime}
+            convertDateFormat={convertDateFormat}/>
         </React.Fragment>
       )}
     </div>

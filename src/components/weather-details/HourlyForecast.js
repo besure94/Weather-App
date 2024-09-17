@@ -1,23 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 function HourlyForecast(props) {
-  const { twentyFourHourForecast } = props;
-  const hourByHour = twentyFourHourForecast.forecast.forecastday[0].hour;
-  console.log("24 hr: ", hourByHour);
+  const { weatherApiObject, locationLocalTime, convertDateFormat } = props;
+  const currentDay24HourForecast = weatherApiObject.forecast.forecastday[0].hour;
+
+  const [time24HoursFromNow, setTime24HoursFromNow] = useState(null);
+
+  console.log("Current day 24 hr forecast: ", currentDay24HourForecast);
+  console.log("Weather API obj: ", weatherApiObject);
+
+  function identifyTime24HoursFromNow(currentTime) {
+
+  }
 
   return (
     <React.Fragment>
       <br/>
       <div className='weather-forecast'>
         <div className='location-weather-forecast'>
-          {/* need to stop h5 from moving with the container */}
         <h4>Hourly Forecast</h4>
         <br/>
           <div className="hourly-forecast">
             <React.Fragment>
-              {/* Each hour needs to show the temp, an icon, and the time - time needs to be rounded to the hour */}
-              {hourByHour.map((hour, index) =>
+              {/*
+                - time needs to be rounded to the hour
+                - need to identify the current time, and display that first.
+                - needs to run for 24 hours from current time to 24 hours from then
+                - need a condition/function that identifies current time
+                - time needs to run for 24 hours from current time
+                - time 24 hours from then will be in different array, so need to account for that
+              */}
+              {currentDay24HourForecast.map((hour, index) =>
                 <div key={index}>
                   <div className="hour">
                     <h6>{hour.temp_f}{'\u00b0'}</h6>
@@ -35,7 +49,8 @@ function HourlyForecast(props) {
 }
 
 HourlyForecast.propTypes = {
-  twentyFourHourForecast: PropTypes.object
+  weatherApiObject: PropTypes.object,
+  convertDateFormat: PropTypes.func
 }
 
 export default HourlyForecast;
