@@ -38,7 +38,7 @@ function WeatherForecast() {
   }
 
   const convertDateFormat = (date) => {
-    return format(new Date(date), 'M/d/yyyy h:mma');
+    return format(new Date(date), 'h:mma').toLowerCase();
   }
 
   return (
