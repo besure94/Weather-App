@@ -6,17 +6,16 @@ function HourlyForecast(props) {
   const { weatherApiObject, locationLocalTime, convertDateFormat } = props;
   const [twentyHourForecast, setTwentyFourHourForecast] = useState([]);
   const [threeDayForecast, setThreeDayForecast] = useState([]);
-  const [roundedTime, setRoundedTime] = useState(null);
+  // const [roundedTime, setRoundedTime] = useState(null);
 
-  // console.log("Weather API obj: ", weatherApiObject);
   console.log("3 day forecast: ", threeDayForecast);
-  // console.log("Location local time: ", locationLocalTime);
 
   useEffect(() => {
     const merged3DayForecastArray = weatherApiObject.forecast.forecastday.flatMap(day => day.hour);
     setThreeDayForecast(merged3DayForecastArray);
     const roundedLocalTime = roundLocalTimeToHour(locationLocalTime);
-    setRoundedTime(roundedLocalTime);
+    // setRoundedTime(roundedLocalTime);
+    console.log(roundedLocalTime);
   }, []);
 
 
@@ -54,8 +53,7 @@ function HourlyForecast(props) {
   // working on rounding hourly forecast time to hour, similar to above
   const roundHourlyForecastTimesToHour = (forecastArray) => {
     forecastArray.forEach(index => {
-      let meridiem = index.time.slice(-2);
-      console.log(meridiem);
+      console.log(index.time.slice(-2));
     });
 
     return forecastArray;
