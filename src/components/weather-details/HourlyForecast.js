@@ -22,7 +22,7 @@ function HourlyForecast(props) {
 
   // need to first round the current local time to the nearest hour, while keeping AM or PM - done
 
-  // need to also round all of the times in the 3 day forecast to match this time format - do next
+  // need to also round all of the times in the 3 day forecast to match this time format to do the comparison - do next
 
   // then need to find the first index where this current local time is in the 3 day forecast array
 
@@ -50,6 +50,18 @@ function HourlyForecast(props) {
 
     return `${hours}:00${meridiem}`;
   }
+
+  // working on rounding hourly forecast time to hour, similar to above
+  const roundHourlyForecastTimesToHour = (forecastArray) => {
+    forecastArray.forEach(index => {
+      let meridiem = index.time.slice(-2);
+      console.log(meridiem);
+    });
+
+    return forecastArray;
+  }
+
+  console.log("Round forecast times: ", roundHourlyForecastTimesToHour(threeDayForecast));
 
   // const startForecastDisplayAtCurrentTime = (forecastArray) => {
   //   forecastArray.forEach(index => {
