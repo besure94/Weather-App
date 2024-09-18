@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchForm from '../main/SearchForm';
 import { getWeather } from '../api-call/weather-api-call';
-import { format } from 'date-fns';
+import { convertDateFormat } from '../utility-fns/convert-date-format';
 import CurrentWeather from './CurrentWeather';
 import HourlyForecast from './HourlyForecast';
 
@@ -37,9 +37,9 @@ function WeatherForecast() {
     setCity(city);
   }
 
-  const convertDateFormat = (date) => {
-    return format(new Date(date), 'h:mma').toLowerCase();
-  }
+  // const convertDateFormat = (date) => {
+  //   return format(new Date(date), 'h:mma').toLowerCase();
+  // }
 
   return (
     <div>
@@ -52,8 +52,7 @@ function WeatherForecast() {
             weatherApiObject={weatherApiObject} locationLocalTime={locationLocalTime}/>
           <HourlyForecast
             weatherApiObject={weatherApiObject}
-            locationLocalTime={locationLocalTime}
-            convertDateFormat={convertDateFormat}/>
+            locationLocalTime={locationLocalTime}/>
         </React.Fragment>
       )}
     </div>
