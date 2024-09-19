@@ -13,6 +13,7 @@ function CurrentWeather(props) {
         <div className='location-weather'>
           <div className='current-conditions'>
             <div className='temp-and-conditions'>
+              <h4>Now</h4>
               <h1>{weatherApiObject.current.temp_f}{'\u00b0'}F</h1>
               <h4>Feels like {weatherApiObject.current.feelslike_f}{'\u00b0'}F</h4>
               <br/>

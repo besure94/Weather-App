@@ -56,8 +56,8 @@ function HourlyForecast(props) {
       <br/>
       <div className='weather-forecast'>
         <div className='location-weather-forecast'>
-        <h4>24 Hour Forecast</h4>
-        <br/>
+          <h4>24 Hour Forecast</h4>
+          <br/>
           <div className="hourly-forecast">
             <React.Fragment>
               {twentyFourHourForecast.map((hour, index) =>
