@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { convertDateFormat } from '../utility-fns/convert-date-format';
 
-// change display of current time in 24 hour forecast to say 'Now'
 function HourlyForecast(props) {
   const { weatherApiObject, locationLocalTime } = props;
   const [twentyFourHourForecast, setTwentyFourHourForecast] = useState([]);

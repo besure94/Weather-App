@@ -4,6 +4,7 @@ import { getWeather } from '../api-call/weather-api-call';
 import { convertDateFormat } from '../utility-fns/convert-date-format';
 import CurrentWeather from './CurrentWeather';
 import HourlyForecast from './HourlyForecast';
+import ThreeDayForecast from './ThreeDayForecast';
 
 function WeatherForecast() {
   const [error, setError] = useState(null);
@@ -37,10 +38,6 @@ function WeatherForecast() {
     setCity(city);
   }
 
-  // const convertDateFormat = (date) => {
-  //   return format(new Date(date), 'h:mma').toLowerCase();
-  // }
-
   return (
     <div>
       <br/>
@@ -53,6 +50,8 @@ function WeatherForecast() {
           <HourlyForecast
             weatherApiObject={weatherApiObject}
             locationLocalTime={locationLocalTime}/>
+          <ThreeDayForecast
+            weatherApiObject={weatherApiObject}/>
         </React.Fragment>
       )}
     </div>
