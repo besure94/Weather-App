@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { convertDateFormat } from '../utility-fns/convert-date-format';
+import { convertDateFormat, trimTimeToHour } from '../utility-fns/convert-date-format';
 
 function HourlyForecast(props) {
   const { weatherApiObject, locationLocalTime } = props;
@@ -85,13 +85,13 @@ function HourlyForecast(props) {
         <br/>
           <div className="hourly-forecast">
             <React.Fragment>
-              {/* displaying 3 day forecast temporarily */}
+              {/* displaying 3 day forecast temporarily - supposed to display only for 24 hours */}
               {threeDayForecast.map((hour, index) =>
                 <div key={index}>
                   <div className="hour">
                     <h6>{hour.temp_f}{'\u00b0'}</h6>
                     <img src={hour.condition.icon} alt="An icon symbolizing current hourly weather condition."/>
-                    <h6>{convertDateFormat(hour.time)}</h6>
+                    <h6>{trimTimeToHour(hour.time)}</h6>
                   </div>
                 </div>
               )}
