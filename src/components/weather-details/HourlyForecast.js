@@ -4,32 +4,19 @@ import { convertDateFormat, trimTimeToHour } from '../utility-fns/convert-date-f
 
 function HourlyForecast(props) {
   const { weatherApiObject, locationLocalTime } = props;
-  const [twentyHourForecast, setTwentyFourHourForecast] = useState([]);
-  const [threeDayForecast, setThreeDayForecast] = useState([]);
-  const [formattedThreeDayForecastTimes, setFormattedThreeDayForecastTimes] = useState([]);
-  const [roundedTime, setRoundedTime] = useState(null);
+  const [twentyFourHourForecast, setTwentyFourHourForecast] = useState([]);
 
   useEffect(() => {
     const merged3DayForecastArray = weatherApiObject.forecast.forecastday.flatMap(day => day.hour);
-    setThreeDayForecast(merged3DayForecastArray);
 
     const roundedLocalTime = roundLocalTimeToHour(locationLocalTime);
-    setRoundedTime(roundedLocalTime);
 
     const formattedForecastTimes = convertForecastTimeFormats(merged3DayForecastArray);
-    setFormattedThreeDayForecastTimes(formattedForecastTimes);
+
+    const newTwentyFourHourForecast = displayUpdated24HourForecast(formattedForecastTimes, roundedLocalTime);
+    setTwentyFourHourForecast(newTwentyFourHourForecast);
+
   }, [weatherApiObject, locationLocalTime]);
-
-
-  // need to first round the current local time to the nearest hour, while keeping AM or PM - done
-
-  // need to convert formats of each time in each hourly forecast - done
-
-  // then need to find the first index where this current local time is in the 3 day forecast array
-
-  // then need to trim the array so that the first index is the one closest to current local time
-
-  // then need to jump to 24 hours from this index, and create new array, and display this under Hourly Forecast
 
   const roundLocalTimeToHour = (localTime) => {
     let meridiem = localTime.slice(-2);
@@ -61,20 +48,11 @@ function HourlyForecast(props) {
     });
   };
 
-  // can identify the first index that matches current local time
-
-  // need to mutate array next
-  const startForecastDisplayAtCurrentLocalTime = (forecastArray, timeToMatch) => {
+  const displayUpdated24HourForecast = (forecastArray, timeToMatch) => {
     let firstMatchingIndex = forecastArray.findIndex(index => index.time === timeToMatch);
-    console.log(firstMatchingIndex);
-    forecastArray.slice(firstMatchingIndex);
-    console.log(forecastArray);
-    return forecastArray;
+    let slicedArray = forecastArray.slice(firstMatchingIndex, firstMatchingIndex + 25);
+    return slicedArray;
   }
-
-  console.log("Rounded local time: ", roundedTime);
-  console.log("Formatted 3 day forecast times: ", formattedThreeDayForecastTimes);
-  console.log(startForecastDisplayAtCurrentLocalTime(formattedThreeDayForecastTimes, roundedTime));
 
   return (
     <React.Fragment>
@@ -85,13 +63,12 @@ function HourlyForecast(props) {
         <br/>
           <div className="hourly-forecast">
             <React.Fragment>
-              {/* displaying 3 day forecast temporarily - supposed to display only for 24 hours */}
-              {threeDayForecast.map((hour, index) =>
+              {twentyFourHourForecast.map((hour, index) =>
                 <div key={index}>
                   <div className="hour">
                     <h6>{hour.temp_f}{'\u00b0'}</h6>
                     <img src={hour.condition.icon} alt="An icon symbolizing current hourly weather condition."/>
-                    <h6>{trimTimeToHour(hour.time)}</h6>
+                    <h6>{hour.time}</h6>
                   </div>
                 </div>
               )}
