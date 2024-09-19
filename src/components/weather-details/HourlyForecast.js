@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { convertDateFormat, trimTimeToHour } from '../utility-fns/convert-date-format';
+import { convertDateFormat } from '../utility-fns/convert-date-format';
 
+// change display of current time in 24 hour forecast to say 'Now'
 function HourlyForecast(props) {
   const { weatherApiObject, locationLocalTime } = props;
   const [twentyFourHourForecast, setTwentyFourHourForecast] = useState([]);
@@ -51,6 +52,7 @@ function HourlyForecast(props) {
   const displayUpdated24HourForecast = (forecastArray, timeToMatch) => {
     let firstMatchingIndex = forecastArray.findIndex(index => index.time === timeToMatch);
     let slicedArray = forecastArray.slice(firstMatchingIndex, firstMatchingIndex + 25);
+    slicedArray[0].time = "Now";
     return slicedArray;
   }
 
