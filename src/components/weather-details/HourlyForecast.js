@@ -20,11 +20,7 @@ function HourlyForecast(props) {
 
   const roundLocalTimeToHour = (localTime) => {
     let meridiem = localTime.slice(-2);
-    let [hours, minutes] = localTime.slice(0, -2).trim().split(":").map(Number);
-
-    if (minutes >= 30) {
-      hours += 1;
-    }
+    let hours = parseInt(localTime.slice(0, -4));
 
     if (hours === 12 && meridiem === 'am') {
       hours = 12;
@@ -60,7 +56,7 @@ function HourlyForecast(props) {
       <br/>
       <div className='weather-forecast'>
         <div className='location-weather-forecast'>
-        <h4>Hourly Forecast</h4>
+        <h4>24 Hour Forecast</h4>
         <br/>
           <div className="hourly-forecast">
             <React.Fragment>
