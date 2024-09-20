@@ -6,14 +6,9 @@ function ThreeDayForeCast(props) {
   const { weatherApiObject } = props;
   console.log("API response: ", weatherApiObject);
 
-  // working on changing first day in the 3 day forecast to say 'Today' //
+  // working on changing first day in the 3 day forecast to say 'Today'
 
-  // const changeFirstDayToSayToday = (threeDayForecast) => {
-  //   threeDayForecast.forecast.forecastday[0].date = "Today";
-  //   return threeDayForecast;
-  // }
-
-  // console.log(changeFirstDayToSayToday(weatherApiObject.forecast.forecastday));
+  // BUG: Some locations are showing the previous day instead of the current day in the 3 hour forecast - fix!
 
   return (
     <React.Fragment>
