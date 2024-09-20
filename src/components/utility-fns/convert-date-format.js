@@ -7,3 +7,7 @@ export const convertDateFormat = (date) => {
 export const trimTimeToHour = (date) => {
   return format(new Date(date), 'ha').toLowerCase();
 }
+
+export const changeDateToWeekday = (date) => {
+  return format(new Date(date), 'EEEE, MMMM d');
+}

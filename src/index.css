@@ -57,11 +57,26 @@ code {
   gap: 1rem;
 }
 
+.day {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
 .details {
   background-color: #eee;
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 0.325rem;
+}
+
+.forecast-for-each-day {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 img.current-weather-icon {
@@ -86,6 +101,17 @@ img.current-weather-icon {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.three-day-forecast {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.three-day-forecast-container {
+  padding-left: 13.5rem;
+  padding-right: 13.5rem;
 }
 
 .weather-forecast {
