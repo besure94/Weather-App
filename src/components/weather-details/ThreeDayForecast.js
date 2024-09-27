@@ -17,7 +17,7 @@ function ThreeDayForeCast(props) {
               {weatherApiObject.forecast.forecastday.map((forecast, index) =>
                 <div key={index}>
                   <div className="day">
-                    <h5>{changeDateToWeekday(forecast.date).toLocaleString()}</h5>
+                    <h5>{changeDateToWeekday(forecast.date)}</h5>
                     <img className="three-day-forecast-icon" src={forecast.day.condition.icon} alt="An icon showing the general forecast for the day."/>
                     <h5>{forecast.day.maxtemp_f}{'\u00b0'}/{forecast.day.mintemp_f}{'\u00b0'}</h5>
                   </div>
