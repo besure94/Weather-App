@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import SearchForm from '../main/SearchForm';
 import { getWeather } from '../api-call/weather-api-call';
-import { convertDateFormat } from '../utility-fns/convert-date-format';
+import { convertDateFormat, changeDateToWeekday } from '../utility-fns/convert-date-format';
 import CurrentWeather from './CurrentWeather';
 import HourlyForecast from './HourlyForecast';
 import ThreeDayForecast from './ThreeDayForecast';
 
-function WeatherForecast() {
+function Weather() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [weatherApiObject, setCurrentWeather] = useState([]);
@@ -71,6 +71,20 @@ function WeatherForecast() {
     return slicedArray;
   }
 
+  const changeDateFormatsToWeekday = (threeDayForecast) => {
+    return threeDayForecast.map(day => {
+      return {
+        ...day,
+        date: changeDateToWeekday(day.date),
+      };
+    });
+  };
+
+  const changeFirstDayToSayToday = (new3DayForecast) => {
+    const modifiedFirstDay = Object.assign({}, new3DayForecast[0], {date: "Today"});
+    return modifiedFirstDay;
+  }
+
   return (
     <div>
       <br/>
@@ -87,11 +101,13 @@ function WeatherForecast() {
             onConvertingTimeFormats={convertForecastTimeFormats}
             onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}/>
           <ThreeDayForecast
-            weatherApiObject={weatherApiObject}/>
+            weatherApiObject={weatherApiObject}
+            onChanging3DayDateFormats={changeDateFormatsToWeekday}
+            onChangingFirstDayToSayToday={changeFirstDayToSayToday}/>
         </React.Fragment>
       )}
     </div>
   )
 }
 
-export default WeatherForecast;
+export default Weather;

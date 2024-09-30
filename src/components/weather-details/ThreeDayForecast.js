@@ -1,36 +1,21 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { changeDateToWeekday } from '../utility-fns/convert-date-format';
 import SelectedForecastDay from "./SelectedForecastDay";
 
 function ThreeDayForeCast(props) {
-  const { weatherApiObject } = props;
+  const { weatherApiObject, onChanging3DayDateFormats, onChangingFirstDayToSayToday } = props;
   const [threeDayForecast, setNew3DayForecast] = useState([]);
   const [selectedForecastDay, setSelectedForecastDay] = useState(null);
 
   useEffect(() => {
-    const threeDayForecastWithNewDates = changeDateFormatsToWeekday(weatherApiObject.forecast.forecastday);
+    const threeDayForecastWithNewDates = onChanging3DayDateFormats(weatherApiObject.forecast.forecastday);
     setNew3DayForecast(threeDayForecastWithNewDates);
 
-    const moddedFirstDayOfForecast = changeFirstDayToSayToday(threeDayForecastWithNewDates);
+    const moddedFirstDayOfForecast = onChangingFirstDayToSayToday(threeDayForecastWithNewDates);
     const final3DayForecast = [moddedFirstDayOfForecast, ...threeDayForecastWithNewDates.slice(1)];
     setNew3DayForecast(final3DayForecast);
 
   }, [weatherApiObject]);
-
-  const changeDateFormatsToWeekday = (threeDayForecast) => {
-    return threeDayForecast.map(day => {
-      return {
-        ...day,
-        date: changeDateToWeekday(day.date),
-      };
-    });
-  };
-
-  const changeFirstDayToSayToday = (new3DayForecast) => {
-    const modifiedFirstDay = Object.assign({}, new3DayForecast[0], {date: "Today"});
-    return modifiedFirstDay;
-  }
 
   const selectDayFromForecast = (forecastDay) => {
     setSelectedForecastDay(forecastDay === selectedForecastDay ? null : forecastDay);
@@ -66,7 +51,9 @@ function ThreeDayForeCast(props) {
 }
 
 ThreeDayForeCast.propTypes = {
-  weatherApiObject: PropTypes.object
+  weatherApiObject: PropTypes.object,
+  onChanging3DayDateFormats: PropTypes.func,
+  onChangingFirstDayToSayToday: PropTypes.func
 }
 
 export default ThreeDayForeCast;
