@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { changeDateToWeekday } from '../utility-fns/convert-date-format';
+import SelectedForecastDay from "./SelectedForecastDay";
 
 function ThreeDayForeCast(props) {
   const { weatherApiObject } = props;
@@ -52,7 +53,7 @@ function ThreeDayForeCast(props) {
                     <h5>{forecast.day.maxtemp_f}{'\u00b0'}/{forecast.day.mintemp_f}{'\u00b0'}</h5>
                   </div>
                   {selectedForecastDay === index && (
-                    <h5>SELECTED DAY</h5>
+                    <SelectedForecastDay weatherApiObject={weatherApiObject}/>
                   )}
                 </div>
               )}
