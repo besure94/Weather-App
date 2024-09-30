@@ -5,6 +5,7 @@ import { changeDateToWeekday } from '../utility-fns/convert-date-format';
 function ThreeDayForeCast(props) {
   const { weatherApiObject } = props;
   const [threeDayForecast, setNew3DayForecast] = useState([]);
+  const [selectedForecastDay, setSelectedForecastDay] = useState(null);
 
   useEffect(() => {
     const threeDayForecastWithNewDates = changeDateFormatsToWeekday(weatherApiObject.forecast.forecastday);
@@ -30,6 +31,10 @@ function ThreeDayForeCast(props) {
     return modifiedFirstDay;
   }
 
+  const selectDayFromForecast = (forecastDay) => {
+    setSelectedForecastDay(forecastDay === selectedForecastDay ? null : forecastDay);
+  }
+
   return (
     <React.Fragment>
       <br/>
@@ -41,11 +46,14 @@ function ThreeDayForeCast(props) {
             <React.Fragment>
               {threeDayForecast.map((forecast, index) =>
                 <div key={index}>
-                  <div className="day">
+                  <div className="day" onClick={() => selectDayFromForecast(index)}>
                     <h5>{forecast.date}</h5>
                     <img className="three-day-forecast-icon" src={forecast.day.condition.icon} alt="An icon showing the general forecast for the day."/>
                     <h5>{forecast.day.maxtemp_f}{'\u00b0'}/{forecast.day.mintemp_f}{'\u00b0'}</h5>
                   </div>
+                  {selectedForecastDay === index && (
+                    <h5>SELECTED DAY</h5>
+                  )}
                 </div>
               )}
             </React.Fragment>
