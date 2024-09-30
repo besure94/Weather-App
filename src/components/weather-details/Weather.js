@@ -38,6 +38,39 @@ function WeatherForecast() {
     setCity(city);
   }
 
+  const roundLocalTimeToHour = (localTime) => {
+    let meridiem = localTime.slice(-2);
+    let hours = parseInt(localTime.slice(0, -4));
+
+    if (hours === 12 && meridiem === 'am') {
+      hours = 12;
+    } else if (hours === 12 && meridiem === 'pm') {
+      hours = 12;
+    } else if (hours === 13) {
+      hours = 1;
+    } else if (hours === 0) {
+      hours = 12;
+    }
+
+    return `${hours}:00${meridiem}`;
+  }
+
+  const convertForecastTimeFormats = (forecastArray) => {
+    return forecastArray.map(index => {
+      return {
+        ...index,
+        time: convertDateFormat(index.time)
+      };
+    });
+  };
+
+  const displayUpdated24HourForecast = (forecastArray, timeToMatch) => {
+    let firstMatchingIndex = forecastArray.findIndex(index => index.time === timeToMatch);
+    let slicedArray = forecastArray.slice(firstMatchingIndex, firstMatchingIndex + 25);
+    slicedArray[0].time = "Now";
+    return slicedArray;
+  }
+
   return (
     <div>
       <br/>
@@ -49,7 +82,10 @@ function WeatherForecast() {
             weatherApiObject={weatherApiObject} locationLocalTime={locationLocalTime}/>
           <HourlyForecast
             weatherApiObject={weatherApiObject}
-            locationLocalTime={locationLocalTime}/>
+            locationLocalTime={locationLocalTime}
+            onRoundingTimeToHour={roundLocalTimeToHour}
+            onConvertingTimeFormats={convertForecastTimeFormats}
+            onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}/>
           <ThreeDayForecast
             weatherApiObject={weatherApiObject}/>
         </React.Fragment>
