@@ -33,27 +33,17 @@ code {
 
 /* weather details styling */
 .current-weather {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-left: 15rem;
+  padding-right: 15rem;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.current-conditions {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
-  gap: 10rem;
-  padding-left: 6rem;
-  padding-right: 6rem;
 }
 
 .current-weather-details {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  /* text-align: right; */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
 
@@ -68,7 +58,6 @@ code {
 .details {
   background-color: #eee;
   padding: 1rem;
-  margin-bottom: 1rem;
   border-radius: 0.325rem;
 }
 
@@ -100,6 +89,7 @@ img.current-weather-icon {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
 }
 
 .three-day-forecast {
