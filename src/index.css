@@ -40,11 +40,15 @@ code {
   align-items: center;
 }
 
+.current-weather-24-hr-forecast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .current-weather-details {
-  /* text-align: right; */
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
 }
 
 .day {
@@ -58,7 +62,9 @@ code {
 .details {
   background-color: #eee;
   padding: 1rem;
+  margin: 0.75rem;
   border-radius: 0.325rem;
+  font-size: 1rem;
 }
 
 .forecast-for-each-day {
@@ -85,6 +91,11 @@ img.current-weather-icon {
   flex-direction: row;
 }
 
+.location-weather-forecast {
+  display: flex;
+  align-items: flex-start;
+}
+
 .temp-and-conditions {
   display: flex;
   flex-direction: column;
@@ -99,11 +110,11 @@ img.current-weather-icon {
 }
 
 .three-day-forecast-container {
-  padding-left: 13.5rem;
-  padding-right: 13.5rem;
+  padding-left: 15rem;
+  padding-right: 15rem;
 }
 
 .weather-forecast {
-  padding-left: 13.5rem;
-  padding-right: 13.5rem;
+  padding-left: 15rem;
+  padding-right: 15rem;
 }

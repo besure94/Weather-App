@@ -2,26 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function CurrentWeather(props) {
-  const { weatherApiObject, locationLocalTime } = props;
+  const { weatherApiObject } = props;
 
   return (
     <React.Fragment>
-      <div className="location">
-        <h4>{weatherApiObject.location.name}, {weatherApiObject.location.region}, {weatherApiObject.location.country}</h4>
-        <h5>{locationLocalTime}</h5>
-      </div>
-      <br/>
       <div className='current-weather'>
         <div className='temp-and-conditions'>
+          <h4>{weatherApiObject.location.name}, {weatherApiObject.location.region}, {weatherApiObject.location.country}</h4>
           <img className="current-weather-icon" src={weatherApiObject.current.condition.icon} alt="An icon showing current weather conditions."/>
           <h1>{weatherApiObject.current.temp_f}{'\u00b0'}F</h1>
           <h3>{weatherApiObject.current.condition.text}</h3>
           <h5>Feels like {weatherApiObject.current.feelslike_f}{'\u00b0'}F</h5>
-          {/* <br/> */}
-          <div className='high-and-low'>
+          {/* <div className='high-and-low'>
             <h6>High: {weatherApiObject.forecast.forecastday[0].day.maxtemp_f}{'\u00b0'}</h6>
             <h6>Low: {weatherApiObject.forecast.forecastday[0].day.mintemp_f}{'\u00b0'}</h6>
-          </div>
+          </div> */}
         </div>
         <div className="current-weather-details">
           <div className='details'>

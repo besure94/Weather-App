@@ -22,21 +22,21 @@ function HourlyForecast(props) {
       <br/>
       <div className='weather-forecast'>
         <div className='location-weather-forecast'>
-          <h4>24 Hour Forecast</h4>
-          <br/>
-          <div className="hourly-forecast">
-            <React.Fragment>
-              {twentyFourHourForecast.map((hour, index) =>
-                <div key={index}>
-                  <div className="hour">
-                    <h6>{hour.temp_f}{'\u00b0'}</h6>
-                    <img src={hour.condition.icon} alt="An icon symbolizing current hourly weather condition."/>
-                    <h6>{hour.time}</h6>
-                  </div>
+          <h4>Hourly Forecast</h4>
+        </div>
+        <br/>
+        <div className="hourly-forecast">
+          <React.Fragment>
+            {twentyFourHourForecast.map((hour, index) =>
+              <div key={index}>
+                <div className="hour">
+                  <h6>{hour.temp_f}{'\u00b0'}</h6>
+                  <img src={hour.condition.icon} alt="An icon symbolizing current hourly weather condition."/>
+                  <h6>{hour.time}</h6>
                 </div>
-              )}
-            </React.Fragment>
-          </div>
+              </div>
+            )}
+          </React.Fragment>
         </div>
       </div>
     </React.Fragment>

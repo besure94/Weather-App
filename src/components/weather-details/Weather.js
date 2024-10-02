@@ -92,14 +92,16 @@ function Weather() {
       {error && <h2>Error: {error}</h2>}
       {isLoaded && (
         <React.Fragment>
-          <CurrentWeather
-            weatherApiObject={weatherApiObject} locationLocalTime={locationLocalTime}/>
-          <HourlyForecast
-            weatherApiObject={weatherApiObject}
-            locationLocalTime={locationLocalTime}
-            onRoundingTimeToHour={roundLocalTimeToHour}
-            onConvertingTimeFormats={convertForecastTimeFormats}
-            onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}/>
+          <div className='weather-components-container'>
+            <CurrentWeather
+              weatherApiObject={weatherApiObject}/>
+            <HourlyForecast
+              weatherApiObject={weatherApiObject}
+              locationLocalTime={locationLocalTime}
+              onRoundingTimeToHour={roundLocalTimeToHour}
+              onConvertingTimeFormats={convertForecastTimeFormats}
+              onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}/>
+          </div>
           <ThreeDayForecast
             weatherApiObject={weatherApiObject}
             onChanging3DayDateFormats={changeDateFormatsToWeekday}
