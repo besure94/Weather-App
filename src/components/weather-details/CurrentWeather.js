@@ -9,8 +9,10 @@ function CurrentWeather(props) {
       <div className='current-weather'>
         <div className='temp-and-conditions'>
           <h4>{weatherApiObject.location.name}, {weatherApiObject.location.region}, {weatherApiObject.location.country}</h4>
-          <img className="current-weather-icon" src={weatherApiObject.current.condition.icon} alt="An icon showing current weather conditions."/>
-          <h1>{weatherApiObject.current.temp_f}{'\u00b0'}F</h1>
+          <div className="icon-and-temp">
+            <img className="current-weather-icon" src={weatherApiObject.current.condition.icon} alt="An icon showing current weather conditions."/>
+            <h1>{weatherApiObject.current.temp_f}{'\u00b0'}F</h1>
+          </div>
           <h3>{weatherApiObject.current.condition.text}</h3>
           <h5>Feels like {weatherApiObject.current.feelslike_f}{'\u00b0'}F</h5>
           {/* <div className='high-and-low'>

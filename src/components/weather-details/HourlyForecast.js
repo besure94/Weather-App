@@ -20,6 +20,7 @@ function HourlyForecast(props) {
   return (
     <React.Fragment>
       <br/>
+      <br/>
       <div className='weather-forecast'>
         <div className='location-weather-forecast'>
           <h4>Hourly Forecast</h4>
@@ -28,10 +29,10 @@ function HourlyForecast(props) {
         <div className="hourly-forecast">
           <React.Fragment>
             {twentyFourHourForecast.map((hour, index) =>
-              <div key={index}>
-                <div className="hour">
+              <div key={index} className="hour">
+                <div className="hour-details">
                   <h6>{hour.temp_f}{'\u00b0'}</h6>
-                  <img src={hour.condition.icon} alt="An icon symbolizing current hourly weather condition."/>
+                  <img src={hour.condition.icon} className="hourly-icon" alt="An icon symbolizing current hourly weather condition."/>
                   <h6>{hour.time}</h6>
                 </div>
               </div>

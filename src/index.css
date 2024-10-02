@@ -73,16 +73,27 @@ code {
   justify-content: space-between;
 }
 
-img.current-weather-icon {
+/* img.current-weather-icon {
   width: 100px;
   height: auto;
-}
+} */
 
 .high-and-low {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
 }
+
+.hour {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* .hour-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+} */
 
 .hourly-forecast {
   display: flex;
@@ -91,9 +102,20 @@ img.current-weather-icon {
   flex-direction: row;
 }
 
+.hourly-icon {
+  float: left;
+}
+
+.icon-and-temp {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .location-weather-forecast {
   display: flex;
-  align-items: flex-start;
+  text-align: left;
 }
 
 .temp-and-conditions {
