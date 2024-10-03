@@ -14,7 +14,7 @@ function Weather() {
   const [weatherApiObject, setCurrentWeather] = useState([]);
   const [city, setCity] = useState("");
   const [locationLocalTime, setLocationLocalTime] = useState(null);
-  const [selectedForecastDay, setSelectedForecastDay] = useState(null);
+  const [selectedForecastDay, setSelectedForecastDay] = useState(0);
 
   useEffect(() => {
     async function getWeatherApiData() {
@@ -25,6 +25,7 @@ function Weather() {
         setCurrentWeather(response);
         setLocationLocalTime(formattedDate);
         setIsLoaded(true);
+        setSelectedForecastDay(0);
       } catch (error) {
         setError(error.message);
         setIsLoaded(false);
@@ -34,6 +35,7 @@ function Weather() {
     if (city) {
       getWeatherApiData(city);
     }
+
   }, [city]);
 
   const handleFormSubmission = (formInput) => {
