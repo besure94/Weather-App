@@ -7,20 +7,13 @@ import HourlyForecast from './HourlyForecast';
 import ThreeDayForecast from './ThreeDayForecast';
 import CurrentWeatherDetails from './CurrentWeatherDetails';
 
-// make each div in 3 day forecast clickable
-
-// clicking a day in the 3 day forecast should trigger a re render
-
-// conditionally render components that contain averages for days 2 and 3's weather details if those days are clicked, as well as their hourly forecasts
-
-// clicking 'today' should just default back to current day and hourly forecast and current condition details
-
 function Weather() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [weatherApiObject, setCurrentWeather] = useState([]);
   const [city, setCity] = useState("");
   const [locationLocalTime, setLocationLocalTime] = useState(null);
+  const [selectedForecastDay, setSelectedForecastDay] = useState(null);
 
   useEffect(() => {
     async function getWeatherApiData() {
@@ -94,7 +87,9 @@ function Weather() {
     return modifiedFirstDay;
   }
 
-  console.log("API response: ", weatherApiObject);
+  const handleSelectingForecastDay = (date) => {
+    setSelectedForecastDay(date);
+  }
 
   return (
     <div>
@@ -106,13 +101,15 @@ function Weather() {
           <div className='weather-components-container'>
             <div className='current-weather-for-location'>
               <CurrentWeather
-                weatherApiObject={weatherApiObject}/>
+                weatherApiObject={weatherApiObject}
+                selectedForecastDay={selectedForecastDay}/>
             </div>
             <div className='three-day-forecast'>
               <ThreeDayForecast
                 weatherApiObject={weatherApiObject}
                 onChanging3DayDateFormats={changeDateFormatsToWeekday}
-                onChangingFirstDayToSayToday={changeFirstDayToSayToday}/>
+                onChangingFirstDayToSayToday={changeFirstDayToSayToday}
+                onSelectingForecastDay={handleSelectingForecastDay}/>
             </div>
             {/* <CurrentWeatherDetails
               weatherApiObject={weatherApiObject}/> */}
