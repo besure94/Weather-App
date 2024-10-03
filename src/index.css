@@ -80,7 +80,7 @@ code {
 
 .weather-components-container {
   display: grid;
-  grid-template-columns: 65% 35%;
+  grid-template-columns: 2.5fr 1.5fr;
   gap: 2rem;
   align-items: center;
   padding-left: 10rem;
