@@ -5,6 +5,7 @@ import { convertDateFormat, changeDateToWeekday } from '../utility-fns/convert-d
 import CurrentWeather from './CurrentWeather';
 import HourlyForecast from './HourlyForecast';
 import ThreeDayForecast from './ThreeDayForecast';
+import CurrentWeatherDetails from './CurrentWeatherDetails';
 
 function Weather() {
   const [error, setError] = useState(null);
@@ -93,18 +94,18 @@ function Weather() {
       {isLoaded && (
         <React.Fragment>
           <div className='weather-components-container'>
-            <CurrentWeather
-              weatherApiObject={weatherApiObject}/>
-            <ThreeDayForecast
-              weatherApiObject={weatherApiObject}
-              onChanging3DayDateFormats={changeDateFormatsToWeekday}
-              onChangingFirstDayToSayToday={changeFirstDayToSayToday}/>
-            {/* <HourlyForecast
-              weatherApiObject={weatherApiObject}
-              locationLocalTime={locationLocalTime}
-              onRoundingTimeToHour={roundLocalTimeToHour}
-              onConvertingTimeFormats={convertForecastTimeFormats}
-              onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}/> */}
+            <div className='current-weather-for-location'>
+              <CurrentWeather
+                weatherApiObject={weatherApiObject}/>
+            </div>
+            <div className='three-day-forecast'>
+              <ThreeDayForecast
+                weatherApiObject={weatherApiObject}
+                onChanging3DayDateFormats={changeDateFormatsToWeekday}
+                onChangingFirstDayToSayToday={changeFirstDayToSayToday}/>
+            </div>
+            {/* <CurrentWeatherDetails
+              weatherApiObject={weatherApiObject}/> */}
           </div>
           <HourlyForecast
             weatherApiObject={weatherApiObject}
@@ -112,10 +113,6 @@ function Weather() {
             onRoundingTimeToHour={roundLocalTimeToHour}
             onConvertingTimeFormats={convertForecastTimeFormats}
             onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}/>
-          {/* <ThreeDayForecast
-            weatherApiObject={weatherApiObject}
-            onChanging3DayDateFormats={changeDateFormatsToWeekday}
-            onChangingFirstDayToSayToday={changeFirstDayToSayToday}/> */}
         </React.Fragment>
       )}
     </div>

@@ -23,29 +23,22 @@ function ThreeDayForeCast(props) {
 
   return (
     <React.Fragment>
-      <br/>
-      {/* <div className="three-day-forecast-container">
-        <div className="three-day-forecast"> */}
-          {/* <h4>3 Day Forecast</h4> */}
-          <br/>
-          <div className="forecast-for-each-day">
-            <React.Fragment>
-              {threeDayForecast.map((forecast, index) =>
-                <div key={index}>
-                  <div className="day" onClick={() => selectDayFromForecast(index)}>
-                    <h5>{forecast.date}</h5>
-                    <img className="three-day-forecast-icon" src={forecast.day.condition.icon} alt="An icon showing the general forecast for the day."/>
-                    <h5>{forecast.day.maxtemp_f}{'\u00b0'}/{forecast.day.mintemp_f}{'\u00b0'}</h5>
-                  </div>
-                  {selectedForecastDay === index && (
-                    <SelectedForecastDay weatherApiObject={weatherApiObject}/>
-                  )}
-                </div>
-              )}
-            </React.Fragment>
-          </div>
-        {/* </div>
-      </div> */}
+      <div className="forecast-for-each-day">
+        <React.Fragment>
+          {threeDayForecast.map((forecast, index) =>
+            <div key={index}>
+              <div className="day" onClick={() => selectDayFromForecast(index)}>
+                <h5>{forecast.date}</h5>
+                <img className="three-day-forecast-icon" src={forecast.day.condition.icon} alt="An icon showing the general forecast for the day."/>
+                <h5>{forecast.day.maxtemp_f}{'\u00b0'}/{forecast.day.mintemp_f}{'\u00b0'}</h5>
+              </div>
+              {/* {selectedForecastDay === index && (
+                <SelectedForecastDay weatherApiObject={weatherApiObject}/>
+              )} */}
+            </div>
+          )}
+        </React.Fragment>
+      </div>
     </React.Fragment>
   )
 }

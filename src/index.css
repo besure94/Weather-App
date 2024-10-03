@@ -16,35 +16,9 @@ code {
 #root {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
-  text-align: center;
-}
-
-/* form styling */
-.row > * {
-  flex-shrink: 0;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
-  padding-left: calc(var(--bs-gutter-x) * 0.5);
-  margin-top: var(--bs-gutter-y);
-}
-
-.search-form {
-  width: 30%;
 }
 
 /* weather details styling */
-.current-weather {
-  padding-left: 15rem;
-  padding-right: 15rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.current-weather-24-hr-forecast {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 .current-weather-details {
   display: grid;
@@ -55,7 +29,6 @@ code {
   display: flex;
   flex-direction: row;
   align-items: center;
-  /* justify-content: space-between; */
   width: 100%;
 }
 
@@ -73,37 +46,11 @@ code {
   justify-content: space-between;
 }
 
-/* img.current-weather-icon {
-  width: 100px;
-  height: auto;
-} */
-
-.high-and-low {
-  display: flex;
-  flex-direction: row;
-  gap: 0.5rem;
-}
-
-.hour {
-  display: flex;
-  align-items: flex-start;
-}
-
-/* .hour-details {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-} */
-
 .hourly-forecast {
   display: flex;
   flex-wrap: nowrap;
   overflow-x: scroll;
   flex-direction: row;
-}
-
-.hourly-icon {
-  float: left;
 }
 
 .icon-and-temp {
@@ -131,20 +78,16 @@ code {
   width: 100%;
 }
 
-.three-day-forecast-container {
-  padding-left: 15rem;
-  padding-right: 15rem;
-}
-
 .weather-components-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-left: 15rem;
-  padding-right: 15rem;
+  display: grid;
+  grid-template-columns: 65% 35%;
+  gap: 2rem;
+  align-items: center;
+  padding-left: 10rem;
+  padding-right: 10rem;
 }
 
 .weather-forecast {
-  padding-left: 15rem;
-  padding-right: 15rem;
+  padding-left: 10rem;
+  padding-right: 10rem;
 }
