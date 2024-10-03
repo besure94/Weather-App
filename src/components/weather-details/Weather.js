@@ -7,6 +7,7 @@ import HourlyForecast from './HourlyForecast';
 import ThreeDayForecast from './ThreeDayForecast';
 import CurrentWeatherDetails from './CurrentWeatherDetails';
 
+// render different hourly forecast depending on the selected day
 function Weather() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);

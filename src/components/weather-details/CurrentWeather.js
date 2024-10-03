@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+// render different info for days 2 and 3
 function CurrentWeather(props) {
   const { weatherApiObject, selectedForecastDay } = props;
 
