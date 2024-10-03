@@ -95,17 +95,27 @@ function Weather() {
           <div className='weather-components-container'>
             <CurrentWeather
               weatherApiObject={weatherApiObject}/>
-            <HourlyForecast
+            <ThreeDayForecast
+              weatherApiObject={weatherApiObject}
+              onChanging3DayDateFormats={changeDateFormatsToWeekday}
+              onChangingFirstDayToSayToday={changeFirstDayToSayToday}/>
+            {/* <HourlyForecast
               weatherApiObject={weatherApiObject}
               locationLocalTime={locationLocalTime}
               onRoundingTimeToHour={roundLocalTimeToHour}
               onConvertingTimeFormats={convertForecastTimeFormats}
-              onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}/>
+              onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}/> */}
           </div>
-          <ThreeDayForecast
+          <HourlyForecast
+            weatherApiObject={weatherApiObject}
+            locationLocalTime={locationLocalTime}
+            onRoundingTimeToHour={roundLocalTimeToHour}
+            onConvertingTimeFormats={convertForecastTimeFormats}
+            onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}/>
+          {/* <ThreeDayForecast
             weatherApiObject={weatherApiObject}
             onChanging3DayDateFormats={changeDateFormatsToWeekday}
-            onChangingFirstDayToSayToday={changeFirstDayToSayToday}/>
+            onChangingFirstDayToSayToday={changeFirstDayToSayToday}/> */}
         </React.Fragment>
       )}
     </div>

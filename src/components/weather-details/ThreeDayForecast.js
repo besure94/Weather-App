@@ -24,9 +24,9 @@ function ThreeDayForeCast(props) {
   return (
     <React.Fragment>
       <br/>
-      <div className="three-day-forecast-container">
-        <div className="three-day-forecast">
-          <h4>3 Day Forecast</h4>
+      {/* <div className="three-day-forecast-container">
+        <div className="three-day-forecast"> */}
+          {/* <h4>3 Day Forecast</h4> */}
           <br/>
           <div className="forecast-for-each-day">
             <React.Fragment>
@@ -44,8 +44,8 @@ function ThreeDayForeCast(props) {
               )}
             </React.Fragment>
           </div>
-        </div>
-      </div>
+        {/* </div>
+      </div> */}
     </React.Fragment>
   )
 }
