@@ -40,6 +40,11 @@ code {
   font-size: 1rem;
 }
 
+.error {
+  display: flex;
+  justify-content: center;
+}
+
 .forecast-for-each-day {
   display: flex;
   flex-direction: column;

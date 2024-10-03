@@ -100,7 +100,7 @@ function Weather() {
     <div>
       <br/>
       <SearchForm onFormSubmission={handleFormSubmission}/>
-      {error && <h2>Error: {error}</h2>}
+      {error && <div className='error'><h2>Error: {error}</h2></div>}
       {isLoaded && (
         <React.Fragment>
           <div className='weather-components-container'>
