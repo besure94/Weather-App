@@ -7,6 +7,14 @@ import HourlyForecast from './HourlyForecast';
 import ThreeDayForecast from './ThreeDayForecast';
 import CurrentWeatherDetails from './CurrentWeatherDetails';
 
+// make each div in 3 day forecast clickable
+
+// clicking a day in the 3 day forecast should trigger a re render
+
+// conditionally render components that contain averages for days 2 and 3's weather details if those days are clicked, as well as their hourly forecasts
+
+// clicking 'today' should just default back to current day and hourly forecast and current condition details
+
 function Weather() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -85,6 +93,8 @@ function Weather() {
     const modifiedFirstDay = Object.assign({}, new3DayForecast[0], {date: "Today"});
     return modifiedFirstDay;
   }
+
+  console.log("API response: ", weatherApiObject);
 
   return (
     <div>
