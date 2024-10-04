@@ -7,7 +7,9 @@ import HourlyForecast from './HourlyForecast';
 import ThreeDayForecast from './ThreeDayForecast';
 import CurrentWeatherDetails from './CurrentWeatherDetails';
 
-// render different hourly forecast depending on the selected day
+// then render different hourly forecast depending on the selected day
+
+// then focus on implementing current conditions (AQ, UV, Wind, Humidity, etc) and average conditions for future
 function Weather() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);

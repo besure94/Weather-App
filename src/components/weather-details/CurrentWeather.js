@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-
-// render different info for days 2 and 3
-
-// would be best to map through the 3 day forecast array and display the selected day index rather than manually selecting their indexes to display data
 
 function CurrentWeather(props) {
   const { weatherApiObject, selectedForecastDay } = props;
-  console.log(weatherApiObject);
+  const [displayedWeatherByDay, setDisplayedWeatherByDay] = useState({});
+
+  useEffect(() => {
+    if (selectedForecastDay === 0) {
+      const todaysCurrentWeather = {
+        ...{},
+        icon: weatherApiObject.current.condition.icon,
+        temperature: weatherApiObject.current.temp_f,
+        condition: weatherApiObject.current.condition.text,
+        feelsLike: weatherApiObject.current.feelslike_f
+      }
+      setDisplayedWeatherByDay(todaysCurrentWeather);
+    } else {
+      const forecast = weatherApiObject.forecast.forecastday[selectedForecastDay];
+      const futureDaysWeather = {
+        ...{},
+        icon: forecast.day.condition.icon,
+        high: forecast.day.maxtemp_f,
+        low: forecast.day.mintemp_f,
+        condition: forecast.day.condition.text,
+      }
+      setDisplayedWeatherByDay(futureDaysWeather);
+    }
+  }, [weatherApiObject, selectedForecastDay]);
 
   return (
     <React.Fragment>
@@ -16,29 +35,21 @@ function CurrentWeather(props) {
         {selectedForecastDay === 0 && (
           <React.Fragment>
             <div className="icon-and-temp">
-              <img className="current-weather-icon" src={weatherApiObject.current.condition.icon} alt="An icon showing current weather conditions."/>
-              <h2>{weatherApiObject.current.temp_f}{'\u00b0'}F</h2>
+              <img className="current-weather-icon" src={displayedWeatherByDay.icon} alt="An icon showing current weather conditions."/>
+              <h2>{displayedWeatherByDay.temperature}{'\u00b0'}F</h2>
             </div>
-            <h3>{weatherApiObject.current.condition.text}</h3>
-            <h5>Feels like {weatherApiObject.current.feelslike_f}{'\u00b0'}F</h5>
+            <h3>{displayedWeatherByDay.condition}</h3>
+            <h5>Feels like {displayedWeatherByDay.feelsLike}{'\u00b0'}F</h5>
           </React.Fragment>
         )}
 
-        {selectedForecastDay === 1 && (
+        {selectedForecastDay !== 0 && (
           <React.Fragment>
             <div className="icon-and-temp">
-              <img className="current-weather-icon" src={weatherApiObject.forecast.forecastday[1].day.condition.icon} alt="An icon showing current weather conditions."/>
-              <h2>{weatherApiObject.forecast.forecastday[1].day.maxtemp_f}{'\u00b0'}/{weatherApiObject.forecast.forecastday[1].day.mintemp_f}{'\u00b0'}</h2>
+              <img className="current-weather-icon" src={displayedWeatherByDay.icon} alt="An icon showing current weather conditions."/>
+              <h2>{displayedWeatherByDay.high}{'\u00b0'}/{displayedWeatherByDay.low}{'\u00b0'}</h2>
             </div>
-          </React.Fragment>
-        )}
-
-        {selectedForecastDay === 2 && (
-          <React.Fragment>
-            <div className="icon-and-temp">
-              <img className="current-weather-icon" src={weatherApiObject.forecast.forecastday[2].day.condition.icon} alt="An icon showing current weather conditions."/>
-              <h2>{weatherApiObject.forecast.forecastday[2].day.maxtemp_f}{'\u00b0'}/{weatherApiObject.forecast.forecastday[2].day.mintemp_f}{'\u00b0'}</h2>
-            </div>
+            <h3>{displayedWeatherByDay.condition}</h3>
           </React.Fragment>
         )}
       </div>
