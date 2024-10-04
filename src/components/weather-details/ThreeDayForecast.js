@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 function ThreeDayForeCast(props) {
-  const { weatherApiObject, onChanging3DayDateFormats, onChangingFirstDayToSayToday, onSelectingForecastDay } = props;
+  const { weatherApiObject, onChanging3DayDateFormats, onChangingFirstDayToSayToday, onSelectingForecastDay, selectedForecastDay} = props;
   const [threeDayForecast, setNew3DayForecast] = useState([]);
 
   useEffect(() => {
@@ -21,8 +21,9 @@ function ThreeDayForeCast(props) {
         <React.Fragment>
           {threeDayForecast.map((forecast, index) =>
             <div key={index} onClick={() => onSelectingForecastDay(index)}>
-              <div className="day">
-                <h5>{forecast.date}</h5>
+              <div className={`day ${selectedForecastDay === index ? 'selected' : ''}`}>
+                {/* find different way to mark it besides a check mark */}
+                <h5>{selectedForecastDay === index && `\u2714`}{forecast.date}</h5>
                 <img className="three-day-forecast-icon" src={forecast.day.condition.icon} alt="An icon showing the general forecast for the day."/>
                 <h5>{forecast.day.maxtemp_f}{'\u00b0'}/{forecast.day.mintemp_f}{'\u00b0'}</h5>
               </div>
@@ -38,7 +39,8 @@ ThreeDayForeCast.propTypes = {
   weatherApiObject: PropTypes.object,
   onChanging3DayDateFormats: PropTypes.func,
   onChangingFirstDayToSayToday: PropTypes.func,
-  onSelectingForecastDay: PropTypes.func
+  onSelectingForecastDay: PropTypes.func,
+  selectedForecastDay: PropTypes.number
 }
 
 export default ThreeDayForeCast;

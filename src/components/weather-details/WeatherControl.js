@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SearchForm from '../main/SearchForm';
 import { getWeather } from '../api-call/weather-api-call';
 import { convertDateFormat, changeDateToWeekday } from '../utility-fns/convert-date-format';
-import WeatherOverview from './WeatherOverview';
+import ConditionsOverview from './ConditionsOverview';
 import HourlyForecast from './HourlyForecast';
 import ThreeDayForecast from './ThreeDayForecast';
 import CurrentWeatherDetails from './CurrentWeatherDetails';
@@ -105,7 +105,7 @@ function WeatherControl() {
         <React.Fragment>
           <div className='weather-components-container'>
             <div className='current-weather-for-location'>
-              <WeatherOverview
+              <ConditionsOverview
                 weatherApiObject={weatherApiObject}
                 selectedForecastDay={selectedForecastDay}/>
             </div>
@@ -114,7 +114,8 @@ function WeatherControl() {
                 weatherApiObject={weatherApiObject}
                 onChanging3DayDateFormats={changeDateFormatsToWeekday}
                 onChangingFirstDayToSayToday={changeFirstDayToSayToday}
-                onSelectingForecastDay={handleSelectingForecastDay}/>
+                onSelectingForecastDay={handleSelectingForecastDay}
+                selectedForecastDay={selectedForecastDay}/>
             </div>
             {/* <CurrentWeatherDetails
               weatherApiObject={weatherApiObject}/> */}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-function WeatherOverview(props) {
+function ConditionsOverview(props) {
   const { weatherApiObject, selectedForecastDay } = props;
   const [displayedWeatherByDay, setDisplayedWeatherByDay] = useState({});
 
@@ -57,9 +57,9 @@ function WeatherOverview(props) {
   )
 }
 
-WeatherOverview.propTypes = {
+ConditionsOverview.propTypes = {
   weatherApiObject: PropTypes.object,
   selectedForecastDay: PropTypes.number
 }
 
-export default WeatherOverview;
+export default ConditionsOverview;
