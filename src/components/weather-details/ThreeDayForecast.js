@@ -23,7 +23,7 @@ function ThreeDayForeCast(props) {
             <div key={index} onClick={() => onSelectingForecastDay(index)}>
               <div className={`day ${selectedForecastDay === index ? 'selected' : ''}`}>
                 {/* find different way to mark it besides a check mark */}
-                <h5>{selectedForecastDay === index && `\u2714`}{forecast.date}</h5>
+                <h5>{selectedForecastDay === index && '\u25CF'} {forecast.date}</h5>
                 <img className="three-day-forecast-icon" src={forecast.day.condition.icon} alt="An icon showing the general forecast for the day."/>
                 <h5>{forecast.day.maxtemp_f}{'\u00b0'}/{forecast.day.mintemp_f}{'\u00b0'}</h5>
               </div>
