@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import SearchForm from '../main/SearchForm';
 import { getWeather } from '../api-call/weather-api-call';
 import { convertDateFormat, changeDateToWeekday } from '../utility-fns/convert-date-format';
-import CurrentWeather from './CurrentWeather';
+import WeatherOverview from './WeatherOverview';
 import HourlyForecast from './HourlyForecast';
 import ThreeDayForecast from './ThreeDayForecast';
 import CurrentWeatherDetails from './CurrentWeatherDetails';
@@ -10,7 +10,7 @@ import CurrentWeatherDetails from './CurrentWeatherDetails';
 // then render different hourly forecast depending on the selected day
 
 // then focus on implementing current conditions (AQ, UV, Wind, Humidity, etc) and average conditions for future
-function Weather() {
+function WeatherControl() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [weatherApiObject, setCurrentWeather] = useState([]);
@@ -105,7 +105,7 @@ function Weather() {
         <React.Fragment>
           <div className='weather-components-container'>
             <div className='current-weather-for-location'>
-              <CurrentWeather
+              <WeatherOverview
                 weatherApiObject={weatherApiObject}
                 selectedForecastDay={selectedForecastDay}/>
             </div>
@@ -131,4 +131,4 @@ function Weather() {
   )
 }
 
-export default Weather;
+export default WeatherControl;
