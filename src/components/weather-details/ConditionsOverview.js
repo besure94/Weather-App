@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import OpacityIcon from '@mui/icons-material/Opacity';
+import AirIcon from '@mui/icons-material/Air';
 
 function ConditionsOverview(props) {
   const { weatherApiObject, selectedForecastDay } = props;
@@ -15,10 +17,11 @@ function ConditionsOverview(props) {
       const todaysCurrentWeather = {
         ...{},
         icon: weatherApiObject.current.condition.icon,
-        temperature: weatherApiObject.current.temp_f,
+        temperature: `${weatherApiObject.current.temp_f}${'\u00b0'}F`,
         condition: weatherApiObject.current.condition.text,
         feelsLike: weatherApiObject.current.feelslike_f,
-        wind: weatherApiObject.current.wind_mph
+        wind: `${weatherApiObject.current.wind_mph}mph`,
+        humidity: `${weatherApiObject.current.humidity}%`
       }
       console.log("Todays weather: ", todaysCurrentWeather);
 
@@ -31,10 +34,11 @@ function ConditionsOverview(props) {
       const futureDaysWeather = {
         ...{},
         icon: forecast.day.condition.icon,
-        high: forecast.day.maxtemp_f,
-        low: forecast.day.mintemp_f,
+        high: `${forecast.day.maxtemp_f}${'\u00b0'}`,
+        low: `${forecast.day.mintemp_f}${'\u00b0'}`,
         condition: forecast.day.condition.text,
-        wind: forecast.day.maxwind_mph
+        wind: `${forecast.day.maxwind_mph}mph`,
+        humidity: `${forecast.day.avghumidity}%`
       }
       console.log("Future weather: ", futureDaysWeather);
 
@@ -50,10 +54,12 @@ function ConditionsOverview(props) {
           <React.Fragment>
             <div className="icon-and-temp">
               <img className="current-weather-icon" src={displayedWeatherByDay.icon} alt="An icon showing current weather conditions."/>
-              <h2>{displayedWeatherByDay.temperature}{'\u00b0'}F</h2>
+              <h2>{displayedWeatherByDay.temperature}</h2>
             </div>
             <h3>{displayedWeatherByDay.condition}</h3>
-            <h5>Feels like {displayedWeatherByDay.feelsLike}{'\u00b0'}F</h5>
+            <h5><OpacityIcon/> {displayedWeatherByDay.humidity}</h5>
+            <h5><AirIcon/> {displayedWeatherByDay.wind}</h5>
+            {/* <h5>Feels like {displayedWeatherByDay.feelsLike}{'\u00b0'}F</h5> */}
           </React.Fragment>
         )}
 
@@ -61,9 +67,11 @@ function ConditionsOverview(props) {
           <React.Fragment>
             <div className="icon-and-temp">
               <img className="current-weather-icon" src={displayedWeatherByDay.icon} alt="An icon showing current weather conditions."/>
-              <h2>{displayedWeatherByDay.high}{'\u00b0'}/{displayedWeatherByDay.low}{'\u00b0'}</h2>
+              <h2>{displayedWeatherByDay.high}/{displayedWeatherByDay.low}</h2>
             </div>
             <h3>{displayedWeatherByDay.condition}</h3>
+            <h5><OpacityIcon/> {displayedWeatherByDay.humidity}</h5>
+            <h5><AirIcon/> {displayedWeatherByDay.wind}</h5>
             {/* <h5>Chance of rain: </h5> */}
           </React.Fragment>
         )}
