@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import OpacityIcon from '@mui/icons-material/Opacity';
 import AirIcon from '@mui/icons-material/Air';
+import WaterIcon from '@mui/icons-material/Water';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import WaterDrop from '@mui/icons-material/WaterDrop';
 
 function ConditionsOverview(props) {
   const { weatherApiObject, selectedForecastDay } = props;
@@ -9,8 +11,6 @@ function ConditionsOverview(props) {
   console.log("API response: ", weatherApiObject);
   console.log("3 day forecast: ", weatherApiObject.forecast.forecastday);
 
-  // include wind and humidity for all days - on same line
-  // only include rain/snow if chance is higher than 20 - on its own line
   useEffect(() => {
     const forecast = weatherApiObject.forecast.forecastday[selectedForecastDay];
     if (selectedForecastDay === 0) {
@@ -25,9 +25,12 @@ function ConditionsOverview(props) {
       }
       console.log("Todays weather: ", todaysCurrentWeather);
 
-      // determining logic for displaying chance of rain/snow
       if (forecast.day.daily_chance_of_rain >= 20) {
+        todaysCurrentWeather.chanceOfRain = `${forecast.day.daily_chance_of_rain}%`;
+      }
 
+      if (forecast.day.daily_chance_of_snow >= 20) {
+        todaysCurrentWeather.chanceOfSnow = `${forecast.day.daily_chance_of_snow}%`;
       }
       setDisplayedWeatherByDay(todaysCurrentWeather);
     } else {
@@ -42,6 +45,13 @@ function ConditionsOverview(props) {
       }
       console.log("Future weather: ", futureDaysWeather);
 
+      if (forecast.day.daily_chance_of_rain >= 20) {
+        futureDaysWeather.chanceOfRain = `${forecast.day.daily_chance_of_rain}%`;
+      }
+
+      if (forecast.day.daily_chance_of_snow >= 20) {
+        futureDaysWeather.chanceOfSnow = `${forecast.day.daily_chance_of_snow}%`;
+      }
       setDisplayedWeatherByDay(futureDaysWeather);
     }
   }, [weatherApiObject, selectedForecastDay]);
@@ -57,8 +67,14 @@ function ConditionsOverview(props) {
               <h2>{displayedWeatherByDay.temperature}</h2>
             </div>
             <h3>{displayedWeatherByDay.condition}</h3>
-            <h5><OpacityIcon/> {displayedWeatherByDay.humidity}</h5>
-            <h5><AirIcon/> {displayedWeatherByDay.wind}</h5>
+            <div className="humidity-and-wind">
+              <h5><WaterIcon fontSize="large"/> {displayedWeatherByDay.humidity}</h5>
+              <h5><AirIcon fontSize='large'/> {displayedWeatherByDay.wind}</h5>
+            </div>
+            <div className="precipitation-chance">
+              <h5><WaterDrop fontSize="large"/> {displayedWeatherByDay.chanceOfRain}</h5>
+              <h5><AcUnitIcon fontSize="large"/> {displayedWeatherByDay.chanceOfSnow}</h5>
+            </div>
             {/* <h5>Feels like {displayedWeatherByDay.feelsLike}{'\u00b0'}F</h5> */}
           </React.Fragment>
         )}
@@ -70,9 +86,14 @@ function ConditionsOverview(props) {
               <h2>{displayedWeatherByDay.high}/{displayedWeatherByDay.low}</h2>
             </div>
             <h3>{displayedWeatherByDay.condition}</h3>
-            <h5><OpacityIcon/> {displayedWeatherByDay.humidity}</h5>
-            <h5><AirIcon/> {displayedWeatherByDay.wind}</h5>
-            {/* <h5>Chance of rain: </h5> */}
+            <div className="humidity-and-wind">
+              <h5><WaterIcon fontSize="large"/> {displayedWeatherByDay.humidity}</h5>
+              <h5><AirIcon fontSize="large"/> {displayedWeatherByDay.wind}</h5>
+            </div>
+            <div className="precipitation-chance">
+              <h5><WaterDrop fontSize="large"/> {displayedWeatherByDay.chanceOfRain}</h5>
+              <h5><AcUnitIcon fontSize="large"/> {displayedWeatherByDay.chanceOfSnow}</h5>
+            </div>
           </React.Fragment>
         )}
       </div>
