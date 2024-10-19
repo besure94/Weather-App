@@ -7,6 +7,7 @@ import WaterDrop from '@mui/icons-material/WaterDrop';
 
 // app is incorrectly rendering rain/snow icons
 // should only render rain/snow icons if chance of respective one is at or above 20%
+// having two different objects is unnecessary now, as the data is virtually the same for every day except for a couple of things - refactor
 function ConditionsOverview(props) {
   const { weatherApiObject, selectedForecastDay } = props;
   const [displayedWeatherByDay, setDisplayedWeatherByDay] = useState({});
