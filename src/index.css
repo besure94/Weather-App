@@ -59,6 +59,12 @@ code {
   flex-direction: row;
 }
 
+.humidity-and-wind, .precipitation-chance {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
 .icon-and-temp {
   display: flex;
   flex-direction: row;
