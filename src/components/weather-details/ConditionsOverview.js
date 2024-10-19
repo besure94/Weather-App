@@ -4,6 +4,8 @@ import AirIcon from '@mui/icons-material/Air';
 import WaterIcon from '@mui/icons-material/Water';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import WaterDrop from '@mui/icons-material/WaterDrop';
+import Brightness6Icon from '@mui/icons-material/Brightness6';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
 
 function ConditionsOverview(props) {
   const { weatherApiObject, selectedForecastDay } = props;
@@ -24,7 +26,7 @@ function ConditionsOverview(props) {
       condition: selectedForecastDay === 0
         ? weatherApiObject.current.condition.text
         : forecast.day.condition.text,
-      feelsLike: weatherApiObject.current.feelslike_f,
+      feelsLike: `Feels like ${weatherApiObject.current.feelslike_f}${'\u00b0'}F`,
       wind: selectedForecastDay === 0
         ? `${weatherApiObject.current.wind_mph}mph`
         : `${forecast.day.maxwind_mph}mph`,
@@ -32,18 +34,24 @@ function ConditionsOverview(props) {
         ? `${weatherApiObject.current.humidity}%`
         : `${forecast.day.avghumidity}%`,
       chanceOfRain: `${forecast.day.daily_chance_of_rain}%`,
-      chanceOfSnow: `${forecast.day.daily_chance_of_snow}%`
+      chanceOfSnow: `${forecast.day.daily_chance_of_snow}%`,
+      sunrise: selectedForecastDay !== 0
+        ? `${forecast.astro.sunrise}`
+        : '',
+      sunset: selectedForecastDay !== 0
+        ? `${forecast.astro.sunset}`
+        : ''
     }
 
     setDisplayedWeatherByDay(dailyWeatherConditions);
 
-    if (dailyWeatherConditions.chanceOfRain.replace(/[^0-9]/g, '') >= 20) {
+    if (dailyWeatherConditions.chanceOfRain.replace(/[^0-9]/g, '') >= 10) {
       setRainLikely(true);
     } else {
       setRainLikely(false);
     }
 
-    if (dailyWeatherConditions.chanceOfSnow.replace(/[^0-9]/g, '') >= 20) {
+    if (dailyWeatherConditions.chanceOfSnow.replace(/[^0-9]/g, '') >= 10) {
       setSnowLikely(true);
     } else {
       setSnowLikely(false);
@@ -66,16 +74,25 @@ function ConditionsOverview(props) {
               <h3>{weatherConditionsByDay.condition}</h3>
             )}
           </div>
+          {selectedForecastDay === 0 && (
+            <h4>{weatherConditionsByDay.feelsLike}</h4>
+          )}
           <div className="humidity-wind-rain-snow">
-            <h5><WaterIcon fontSize="large"/> {weatherConditionsByDay.humidity}</h5>
-            <h5><AirIcon fontSize='large'/> {weatherConditionsByDay.wind}</h5>
+            <h5><WaterIcon fontSize="large"/>&nbsp;{weatherConditionsByDay.humidity}</h5>
+            <h5><AirIcon fontSize='large'/>&nbsp;{weatherConditionsByDay.wind}</h5>
             {rainLikely && (
-              <h5><WaterDrop fontSize="large"/> {weatherConditionsByDay.chanceOfRain}</h5>
+              <h5><WaterDrop fontSize="large"/>&nbsp;{weatherConditionsByDay.chanceOfRain}</h5>
             )}
             {snowLikely && (
-              <h5><AcUnitIcon fontSize="large"/> {weatherConditionsByDay.chanceOfSnow}</h5>
+              <h5><AcUnitIcon fontSize="large"/>&nbsp;{weatherConditionsByDay.chanceOfSnow}</h5>
             )}
           </div>
+          {selectedForecastDay !== 0 && (
+            <div className="sunrise-sunset">
+              <h5><Brightness6Icon fontSize="large"/>&nbsp;{weatherConditionsByDay.sunrise}</h5>
+              <h5><Brightness4Icon fontSize="large"/>&nbsp;{weatherConditionsByDay.sunset}</h5>
+            </div>
+          )}
         </React.Fragment>
       </div>
     </React.Fragment>

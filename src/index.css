@@ -77,6 +77,12 @@ code {
   text-align: left;
 }
 
+.sunrise-sunset {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
 .temp-and-conditions {
   display: flex;
   flex-direction: column;
