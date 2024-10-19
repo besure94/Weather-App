@@ -62,8 +62,10 @@ function ConditionsOverview(props) {
             {selectedForecastDay === 0 && (
               <h3>&nbsp;{'\u25CF'}&nbsp;Now</h3>
             )}
+            {selectedForecastDay !== 0 && (
+              <h3>{weatherConditionsByDay.condition}</h3>
+            )}
           </div>
-          <h3>{weatherConditionsByDay.condition}</h3>
           <div className="humidity-wind-rain-snow">
             <h5><WaterIcon fontSize="large"/> {weatherConditionsByDay.humidity}</h5>
             <h5><AirIcon fontSize='large'/> {weatherConditionsByDay.wind}</h5>
