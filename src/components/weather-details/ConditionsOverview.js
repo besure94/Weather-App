@@ -20,7 +20,7 @@ function ConditionsOverview(props) {
         : forecast.day.condition.icon,
       temp: selectedForecastDay === 0
         ? `${weatherApiObject.current.temp_f}${'\u00b0'}F`
-        : `${forecast.day.maxtemp_f}${'\u00b0'}/${forecast.day.mintemp_f}${'\u00b0'}`,
+        : '',
       condition: selectedForecastDay === 0
         ? weatherApiObject.current.condition.text
         : forecast.day.condition.text,
@@ -58,7 +58,10 @@ function ConditionsOverview(props) {
         <React.Fragment>
           <div className="icon-and-temp">
             <img className="current-weather-icon" src={weatherConditionsByDay.icon} alt="An icon showing current weather conditions."/>
-            <h2>{weatherConditionsByDay.temperature}</h2>
+            <h2>{weatherConditionsByDay.temp}</h2>
+            {selectedForecastDay === 0 && (
+              <h3>&nbsp;{'\u25CF'}&nbsp;Now</h3>
+            )}
           </div>
           <h3>{weatherConditionsByDay.condition}</h3>
           <div className="humidity-wind-rain-snow">
