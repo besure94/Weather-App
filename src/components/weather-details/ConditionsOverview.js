@@ -5,9 +5,13 @@ import WaterIcon from '@mui/icons-material/Water';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import WaterDrop from '@mui/icons-material/WaterDrop';
 
+// app is incorrectly rendering rain/snow icons
+// should only render rain/snow icons if chance of respective one is at or above 20%
 function ConditionsOverview(props) {
   const { weatherApiObject, selectedForecastDay } = props;
   const [displayedWeatherByDay, setDisplayedWeatherByDay] = useState({});
+  const [rainLikely, setRainLikely] = useState(null);
+  const [snowLikely, setSnowLikely] = useState(null);
   console.log("API response: ", weatherApiObject);
   console.log("3 day forecast: ", weatherApiObject.forecast.forecastday);
 
@@ -27,11 +31,14 @@ function ConditionsOverview(props) {
 
       if (forecast.day.daily_chance_of_rain >= 20) {
         todaysCurrentWeather.chanceOfRain = `${forecast.day.daily_chance_of_rain}%`;
+        setRainLikely(20);
       }
 
       if (forecast.day.daily_chance_of_snow >= 20) {
         todaysCurrentWeather.chanceOfSnow = `${forecast.day.daily_chance_of_snow}%`;
+        setSnowLikely(20);
       }
+
       setDisplayedWeatherByDay(todaysCurrentWeather);
     } else {
       const futureDaysWeather = {
@@ -47,14 +54,20 @@ function ConditionsOverview(props) {
 
       if (forecast.day.daily_chance_of_rain >= 20) {
         futureDaysWeather.chanceOfRain = `${forecast.day.daily_chance_of_rain}%`;
+        setRainLikely(20);
       }
 
       if (forecast.day.daily_chance_of_snow >= 20) {
         futureDaysWeather.chanceOfSnow = `${forecast.day.daily_chance_of_snow}%`;
+        setSnowLikely(20);
       }
+
       setDisplayedWeatherByDay(futureDaysWeather);
     }
   }, [weatherApiObject, selectedForecastDay]);
+
+  console.log("Rain likely: ", rainLikely);
+  console.log("Snow likely: ", snowLikely);
 
   return (
     <React.Fragment>
@@ -72,10 +85,13 @@ function ConditionsOverview(props) {
               <h5><AirIcon fontSize='large'/> {displayedWeatherByDay.wind}</h5>
             </div>
             <div className="precipitation-chance">
-              <h5><WaterDrop fontSize="large"/> {displayedWeatherByDay.chanceOfRain}</h5>
-              <h5><AcUnitIcon fontSize="large"/> {displayedWeatherByDay.chanceOfSnow}</h5>
+              {rainLikely >= 20 && (
+                <h5><WaterDrop fontSize="large"/> {displayedWeatherByDay.chanceOfRain}</h5>
+              )}
+              {snowLikely >= 20 && (
+                <h5><AcUnitIcon fontSize="large"/> {displayedWeatherByDay.chanceOfSnow}</h5>
+              )}
             </div>
-            {/* <h5>Feels like {displayedWeatherByDay.feelsLike}{'\u00b0'}F</h5> */}
           </React.Fragment>
         )}
 
@@ -91,8 +107,12 @@ function ConditionsOverview(props) {
               <h5><AirIcon fontSize="large"/> {displayedWeatherByDay.wind}</h5>
             </div>
             <div className="precipitation-chance">
-              <h5><WaterDrop fontSize="large"/> {displayedWeatherByDay.chanceOfRain}</h5>
-              <h5><AcUnitIcon fontSize="large"/> {displayedWeatherByDay.chanceOfSnow}</h5>
+              {rainLikely >= 20 && (
+                <h5><WaterDrop fontSize="large"/> {displayedWeatherByDay.chanceOfRain}</h5>
+              )}
+              {snowLikely >= 20 && (
+                <h5><AcUnitIcon fontSize="large"/> {displayedWeatherByDay.chanceOfSnow}</h5>
+              )}
             </div>
           </React.Fragment>
         )}
