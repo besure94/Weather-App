@@ -5,118 +5,75 @@ import WaterIcon from '@mui/icons-material/Water';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import WaterDrop from '@mui/icons-material/WaterDrop';
 
-// app is incorrectly rendering rain/snow icons
-// should only render rain/snow icons if chance of respective one is at or above 20%
-// having two different objects is unnecessary now, as the data is virtually the same for every day except for a couple of things - refactor
 function ConditionsOverview(props) {
   const { weatherApiObject, selectedForecastDay } = props;
-  const [displayedWeatherByDay, setDisplayedWeatherByDay] = useState({});
-  const [rainLikely, setRainLikely] = useState(null);
-  const [snowLikely, setSnowLikely] = useState(null);
-  console.log("API response: ", weatherApiObject);
-  console.log("3 day forecast: ", weatherApiObject.forecast.forecastday);
+  const [weatherConditionsByDay, setDisplayedWeatherByDay] = useState({});
+  const [rainLikely, setRainLikely] = useState(false);
+  const [snowLikely, setSnowLikely] = useState(false);
 
   useEffect(() => {
     const forecast = weatherApiObject.forecast.forecastday[selectedForecastDay];
-    if (selectedForecastDay === 0) {
-      const todaysCurrentWeather = {
-        ...{},
-        icon: weatherApiObject.current.condition.icon,
-        temperature: `${weatherApiObject.current.temp_f}${'\u00b0'}F`,
-        condition: weatherApiObject.current.condition.text,
-        feelsLike: weatherApiObject.current.feelslike_f,
-        wind: `${weatherApiObject.current.wind_mph}mph`,
-        humidity: `${weatherApiObject.current.humidity}%`
-      }
-      console.log("Todays weather: ", todaysCurrentWeather);
 
-      if (forecast.day.daily_chance_of_rain >= 20) {
-        todaysCurrentWeather.chanceOfRain = `${forecast.day.daily_chance_of_rain}%`;
-        setRainLikely(20);
-      }
-
-      if (forecast.day.daily_chance_of_snow >= 20) {
-        todaysCurrentWeather.chanceOfSnow = `${forecast.day.daily_chance_of_snow}%`;
-        setSnowLikely(20);
-      }
-
-      setDisplayedWeatherByDay(todaysCurrentWeather);
-    } else {
-      const futureDaysWeather = {
-        ...{},
-        icon: forecast.day.condition.icon,
-        high: `${forecast.day.maxtemp_f}${'\u00b0'}`,
-        low: `${forecast.day.mintemp_f}${'\u00b0'}`,
-        condition: forecast.day.condition.text,
-        wind: `${forecast.day.maxwind_mph}mph`,
-        humidity: `${forecast.day.avghumidity}%`
-      }
-      console.log("Future weather: ", futureDaysWeather);
-
-      if (forecast.day.daily_chance_of_rain >= 20) {
-        futureDaysWeather.chanceOfRain = `${forecast.day.daily_chance_of_rain}%`;
-        setRainLikely(20);
-      }
-
-      if (forecast.day.daily_chance_of_snow >= 20) {
-        futureDaysWeather.chanceOfSnow = `${forecast.day.daily_chance_of_snow}%`;
-        setSnowLikely(20);
-      }
-
-      setDisplayedWeatherByDay(futureDaysWeather);
+    const dailyWeatherConditions = {
+      icon: selectedForecastDay === 0
+        ? weatherApiObject.current.condition.icon
+        : forecast.day.condition.icon,
+      temp: selectedForecastDay === 0
+        ? `${weatherApiObject.current.temp_f}${'\u00b0'}F`
+        : `${forecast.day.maxtemp_f}${'\u00b0'}/${forecast.day.mintemp_f}${'\u00b0'}`,
+      condition: selectedForecastDay === 0
+        ? weatherApiObject.current.condition.text
+        : forecast.day.condition.text,
+      feelsLike: weatherApiObject.current.feelslike_f,
+      wind: selectedForecastDay === 0
+        ? `${weatherApiObject.current.wind_mph}mph`
+        : `${forecast.day.maxwind_mph}mph`,
+      humidity: selectedForecastDay === 0
+        ? `${weatherApiObject.current.humidity}%`
+        : `${forecast.day.avghumidity}%`,
+      chanceOfRain: `${forecast.day.daily_chance_of_rain}%`,
+      chanceOfSnow: `${forecast.day.daily_chance_of_snow}%`
     }
-  }, [weatherApiObject, selectedForecastDay]);
 
-  console.log("Rain likely: ", rainLikely);
-  console.log("Snow likely: ", snowLikely);
+    setDisplayedWeatherByDay(dailyWeatherConditions);
+
+    if (dailyWeatherConditions.chanceOfRain.replace(/[^0-9]/g, '') >= 20) {
+      setRainLikely(true);
+    } else {
+      setRainLikely(false);
+    }
+
+    if (dailyWeatherConditions.chanceOfSnow.replace(/[^0-9]/g, '') >= 20) {
+      setSnowLikely(true);
+    } else {
+      setSnowLikely(false);
+    }
+
+  }, [weatherApiObject, selectedForecastDay]);
 
   return (
     <React.Fragment>
       <div className='temp-and-conditions'>
         <h3>{weatherApiObject.location.name}, {weatherApiObject.location.region}, {weatherApiObject.location.country}</h3>
-        {selectedForecastDay === 0 && (
-          <React.Fragment>
-            <div className="icon-and-temp">
-              <img className="current-weather-icon" src={displayedWeatherByDay.icon} alt="An icon showing current weather conditions."/>
-              <h2>{displayedWeatherByDay.temperature}</h2>
-            </div>
-            <h3>{displayedWeatherByDay.condition}</h3>
-            <div className="humidity-and-wind">
-              <h5><WaterIcon fontSize="large"/> {displayedWeatherByDay.humidity}</h5>
-              <h5><AirIcon fontSize='large'/> {displayedWeatherByDay.wind}</h5>
-            </div>
-            <div className="precipitation-chance">
-              {rainLikely >= 20 && (
-                <h5><WaterDrop fontSize="large"/> {displayedWeatherByDay.chanceOfRain}</h5>
-              )}
-              {snowLikely >= 20 && (
-                <h5><AcUnitIcon fontSize="large"/> {displayedWeatherByDay.chanceOfSnow}</h5>
-              )}
-            </div>
-          </React.Fragment>
-        )}
-
-        {selectedForecastDay !== 0 && (
-          <React.Fragment>
-            <div className="icon-and-temp">
-              <img className="current-weather-icon" src={displayedWeatherByDay.icon} alt="An icon showing current weather conditions."/>
-              <h2>{displayedWeatherByDay.high}/{displayedWeatherByDay.low}</h2>
-            </div>
-            <h3>{displayedWeatherByDay.condition}</h3>
-            <div className="humidity-and-wind">
-              <h5><WaterIcon fontSize="large"/> {displayedWeatherByDay.humidity}</h5>
-              <h5><AirIcon fontSize="large"/> {displayedWeatherByDay.wind}</h5>
-            </div>
-            <div className="precipitation-chance">
-              {rainLikely >= 20 && (
-                <h5><WaterDrop fontSize="large"/> {displayedWeatherByDay.chanceOfRain}</h5>
-              )}
-              {snowLikely >= 20 && (
-                <h5><AcUnitIcon fontSize="large"/> {displayedWeatherByDay.chanceOfSnow}</h5>
-              )}
-            </div>
-          </React.Fragment>
-        )}
+        <React.Fragment>
+          <div className="icon-and-temp">
+            <img className="current-weather-icon" src={weatherConditionsByDay.icon} alt="An icon showing current weather conditions."/>
+            <h2>{weatherConditionsByDay.temperature}</h2>
+          </div>
+          <h3>{weatherConditionsByDay.condition}</h3>
+          <div className="humidity-and-wind">
+            <h5><WaterIcon fontSize="large"/> {weatherConditionsByDay.humidity}</h5>
+            <h5><AirIcon fontSize='large'/> {weatherConditionsByDay.wind}</h5>
+          </div>
+          <div className="precipitation-chance">
+            {rainLikely && (
+              <h5><WaterDrop fontSize="large"/> {weatherConditionsByDay.chanceOfRain}</h5>
+            )}
+            {snowLikely && (
+              <h5><AcUnitIcon fontSize="large"/> {weatherConditionsByDay.chanceOfSnow}</h5>
+            )}
+          </div>
+        </React.Fragment>
       </div>
     </React.Fragment>
   )
