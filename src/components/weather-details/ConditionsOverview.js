@@ -61,11 +61,9 @@ function ConditionsOverview(props) {
             <h2>{weatherConditionsByDay.temperature}</h2>
           </div>
           <h3>{weatherConditionsByDay.condition}</h3>
-          <div className="humidity-and-wind">
+          <div className="humidity-wind-rain-snow">
             <h5><WaterIcon fontSize="large"/> {weatherConditionsByDay.humidity}</h5>
             <h5><AirIcon fontSize='large'/> {weatherConditionsByDay.wind}</h5>
-          </div>
-          <div className="precipitation-chance">
             {rainLikely && (
               <h5><WaterDrop fontSize="large"/> {weatherConditionsByDay.chanceOfRain}</h5>
             )}

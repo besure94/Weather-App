@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
+// write logic to abbreviate weekdays to 3 letters (Fri, Sat, Sun, etc)
 function ThreeDayForeCast(props) {
   const { weatherApiObject, onChanging3DayDateFormats, onChangingFirstDayToSayToday, onSelectingForecastDay, selectedForecastDay} = props;
   const [threeDayForecast, setNew3DayForecast] = useState([]);
@@ -8,6 +9,7 @@ function ThreeDayForeCast(props) {
   useEffect(() => {
     const threeDayForecastWithNewDates = onChanging3DayDateFormats(weatherApiObject.forecast.forecastday);
     setNew3DayForecast(threeDayForecastWithNewDates);
+    console.log("3 day forecast : ", threeDayForecastWithNewDates);
 
     const moddedFirstDayOfForecast = onChangingFirstDayToSayToday(threeDayForecastWithNewDates);
     const final3DayForecast = [moddedFirstDayOfForecast, ...threeDayForecastWithNewDates.slice(1)];

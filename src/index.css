@@ -59,7 +59,7 @@ code {
   flex-direction: row;
 }
 
-.humidity-and-wind, .precipitation-chance {
+.humidity-wind-rain-snow {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
