@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 function ThreeDayForeCast(props) {
-  const { weatherApiObject, onChanging3DayDateFormats, onChangingFirstDayToSayToday, onSelectingForecastDay, selectedForecastDay} = props;
+  const { weatherApiObject,
+    onChanging3DayDateFormats,
+    onChangingFirstDayToSayToday,
+    onSelectingForecastDay,
+    selectedForecastDay} = props;
   const [threeDayForecast, setNew3DayForecast] = useState([]);
 
   useEffect(() => {

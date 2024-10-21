@@ -7,9 +7,10 @@ import HourlyForecast from './HourlyForecast';
 import ThreeDayForecast from './ThreeDayForecast';
 import CurrentWeatherDetails from './CurrentWeatherDetails';
 
-// then render different hourly forecast depending on the selected day
+// render different hourly forecast depending on the selected day
 
-// then focus on implementing current conditions (AQ, UV, Wind, Humidity, etc) and average conditions for future
+// need to pass down selectedForecastDay prop to HourlyForecast
+
 function WeatherControl() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -125,7 +126,8 @@ function WeatherControl() {
             locationLocalTime={locationLocalTime}
             onRoundingTimeToHour={roundLocalTimeToHour}
             onConvertingTimeFormats={convertForecastTimeFormats}
-            onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}/>
+            onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}
+            selectedForecastDay={selectedForecastDay}/>
         </React.Fragment>
       )}
     </div>

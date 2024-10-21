@@ -74,9 +74,11 @@ function ConditionsOverview(props) {
               <h3>{weatherConditionsByDay.condition}</h3>
             )}
           </div>
+
           {selectedForecastDay === 0 && (
             <h4>{weatherConditionsByDay.feelsLike}</h4>
           )}
+
           <div className="humidity-wind-rain-snow">
             <h5><WaterIcon fontSize="large"/>&nbsp;{weatherConditionsByDay.humidity}</h5>
             <h5><AirIcon fontSize='large'/>&nbsp;{weatherConditionsByDay.wind}</h5>
@@ -87,6 +89,7 @@ function ConditionsOverview(props) {
               <h5><AcUnitIcon fontSize="large"/>&nbsp;{weatherConditionsByDay.chanceOfSnow}</h5>
             )}
           </div>
+
           {selectedForecastDay !== 0 && (
             <div className="sunrise-sunset">
               <h5><Brightness6Icon fontSize="large"/>&nbsp;{weatherConditionsByDay.sunrise}</h5>
