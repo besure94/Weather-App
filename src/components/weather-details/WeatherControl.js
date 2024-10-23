@@ -3,13 +3,9 @@ import SearchForm from '../main/SearchForm';
 import { getWeather } from '../api-call/weather-api-call';
 import { convertDateFormat, changeDateToWeekday } from '../utility-fns/convert-date-format';
 import ConditionsOverview from './ConditionsOverview';
-import HourlyForecast from './HourlyForecast';
+import DetailedForecast from './DetailedForecast';
 import ThreeDayForecast from './ThreeDayForecast';
 import CurrentWeatherDetails from './CurrentWeatherDetails';
-
-// render different hourly forecast depending on the selected day
-
-// need to pass down selectedForecastDay prop to HourlyForecast
 
 function WeatherControl() {
   const [error, setError] = useState(null);
@@ -74,7 +70,7 @@ function WeatherControl() {
 
   const displayUpdated24HourForecast = (forecastArray, timeToMatch) => {
     let firstMatchingIndex = forecastArray.findIndex(index => index.time === timeToMatch);
-    let slicedArray = forecastArray.slice(firstMatchingIndex, firstMatchingIndex + 25);
+    let slicedArray = forecastArray.slice(firstMatchingIndex, firstMatchingIndex + 24);
     slicedArray[0].time = "Now";
     return slicedArray;
   }
@@ -121,7 +117,7 @@ function WeatherControl() {
             {/* <CurrentWeatherDetails
               weatherApiObject={weatherApiObject}/> */}
           </div>
-          <HourlyForecast
+          <DetailedForecast
             weatherApiObject={weatherApiObject}
             locationLocalTime={locationLocalTime}
             onRoundingTimeToHour={roundLocalTimeToHour}

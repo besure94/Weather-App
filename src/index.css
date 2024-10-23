@@ -52,10 +52,9 @@ code {
   align-items: flex-end;
 }
 
-.hourly-forecast {
+.detailed-forecast {
   display: flex;
   flex-wrap: nowrap;
-  overflow-x: scroll;
   flex-direction: row;
 }
 

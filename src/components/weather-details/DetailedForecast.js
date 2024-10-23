@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-// change 24 hour forecast to only display in 2-3 hour increments
+// when adding graph, consider adding separate lines for temp, humidity, wind, rain, and snow
 
-// will determine which one is best later
-
-function HourlyForecast(props) {
+function DetailedForecast(props) {
   const { weatherApiObject,
     locationLocalTime,
     onRoundingTimeToHour,
     onConvertingTimeFormats,
     onDisplayingUpdated24HrForecast,
     selectedForecastDay } = props;
-  const [twentyFourHourForecast, setTwentyFourHourForecast] = useState([]);
+  const [detailedForecast, setDetailedForecast] = useState([]);
 
   useEffect(() => {
     const merged3DayForecastArray = weatherApiObject.forecast.forecastday.flatMap(day => day.hour);
@@ -23,22 +21,36 @@ function HourlyForecast(props) {
 
     const todaysTwentyFourHourForecast = onDisplayingUpdated24HrForecast(formattedForecastTimes, roundedLocalTime);
 
+    const showForecastInThreeHourSteps = filterForecastInThreeHourSteps(todaysTwentyFourHourForecast);
+
     let futureDaysTwentyFourHourForecast = null;
+    let futureDaysForecastInThreeHourSteps = null;
 
     switch (selectedForecastDay) {
       case 1:
         futureDaysTwentyFourHourForecast = formattedForecastTimes.slice(24, 48);
-        setTwentyFourHourForecast(futureDaysTwentyFourHourForecast);
+
+        futureDaysForecastInThreeHourSteps = filterForecastInThreeHourSteps(futureDaysTwentyFourHourForecast);
+
+        setDetailedForecast(futureDaysForecastInThreeHourSteps);
         break;
       case 2:
         futureDaysTwentyFourHourForecast = formattedForecastTimes.slice(48, 72);
-        setTwentyFourHourForecast(futureDaysTwentyFourHourForecast);
+
+        futureDaysForecastInThreeHourSteps = filterForecastInThreeHourSteps(futureDaysTwentyFourHourForecast);
+
+        setDetailedForecast(futureDaysForecastInThreeHourSteps);
         break;
       default:
-        setTwentyFourHourForecast(todaysTwentyFourHourForecast);
+        setDetailedForecast(showForecastInThreeHourSteps);
     }
 
   }, [weatherApiObject, locationLocalTime, selectedForecastDay]);
+
+  const filterForecastInThreeHourSteps = (hourlyForecast) => {
+    const newForecastArray = hourlyForecast.filter((_hour, index) => index % 2 === 0);
+    return newForecastArray;
+  }
 
   return (
     <React.Fragment>
@@ -46,12 +58,12 @@ function HourlyForecast(props) {
       <br/>
       <div className='weather-forecast'>
         <div className='location-weather-forecast'>
-          <h4>Hourly Forecast</h4>
+          <h4>Detailed Forecast</h4>
         </div>
         <br/>
-        <div className="hourly-forecast">
+        <div className="detailed-forecast">
           <React.Fragment>
-            {twentyFourHourForecast.map((hour, index) =>
+            {detailedForecast.map((hour, index) =>
               <div key={index} className="hour">
                 <div className="hour-details">
                   <h6>{hour.temp_f}{'\u00b0'}</h6>
@@ -67,7 +79,7 @@ function HourlyForecast(props) {
   )
 }
 
-HourlyForecast.propTypes = {
+DetailedForecast.propTypes = {
   weatherApiObject: PropTypes.object,
   onRoundingTimeToHour: PropTypes.func,
   onConvertingTimeFormats: PropTypes.func,
@@ -75,4 +87,4 @@ HourlyForecast.propTypes = {
   selectedForecastDay: PropTypes.number
 }
 
-export default HourlyForecast;
+export default DetailedForecast;
