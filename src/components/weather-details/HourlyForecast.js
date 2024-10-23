@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-// take selectedForecastDay and create a new array that contains the hourly forecast
+// change 24 hour forecast to only display in 2-3 hour increments
 
-// if day is 'today', leave alone as it already handles showing the forecast based on the current hour
-
-// if days 2 or 3, access the 1st or 2nd index of forecastday array, and conditionally render it based on which day it is
-
-// of existing 3 day forecast array that already exists, the starting index of day 2 will be index 24 and ending at 47, and starting index of day 3 will be 48 and ending at 71
+// will determine which one is best later
 
 function HourlyForecast(props) {
   const { weatherApiObject,
@@ -16,35 +12,34 @@ function HourlyForecast(props) {
     onConvertingTimeFormats,
     onDisplayingUpdated24HrForecast,
     selectedForecastDay } = props;
-  const [todaysTwentyFourHourForecast, setTodaysTwentyFourHourForecast] = useState([]);
-  const [futureDaysTwentyFourHourForecast, setFutureDaysTwentyFourHourForecast] = useState([]);
-  console.log("3 day forecast: ", weatherApiObject.forecast.forecastday);
+  const [twentyFourHourForecast, setTwentyFourHourForecast] = useState([]);
 
   useEffect(() => {
-    // const forecast = weatherApiObject.forecast.forecastday[selectedForecastDay];
-    // console.log("Forecast: ", forecast);
-    // if (selectedForecastDay !== 0) {
-    //   setFutureDaysTwentyFourHourForecast(forecast);
-    // }
-    // console.log("Forecast future: ", futureDaysTwentyFourHourForecast);
     const merged3DayForecastArray = weatherApiObject.forecast.forecastday.flatMap(day => day.hour);
-    console.log("Merged 3 day forecast: ", merged3DayForecastArray);
+
     const roundedLocalTime = onRoundingTimeToHour(locationLocalTime);
 
     const formattedForecastTimes = onConvertingTimeFormats(merged3DayForecastArray);
 
-    const newTwentyFourHourForecast = onDisplayingUpdated24HrForecast(formattedForecastTimes, roundedLocalTime);
-    setTodaysTwentyFourHourForecast(newTwentyFourHourForecast);
+    const todaysTwentyFourHourForecast = onDisplayingUpdated24HrForecast(formattedForecastTimes, roundedLocalTime);
 
-  }, [weatherApiObject, locationLocalTime]);
+    let futureDaysTwentyFourHourForecast = null;
 
-  // const createHourlyForecastForFutureDays = (selectedDay) => {
-  //   if (selectedDay !== 0) {
+    switch (selectedForecastDay) {
+      case 1:
+        futureDaysTwentyFourHourForecast = formattedForecastTimes.slice(24, 48);
+        setTwentyFourHourForecast(futureDaysTwentyFourHourForecast);
+        break;
+      case 2:
+        futureDaysTwentyFourHourForecast = formattedForecastTimes.slice(48, 72);
+        setTwentyFourHourForecast(futureDaysTwentyFourHourForecast);
+        break;
+      default:
+        setTwentyFourHourForecast(todaysTwentyFourHourForecast);
+    }
 
-  //   }
-  // }
+  }, [weatherApiObject, locationLocalTime, selectedForecastDay]);
 
-  console.log("Selected day: ", selectedForecastDay);
   return (
     <React.Fragment>
       <br/>
@@ -56,7 +51,7 @@ function HourlyForecast(props) {
         <br/>
         <div className="hourly-forecast">
           <React.Fragment>
-            {todaysTwentyFourHourForecast.map((hour, index) =>
+            {twentyFourHourForecast.map((hour, index) =>
               <div key={index} className="hour">
                 <div className="hour-details">
                   <h6>{hour.temp_f}{'\u00b0'}</h6>
