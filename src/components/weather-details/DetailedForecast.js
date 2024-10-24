@@ -67,23 +67,24 @@ function DetailedForecast(props) {
   return (
     <React.Fragment>
       <br/>
-      <br/>
+      {/* <br/> */}
       <div className='weather-forecast'>
         <div className='location-weather-forecast'>
           <h4>Hourly Forecast</h4>
         </div>
-        <br/>
+        {/* <br/> */}
         <div className="detailed-forecast">
           {/* <ResponsiveContainer> */}
             <LineChart width={600} height={300} data={detailedForecast}>
-              <CartesianGrid strokeDasharray="3 3"/>
+              {/* <CartesianGrid strokeDasharray="3 3"/> */}
               <XAxis dataKey="time"/>
-              <YAxis domain={[-150, 150]}/>
+              <YAxis yAxisId="left" domain={[-150, 150]} tick={{ fill: '#FF6384' }}/>
+              <YAxis yAxisId="right" orientation="right" domain={[0, 100]} tick={{ fill: '#36A2EB' }}/>
               <Tooltip/>
               <Legend/>
-              <Line type="monotone" dataKey="temp_f" stroke="#8884d8" activeDot={{ r: 6 }} />
-              <Line type="monotone" dataKey="humidity" stroke="#82ca9d" activeDot={{ r: 6 }}/>
-              <Line type="monotone" dataKey="wind_mph" stroke="#000000" activeDot={{ r: 6 }}/>
+              <Line type="monotone" yAxisId="left" dataKey="temp_f" name="Temperature" stroke="#FF6384" activeDot={{ r: 6 }} />
+              <Line type="monotone" yAxisId="right" dataKey="humidity" name="Humidity" stroke="#36A2EB" activeDot={{ r: 6 }}/>
+              <Line type="monotone" yAxisId="right" dataKey="wind_mph" name="Wind" stroke="#32CD32" activeDot={{ r: 6 }}/>
             </LineChart>
           {/* </ResponsiveContainer> */}
 
