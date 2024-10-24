@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ReferenceLine,
+  ResponsiveContainer,
+} from 'recharts';
 
 // when adding graph, consider adding separate lines for temp, humidity, wind, rain, and snow
 
@@ -48,31 +59,34 @@ function DetailedForecast(props) {
   }, [weatherApiObject, locationLocalTime, selectedForecastDay]);
 
   const filterForecastInThreeHourSteps = (hourlyForecast) => {
-    const newForecastArray = hourlyForecast.filter((_hour, index) => index % 2 === 0);
+    const newForecastArray = hourlyForecast.filter((_hour, index) => index % 1 === 0);
     return newForecastArray;
   }
 
+  console.log("Detailed forecast: ", detailedForecast);
   return (
     <React.Fragment>
       <br/>
       <br/>
       <div className='weather-forecast'>
         <div className='location-weather-forecast'>
-          <h4>Detailed Forecast</h4>
+          <h4>Hourly Forecast</h4>
         </div>
         <br/>
         <div className="detailed-forecast">
-          <React.Fragment>
-            {detailedForecast.map((hour, index) =>
-              <div key={index} className="hour">
-                <div className="hour-details">
-                  <h6>{hour.temp_f}{'\u00b0'}</h6>
-                  <img src={hour.condition.icon} className="hourly-icon" alt="An icon symbolizing current hourly weather condition."/>
-                  <h6>{hour.time}</h6>
-                </div>
-              </div>
-            )}
-          </React.Fragment>
+          {/* <ResponsiveContainer> */}
+            <LineChart width={600} height={300} data={detailedForecast}>
+              <CartesianGrid strokeDasharray="3 3"/>
+              <XAxis dataKey="time"/>
+              <YAxis domain={[-150, 150]}/>
+              <Tooltip/>
+              <Legend/>
+              <Line type="monotone" dataKey="temp_f" stroke="#8884d8" activeDot={{ r: 6 }} />
+              <Line type="monotone" dataKey="humidity" stroke="#82ca9d" activeDot={{ r: 6 }}/>
+              <Line type="monotone" dataKey="wind_mph" stroke="#000000" activeDot={{ r: 6 }}/>
+            </LineChart>
+          {/* </ResponsiveContainer> */}
+
         </div>
       </div>
     </React.Fragment>
