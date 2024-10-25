@@ -12,7 +12,7 @@ import HumidityChart from "../charts/HumidityChart";
 import RainChart from "../charts/RainChart";
 import SnowChart from "../charts/SnowChart";
 
-// consider refactoring DetailedForecast and having individual components for each type of chart
+// currently seeing a bug where the chart doesn't render right for SnowChart
 
 // should upgrade Tooltip to be more detailed and include stuff like %, mph, F, etc
 function DetailedForecast(props) {
