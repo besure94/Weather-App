@@ -1,6 +1,6 @@
 # Weather App
 
-#### A work-in-progress application that allows a user to search for current weather conditions and forecasts for a specific city or region.
+#### An application that allows a user to search for current weather conditions and view detailed forecast analysis for a specific city or region.
 
 #### By Brian Scherner
 
@@ -19,7 +19,7 @@
 
 ## Description
 
-This application presents users with a form, where they enter a city or region. The current weather conditions for that city/region are then shown, along with other weather information that users commonly like to know. The weather conditions are retrieved from the Weather API.
+This application presents users with a form, where they enter a city or region. The current weather conditions for that city/region are shown, as well as a 3 day forecast. Clicking a day will reveal its forecast details. The weather conditions are retrieved from the Weather API.
 
 ## Setup/Installation Requirements
 
