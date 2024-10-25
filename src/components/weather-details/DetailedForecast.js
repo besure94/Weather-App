@@ -36,36 +36,22 @@ function DetailedForecast(props) {
 
     const todaysTwentyFourHourForecast = onDisplayingUpdated24HrForecast(formattedForecastTimes, roundedLocalTime);
 
-    const showForecastInThreeHourSteps = filterForecastInThreeHourSteps(todaysTwentyFourHourForecast);
-
     let futureDaysTwentyFourHourForecast = null;
-    let futureDaysForecastInThreeHourSteps = null;
 
     switch (selectedForecastDay) {
       case 1:
         futureDaysTwentyFourHourForecast = formattedForecastTimes.slice(24, 48);
-
-        futureDaysForecastInThreeHourSteps = filterForecastInThreeHourSteps(futureDaysTwentyFourHourForecast);
-
-        setDetailedForecast(futureDaysForecastInThreeHourSteps);
+        setDetailedForecast(futureDaysTwentyFourHourForecast);
         break;
       case 2:
         futureDaysTwentyFourHourForecast = formattedForecastTimes.slice(48, 72);
-
-        futureDaysForecastInThreeHourSteps = filterForecastInThreeHourSteps(futureDaysTwentyFourHourForecast);
-
-        setDetailedForecast(futureDaysForecastInThreeHourSteps);
+        setDetailedForecast(futureDaysTwentyFourHourForecast);
         break;
       default:
-        setDetailedForecast(showForecastInThreeHourSteps);
+        setDetailedForecast(todaysTwentyFourHourForecast);
     }
 
   }, [weatherApiObject, locationLocalTime, selectedForecastDay]);
-
-  const filterForecastInThreeHourSteps = (hourlyForecast) => {
-    const newForecastArray = hourlyForecast.filter((_hour, index) => index % 1 === 0);
-    return newForecastArray;
-  }
 
   console.log("Detailed forecast: ", detailedForecast);
   return (
