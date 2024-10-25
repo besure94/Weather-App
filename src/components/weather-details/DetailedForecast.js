@@ -20,6 +20,7 @@ import {
 
 // consider refactoring DetailedForecast and having individual components for each type of chart
 
+// should upgrade Tooltip to be more detailed and include stuff like %, mph, F, etc
 function DetailedForecast(props) {
   const { weatherApiObject,
     locationLocalTime,
