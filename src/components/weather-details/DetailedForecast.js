@@ -18,8 +18,6 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-// consider adding chart for rain/snow if it is expected in the forecast
-
 function DetailedForecast(props) {
   const { weatherApiObject,
     locationLocalTime,
@@ -45,21 +43,20 @@ function DetailedForecast(props) {
 
     switch (selectedForecastDay) {
       case 1:
-        futureDaysTwentyFourHourForecast = formattedForecastTimes.slice(24, 48);
+        futureDaysTwentyFourHourForecast = convertCentimetersToInches(formattedForecastTimes.slice(24, 48));
         setDetailedForecast(futureDaysTwentyFourHourForecast);
         break;
       case 2:
-        futureDaysTwentyFourHourForecast = formattedForecastTimes.slice(48, 72);
+        futureDaysTwentyFourHourForecast = convertCentimetersToInches(formattedForecastTimes.slice(48, 72));
         setDetailedForecast(futureDaysTwentyFourHourForecast);
         break;
       default:
-        setDetailedForecast(todaysTwentyFourHourForecast);
+        setDetailedForecast(convertCentimetersToInches(todaysTwentyFourHourForecast));
     }
 
     setActiveIcon(1);
 
     const forecast = weatherApiObject.forecast.forecastday[selectedForecastDay];
-    console.log("Forecast var: ", forecast);
 
     if (forecast.day.daily_chance_of_rain.toString().replace(/[^0-9]/g, '') >= 10) {
       setRainLikely(true);
@@ -79,7 +76,14 @@ function DetailedForecast(props) {
     setActiveIcon(icon);
   }
 
-  console.log("Detailed forecast: ", detailedForecast);
+  const convertCentimetersToInches = (forecastArray) => {
+    return forecastArray.map(index => {
+      return {
+        ...index,
+        snow_in: (index.snow_cm / 2.54).toFixed(2)
+      };
+    });
+  };
 
   return (
     <React.Fragment>
@@ -149,6 +153,16 @@ function DetailedForecast(props) {
               <Tooltip/>
               <Legend/>
               <Line type="monotone" yAxisId="left" dataKey="precip_in" name="Rain" stroke="#0d6efd" activeDot={{ r: 6 }}/>
+              </LineChart>
+            )}
+            {activeIcon === 5 && (
+              <LineChart data={detailedForecast}>
+              <CartesianGrid strokeDasharray="3 3"/>
+              <XAxis dataKey="time"/>
+              <YAxis yAxisId="left" domain={[0, 'auto']}/>
+              <Tooltip/>
+              <Legend/>
+              <Line type="monotone" yAxisId="left" dataKey="snow_in" name="Snow" stroke="#0d6efd" activeDot={{ r: 6 }}/>
               </LineChart>
             )}
           </ResponsiveContainer>
