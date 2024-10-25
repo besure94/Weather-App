@@ -6,17 +6,11 @@ import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
 import IconButton from '@mui/material/IconButton';
 import WaterDrop from '@mui/icons-material/WaterDrop';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ReferenceLine,
-  ResponsiveContainer,
-} from 'recharts';
+import TempChart from '../charts/TempChart';
+import WindChart from "../charts/WindChart";
+import HumidityChart from "../charts/HumidityChart";
+import RainChart from "../charts/RainChart";
+import SnowChart from "../charts/SnowChart";
 
 // consider refactoring DetailedForecast and having individual components for each type of chart
 
@@ -117,58 +111,21 @@ function DetailedForecast(props) {
         </div>
         <br/>
         <div className="detailed-forecast">
-          <ResponsiveContainer width="65%" height={250}>
-            {activeIcon === 1 && (
-              <LineChart data={detailedForecast}>
-              <CartesianGrid strokeDasharray="3 3"/>
-              <XAxis dataKey="time"/>
-              <YAxis yAxisId="left" domain={['auto', 'auto']}/>
-              <Tooltip/>
-              <Legend/>
-              <Line type="monotone" yAxisId="left" dataKey="temp_f" name="Temperature" stroke="#FF6384" activeDot={{ r: 6 }} />
-              </LineChart>
-            )}
-            {activeIcon === 2 && (
-              <LineChart data={detailedForecast}>
-              <CartesianGrid strokeDasharray="3 3"/>
-              <XAxis dataKey="time"/>
-              <YAxis yAxisId="left" domain={[0, 'auto']}/>
-              <Tooltip/>
-              <Legend/>
-              <Line type="monotone" yAxisId="left" dataKey="humidity" name="Humidity" stroke="#0d6efd" activeDot={{ r: 6 }}/>
-              </LineChart>
-            )}
-            {activeIcon === 3 && (
-              <LineChart data={detailedForecast}>
-              <CartesianGrid strokeDasharray="3 3"/>
-              <XAxis dataKey="time"/>
-              <YAxis yAxisId="left" domain={[0, 'auto']}/>
-              <Tooltip/>
-              <Legend/>
-              <Line type="monotone" yAxisId="left" dataKey="wind_mph" name="Wind" stroke="#198754" activeDot={{ r: 6 }}/>
-              </LineChart>
-            )}
-            {activeIcon === 4 && (
-              <LineChart data={detailedForecast}>
-              <CartesianGrid strokeDasharray="3 3"/>
-              <XAxis dataKey="time"/>
-              <YAxis yAxisId="left" domain={[0, 'auto']}/>
-              <Tooltip/>
-              <Legend/>
-              <Line type="monotone" yAxisId="left" dataKey="precip_in" name="Rain" stroke="#0d6efd" activeDot={{ r: 6 }}/>
-              </LineChart>
-            )}
-            {activeIcon === 5 && (
-              <LineChart data={detailedForecast}>
-              <CartesianGrid strokeDasharray="3 3"/>
-              <XAxis dataKey="time"/>
-              <YAxis yAxisId="left" domain={[0, 'auto']}/>
-              <Tooltip/>
-              <Legend/>
-              <Line type="monotone" yAxisId="left" dataKey="snow_in" name="Snow" stroke="#0d6efd" activeDot={{ r: 6 }}/>
-              </LineChart>
-            )}
-          </ResponsiveContainer>
+          {activeIcon === 1 && (
+            <TempChart detailedForecast={detailedForecast}/>
+          )}
+          {activeIcon === 2 && (
+            <HumidityChart detailedForecast={detailedForecast}/>
+          )}
+          {activeIcon === 3 && (
+            <WindChart detailedForecast={detailedForecast}/>
+          )}
+          {activeIcon === 4 && (
+            <RainChart detailedForecast={detailedForecast}/>
+          )}
+          {activeIcon === 5 && (
+            <SnowChart detailedForecast={detailedForecast}/>
+          )}
         </div>
       </div>
     </React.Fragment>
