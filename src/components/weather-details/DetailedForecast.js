@@ -12,7 +12,11 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-// when adding graph, consider adding separate lines for temp, humidity, wind, rain, and snow
+// lines will be used to represent temp, humidity, wind, and possibly rain/snow if it is likely
+
+// this will be managed by clicking buttons for temp, humidity, and wind
+
+// these will be represented by icons: temp = thermometer, humidity uses same water icon as above, and same with wind
 
 function DetailedForecast(props) {
   const { weatherApiObject,
@@ -67,27 +71,22 @@ function DetailedForecast(props) {
   return (
     <React.Fragment>
       <br/>
-      {/* <br/> */}
       <div className='weather-forecast'>
         <div className='location-weather-forecast'>
           <h4>Hourly Forecast</h4>
         </div>
-        {/* <br/> */}
+        <br/>
         <div className="detailed-forecast">
-          {/* <ResponsiveContainer> */}
-            <LineChart width={600} height={300} data={detailedForecast}>
-              {/* <CartesianGrid strokeDasharray="3 3"/> */}
+          <ResponsiveContainer width="65%" height={250}>
+            <LineChart data={detailedForecast}>
+              <CartesianGrid strokeDasharray="3 3"/>
               <XAxis dataKey="time"/>
-              <YAxis yAxisId="left" domain={[-150, 150]} tick={{ fill: '#FF6384' }}/>
-              <YAxis yAxisId="right" orientation="right" domain={[0, 100]} tick={{ fill: '#36A2EB' }}/>
+              <YAxis yAxisId="left" domain={['auto', 'auto']}/>
               <Tooltip/>
               <Legend/>
               <Line type="monotone" yAxisId="left" dataKey="temp_f" name="Temperature" stroke="#FF6384" activeDot={{ r: 6 }} />
-              <Line type="monotone" yAxisId="right" dataKey="humidity" name="Humidity" stroke="#36A2EB" activeDot={{ r: 6 }}/>
-              <Line type="monotone" yAxisId="right" dataKey="wind_mph" name="Wind" stroke="#32CD32" activeDot={{ r: 6 }}/>
             </LineChart>
-          {/* </ResponsiveContainer> */}
-
+          </ResponsiveContainer>
         </div>
       </div>
     </React.Fragment>
