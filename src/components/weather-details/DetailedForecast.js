@@ -18,6 +18,8 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
+// consider refactoring DetailedForecast and having individual components for each type of chart
+
 function DetailedForecast(props) {
   const { weatherApiObject,
     locationLocalTime,
