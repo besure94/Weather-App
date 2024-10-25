@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import AirIcon from '@mui/icons-material/Air';
+import WaterIcon from '@mui/icons-material/Water';
+import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
+import IconButton from '@mui/material/IconButton';
 import {
   LineChart,
   Line,
@@ -12,11 +16,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 
-// lines will be used to represent temp, humidity, wind, and possibly rain/snow if it is likely
-
-// this will be managed by clicking buttons for temp, humidity, and wind
-
-// these will be represented by icons: temp = thermometer, humidity uses same water icon as above, and same with wind
+// consider adding chart for rain/snow if it is expected in the forecast
 
 function DetailedForecast(props) {
   const { weatherApiObject,
@@ -26,6 +26,7 @@ function DetailedForecast(props) {
     onDisplayingUpdated24HrForecast,
     selectedForecastDay } = props;
   const [detailedForecast, setDetailedForecast] = useState([]);
+  const [activeIcon, setActiveIcon] = useState(null);
 
   useEffect(() => {
     const merged3DayForecastArray = weatherApiObject.forecast.forecastday.flatMap(day => day.hour);
@@ -50,28 +51,63 @@ function DetailedForecast(props) {
       default:
         setDetailedForecast(todaysTwentyFourHourForecast);
     }
-
+    setActiveIcon(1);
   }, [weatherApiObject, locationLocalTime, selectedForecastDay]);
 
+  const handleSettingActiveIcon = (icon) => {
+    setActiveIcon(icon);
+  }
+
   console.log("Detailed forecast: ", detailedForecast);
+
   return (
     <React.Fragment>
       <br/>
       <div className='weather-forecast'>
-        <div className='location-weather-forecast'>
-          <h4>Hourly Forecast</h4>
+        <div className="graph-icons">
+          <IconButton color="warning" onClick={() => handleSettingActiveIcon(1)}>
+            <DeviceThermostatIcon fontSize="large"/>
+          </IconButton>
+          <IconButton color="primary" onClick={() => handleSettingActiveIcon(2)}>
+            <WaterIcon fontSize="large"/>
+          </IconButton>
+          <IconButton color="success" onClick={() => handleSettingActiveIcon(3)}>
+            <AirIcon fontSize='large'/>
+          </IconButton>
         </div>
         <br/>
         <div className="detailed-forecast">
           <ResponsiveContainer width="65%" height={250}>
-            <LineChart data={detailedForecast}>
+            {activeIcon === 1 && (
+              <LineChart data={detailedForecast}>
               <CartesianGrid strokeDasharray="3 3"/>
               <XAxis dataKey="time"/>
               <YAxis yAxisId="left" domain={['auto', 'auto']}/>
               <Tooltip/>
               <Legend/>
               <Line type="monotone" yAxisId="left" dataKey="temp_f" name="Temperature" stroke="#FF6384" activeDot={{ r: 6 }} />
-            </LineChart>
+              </LineChart>
+            )}
+            {activeIcon === 2 && (
+              <LineChart data={detailedForecast}>
+              <CartesianGrid strokeDasharray="3 3"/>
+              <XAxis dataKey="time"/>
+              <YAxis yAxisId="left" domain={[0, 'auto']}/>
+              <Tooltip/>
+              <Legend/>
+              <Line type="monotone" yAxisId="left" dataKey="humidity" name="Humidity" stroke="#0d6efd" activeDot={{ r: 6 }}/>
+              </LineChart>
+            )}
+            {activeIcon === 3 && (
+              <LineChart data={detailedForecast}>
+              <CartesianGrid strokeDasharray="3 3"/>
+              <XAxis dataKey="time"/>
+              <YAxis yAxisId="left" domain={[0, 'auto']}/>
+              <Tooltip/>
+              <Legend/>
+              <Line type="monotone" yAxisId="left" dataKey="wind_mph" name="Wind" stroke="#198754" activeDot={{ r: 6 }}/>
+              </LineChart>
+            )}
           </ResponsiveContainer>
         </div>
       </div>
