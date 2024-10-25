@@ -4,6 +4,8 @@ import AirIcon from '@mui/icons-material/Air';
 import WaterIcon from '@mui/icons-material/Water';
 import DeviceThermostatIcon from '@mui/icons-material/DeviceThermostat';
 import IconButton from '@mui/material/IconButton';
+import WaterDrop from '@mui/icons-material/WaterDrop';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
 import {
   LineChart,
   Line,
@@ -27,6 +29,8 @@ function DetailedForecast(props) {
     selectedForecastDay } = props;
   const [detailedForecast, setDetailedForecast] = useState([]);
   const [activeIcon, setActiveIcon] = useState(null);
+  const [rainLikely, setRainLikely] = useState(false);
+  const [snowLikely, setSnowLikely] = useState(false);
 
   useEffect(() => {
     const merged3DayForecastArray = weatherApiObject.forecast.forecastday.flatMap(day => day.hour);
@@ -51,7 +55,24 @@ function DetailedForecast(props) {
       default:
         setDetailedForecast(todaysTwentyFourHourForecast);
     }
+
     setActiveIcon(1);
+
+    const forecast = weatherApiObject.forecast.forecastday[selectedForecastDay];
+    console.log("Forecast var: ", forecast);
+
+    if (forecast.day.daily_chance_of_rain.toString().replace(/[^0-9]/g, '') >= 10) {
+      setRainLikely(true);
+    } else {
+      setRainLikely(false);
+    }
+
+    if (forecast.day.daily_chance_of_snow.toString().replace(/[^0-9]/g, '') >= 10) {
+      setSnowLikely(true);
+    } else {
+      setSnowLikely(false);
+    }
+
   }, [weatherApiObject, locationLocalTime, selectedForecastDay]);
 
   const handleSettingActiveIcon = (icon) => {
@@ -74,6 +95,18 @@ function DetailedForecast(props) {
           <IconButton color="success" onClick={() => handleSettingActiveIcon(3)}>
             <AirIcon fontSize='large'/>
           </IconButton>
+          {rainLikely && (
+            <IconButton color="primary" onClick={() =>
+              handleSettingActiveIcon(4)}>
+              <WaterDrop fontSize="large"/>
+            </IconButton>
+          )}
+          {snowLikely && (
+            <IconButton color="primary" onClick={() =>
+              handleSettingActiveIcon(5)}>
+              <AcUnitIcon fontSize="large"/>
+            </IconButton>
+          )}
         </div>
         <br/>
         <div className="detailed-forecast">
@@ -106,6 +139,16 @@ function DetailedForecast(props) {
               <Tooltip/>
               <Legend/>
               <Line type="monotone" yAxisId="left" dataKey="wind_mph" name="Wind" stroke="#198754" activeDot={{ r: 6 }}/>
+              </LineChart>
+            )}
+            {activeIcon === 4 && (
+              <LineChart data={detailedForecast}>
+              <CartesianGrid strokeDasharray="3 3"/>
+              <XAxis dataKey="time"/>
+              <YAxis yAxisId="left" domain={[0, 'auto']}/>
+              <Tooltip/>
+              <Legend/>
+              <Line type="monotone" yAxisId="left" dataKey="precip_in" name="Rain" stroke="#0d6efd" activeDot={{ r: 6 }}/>
               </LineChart>
             )}
           </ResponsiveContainer>
