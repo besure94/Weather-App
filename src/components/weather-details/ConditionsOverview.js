@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import AirIcon from '@mui/icons-material/Air';
-import WaterIcon from '@mui/icons-material/Water';
-import AcUnitIcon from '@mui/icons-material/AcUnit';
-import WaterDrop from '@mui/icons-material/WaterDrop';
-import Brightness6Icon from '@mui/icons-material/Brightness6';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
+import CurrentConditions from "./CurrentConditions";
+import ConditionsDetails from './ConditionsDetails';
+import SunriseSunset from './SunriseSunset';
 
 function ConditionsOverview(props) {
   const { weatherApiObject, selectedForecastDay } = props;
@@ -62,40 +59,17 @@ function ConditionsOverview(props) {
   return (
     <React.Fragment>
       <div className='temp-and-conditions'>
-        <h3>{weatherApiObject.location.name}, {weatherApiObject.location.region}, {weatherApiObject.location.country}</h3>
+        <h3>{weatherApiObject.location.name}, {weatherApiObject.location.region}</h3>
+        <h3>{weatherApiObject.location.country}</h3>
         <React.Fragment>
-          <div className="icon-and-temp">
-            <img className="current-weather-icon" src={weatherConditionsByDay.icon} alt="An icon showing current weather conditions."/>
-            <h2>{weatherConditionsByDay.temp}</h2>
-            {selectedForecastDay === 0 && (
-              <h3>&nbsp;{'\u25CF'}&nbsp;Now</h3>
-            )}
-            {selectedForecastDay !== 0 && (
-              <h3>{weatherConditionsByDay.condition}</h3>
-            )}
-          </div>
-
-          {selectedForecastDay === 0 && (
-            <h4>{weatherConditionsByDay.feelsLike}</h4>
-          )}
-
-          <div className="humidity-wind-rain-snow">
-            <h5><WaterIcon fontSize="large"/>&nbsp;{weatherConditionsByDay.humidity}</h5>
-            <h5><AirIcon fontSize='large'/>&nbsp;{weatherConditionsByDay.wind}</h5>
-            {rainLikely && (
-              <h5><WaterDrop fontSize="large"/>&nbsp;{weatherConditionsByDay.chanceOfRain}</h5>
-            )}
-            {snowLikely && (
-              <h5><AcUnitIcon fontSize="large"/>&nbsp;{weatherConditionsByDay.chanceOfSnow}</h5>
-            )}
-          </div>
-
-          {selectedForecastDay !== 0 && (
-            <div className="sunrise-sunset">
-              <h5><Brightness6Icon fontSize="large"/>&nbsp;{weatherConditionsByDay.sunrise}</h5>
-              <h5><Brightness4Icon fontSize="large"/>&nbsp;{weatherConditionsByDay.sunset}</h5>
-            </div>
-          )}
+          <CurrentConditions
+            weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}/>
+          <ConditionsDetails
+            weatherConditionsByDay={weatherConditionsByDay}
+            rainLikely={rainLikely}
+            snowLikely={snowLikely}/>
+          <SunriseSunset
+            weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}/>
         </React.Fragment>
       </div>
     </React.Fragment>
