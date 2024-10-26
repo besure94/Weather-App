@@ -12,7 +12,7 @@ import HumidityChart from "../charts/HumidityChart";
 import RainChart from "../charts/RainChart";
 import SnowChart from "../charts/SnowChart";
 
-// currently seeing a bug where the chart doesn't render right for SnowChart
+// currently seeing a bug where the chart sometimes doesn't render right for SnowChart
 
 // should upgrade Tooltip to be more detailed and include stuff like %, mph, F, etc
 function DetailedForecast(props) {
@@ -52,7 +52,6 @@ function DetailedForecast(props) {
     }
 
     setActiveIcon(1);
-
     const forecast = weatherApiObject.forecast.forecastday[selectedForecastDay];
 
     if (forecast.day.daily_chance_of_rain.toString().replace(/[^0-9]/g, '') >= 10) {
@@ -87,24 +86,24 @@ function DetailedForecast(props) {
       <br/>
       <div className='weather-forecast'>
         <div className="graph-icons">
-          <IconButton color="warning" onClick={() => handleSettingActiveIcon(1)}>
+          <IconButton color="warning" onClick={() => handleSettingActiveIcon(1)} className={activeIcon === 1 ? 'icon-active' : ''}>
             <DeviceThermostatIcon fontSize="large"/>
           </IconButton>
-          <IconButton color="primary" onClick={() => handleSettingActiveIcon(2)}>
+          <IconButton color="primary" onClick={() => handleSettingActiveIcon(2)} className={activeIcon === 2 ? 'icon-active' : ''}>
             <WaterIcon fontSize="large"/>
           </IconButton>
-          <IconButton color="success" onClick={() => handleSettingActiveIcon(3)}>
+          <IconButton color="success" onClick={() => handleSettingActiveIcon(3)} className={activeIcon === 3 ? 'icon-active' : ''}>
             <AirIcon fontSize='large'/>
           </IconButton>
           {rainLikely && (
             <IconButton color="primary" onClick={() =>
-              handleSettingActiveIcon(4)}>
+              handleSettingActiveIcon(4)} className={activeIcon === 4 ? 'icon-active' : ''}>
               <WaterDrop fontSize="large"/>
             </IconButton>
           )}
           {snowLikely && (
             <IconButton color="primary" onClick={() =>
-              handleSettingActiveIcon(5)}>
+              handleSettingActiveIcon(5)} className={activeIcon === 5 ? 'icon-active' : ''}>
               <AcUnitIcon fontSize="large"/>
             </IconButton>
           )}
