@@ -40,18 +40,18 @@ function DetailedForecast(props) {
 
     switch (selectedForecastDay) {
       case 1:
-        futureDaysTwentyFourHourForecast = convertCentimetersToInches(formattedForecastTimes.slice(24, 48));
+        futureDaysTwentyFourHourForecast = convertSnowCentimetersToInches(formattedForecastTimes.slice(24, 48));
         setDetailedForecast(futureDaysTwentyFourHourForecast);
         break;
       case 2:
-        futureDaysTwentyFourHourForecast = convertCentimetersToInches(formattedForecastTimes.slice(48, 72));
+        futureDaysTwentyFourHourForecast = convertSnowCentimetersToInches(formattedForecastTimes.slice(48, 72));
         setDetailedForecast(futureDaysTwentyFourHourForecast);
         break;
       default:
-        setDetailedForecast(convertCentimetersToInches(todaysTwentyFourHourForecast));
+        setDetailedForecast(convertSnowCentimetersToInches(todaysTwentyFourHourForecast));
     }
 
-    setActiveIcon(1);
+    setActiveIcon('temperature');
     const forecast = weatherApiObject.forecast.forecastday[selectedForecastDay];
 
     if (forecast.day.daily_chance_of_rain.toString().replace(/[^0-9]/g, '') >= 10) {
@@ -72,7 +72,7 @@ function DetailedForecast(props) {
     setActiveIcon(icon);
   }
 
-  const convertCentimetersToInches = (forecastArray) => {
+  const convertSnowCentimetersToInches = (forecastArray) => {
     return forecastArray.map(index => {
       return {
         ...index,
@@ -86,43 +86,43 @@ function DetailedForecast(props) {
       <br/>
       <div className='weather-forecast'>
         <div className="graph-icons">
-          <IconButton color="warning" onClick={() => handleSettingActiveIcon(1)} className={activeIcon === 1 ? 'icon-active' : ''}>
+          <IconButton color="warning" onClick={() => handleSettingActiveIcon('temperature')} className={activeIcon === 1 ? 'icon-active' : ''}>
             <DeviceThermostatIcon fontSize="large"/>
           </IconButton>
-          <IconButton color="primary" onClick={() => handleSettingActiveIcon(2)} className={activeIcon === 2 ? 'icon-active' : ''}>
+          <IconButton color="primary" onClick={() => handleSettingActiveIcon('humidity')} className={activeIcon === 2 ? 'icon-active' : ''}>
             <WaterIcon fontSize="large"/>
           </IconButton>
-          <IconButton color="success" onClick={() => handleSettingActiveIcon(3)} className={activeIcon === 3 ? 'icon-active' : ''}>
+          <IconButton color="success" onClick={() => handleSettingActiveIcon('wind')} className={activeIcon === 3 ? 'icon-active' : ''}>
             <AirIcon fontSize='large'/>
           </IconButton>
           {rainLikely && (
             <IconButton color="primary" onClick={() =>
-              handleSettingActiveIcon(4)} className={activeIcon === 4 ? 'icon-active' : ''}>
+              handleSettingActiveIcon('rain')} className={activeIcon === 4 ? 'icon-active' : ''}>
               <WaterDrop fontSize="large"/>
             </IconButton>
           )}
           {snowLikely && (
             <IconButton color="primary" onClick={() =>
-              handleSettingActiveIcon(5)} className={activeIcon === 5 ? 'icon-active' : ''}>
+              handleSettingActiveIcon('snow')} className={activeIcon === 5 ? 'icon-active' : ''}>
               <AcUnitIcon fontSize="large"/>
             </IconButton>
           )}
         </div>
         <br/>
         <div className="detailed-forecast">
-          {activeIcon === 1 && (
+          {activeIcon === 'temperature' && (
             <TempChart detailedForecast={detailedForecast}/>
           )}
-          {activeIcon === 2 && (
+          {activeIcon === 'humidity' && (
             <HumidityChart detailedForecast={detailedForecast}/>
           )}
-          {activeIcon === 3 && (
+          {activeIcon === 'wind' && (
             <WindChart detailedForecast={detailedForecast}/>
           )}
-          {activeIcon === 4 && (
+          {activeIcon === 'rain' && (
             <RainChart detailedForecast={detailedForecast}/>
           )}
-          {activeIcon === 5 && (
+          {activeIcon === 'snow' && (
             <SnowChart detailedForecast={detailedForecast}/>
           )}
         </div>
