@@ -12,9 +12,8 @@ import HumidityChart from "../charts/HumidityChart";
 import RainChart from "../charts/RainChart";
 import SnowChart from "../charts/SnowChart";
 
-// currently seeing a bug where the chart sometimes doesn't render right for SnowChart
-
 // should upgrade Tooltip to be more detailed and include stuff like %, mph, F, etc
+
 function DetailedForecast(props) {
   const { weatherApiObject,
     locationLocalTime,
@@ -86,24 +85,28 @@ function DetailedForecast(props) {
       <br/>
       <div className='weather-forecast'>
         <div className="graph-icons">
-          <IconButton color="warning" onClick={() => handleSettingActiveIcon('temperature')} className={activeIcon === 1 ? 'icon-active' : ''}>
+          <IconButton color="warning" onClick={() => handleSettingActiveIcon('temperature')} className={activeIcon === 'temperature' ? 'icon-active' : ''}>
             <DeviceThermostatIcon fontSize="large"/>
           </IconButton>
-          <IconButton color="primary" onClick={() => handleSettingActiveIcon('humidity')} className={activeIcon === 2 ? 'icon-active' : ''}>
+
+          <IconButton color="primary" onClick={() => handleSettingActiveIcon('humidity')} className={activeIcon === 'humidity' ? 'icon-active' : ''}>
             <WaterIcon fontSize="large"/>
           </IconButton>
-          <IconButton color="success" onClick={() => handleSettingActiveIcon('wind')} className={activeIcon === 3 ? 'icon-active' : ''}>
+
+          <IconButton color="success" onClick={() => handleSettingActiveIcon('wind')} className={activeIcon === 'wind' ? 'icon-active' : ''}>
             <AirIcon fontSize='large'/>
           </IconButton>
+
           {rainLikely && (
             <IconButton color="primary" onClick={() =>
-              handleSettingActiveIcon('rain')} className={activeIcon === 4 ? 'icon-active' : ''}>
+              handleSettingActiveIcon('rain')} className={activeIcon === 'rain' ? 'icon-active' : ''}>
               <WaterDrop fontSize="large"/>
             </IconButton>
           )}
+
           {snowLikely && (
             <IconButton color="primary" onClick={() =>
-              handleSettingActiveIcon('snow')} className={activeIcon === 5 ? 'icon-active' : ''}>
+              handleSettingActiveIcon('snow')} className={activeIcon === 'snow' ? 'icon-active' : ''}>
               <AcUnitIcon fontSize="large"/>
             </IconButton>
           )}
@@ -113,15 +116,19 @@ function DetailedForecast(props) {
           {activeIcon === 'temperature' && (
             <TempChart detailedForecast={detailedForecast}/>
           )}
+
           {activeIcon === 'humidity' && (
             <HumidityChart detailedForecast={detailedForecast}/>
           )}
+
           {activeIcon === 'wind' && (
             <WindChart detailedForecast={detailedForecast}/>
           )}
+
           {activeIcon === 'rain' && (
             <RainChart detailedForecast={detailedForecast}/>
           )}
+
           {activeIcon === 'snow' && (
             <SnowChart detailedForecast={detailedForecast}/>
           )}

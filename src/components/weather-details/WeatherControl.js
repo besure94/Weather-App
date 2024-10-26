@@ -5,7 +5,6 @@ import { convertDateFormat, changeDateToWeekday } from '../utility-fns/convert-d
 import ConditionsOverview from './ConditionsOverview';
 import DetailedForecast from './DetailedForecast';
 import ThreeDayForecast from './ThreeDayForecast';
-import CurrentWeatherDetails from './CurrentWeatherDetails';
 
 function WeatherControl() {
   const [error, setError] = useState(null);
@@ -114,8 +113,6 @@ function WeatherControl() {
                 onSelectingForecastDay={handleSelectingForecastDay}
                 selectedForecastDay={selectedForecastDay}/>
             </div>
-            {/* <CurrentWeatherDetails
-              weatherApiObject={weatherApiObject}/> */}
           </div>
           <DetailedForecast
             weatherApiObject={weatherApiObject}
