@@ -9,17 +9,22 @@
 * React
 * JavaScript
 * HTML
-* Webpack
+* CSS
+* Bootstrap
+* Material UI
+* Recharts
 * Node Package Manager
 * Babel
 * ES Lint
-* Bootstrap
-* CSS
 * Weather API
 
 ## Description
 
-This application presents users with a form, where they enter a city or region. The current weather conditions for that city/region are shown, as well as a 3 day forecast. Clicking a day will reveal its forecast details. The weather conditions are retrieved from the Weather API.
+This application presents users with a form, where they enter a city or region. The current weather conditions for that city/region are shown on the left, as well as a 3 day forecast on the right. Clicking a day from the forecast will display its forecast details.
+
+Detailed forecast analysis is also available for each day. This data is represented by line graphs that show hourly conditions for temperature, humidity, and wind, as well as rain and snow (if they are predicted to occur).
+
+All weather data is retrieved from the Weather API.
 
 ## Setup/Installation Requirements
 
@@ -49,7 +54,7 @@ In order to use this application, you will also need an API key from the `Weathe
 
 ## Known Bugs
 
-No bugs, but changes to the UI are necessary and will be added soon.
+None.
 
 ## License
 
