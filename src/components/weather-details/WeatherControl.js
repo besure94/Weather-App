@@ -99,6 +99,7 @@ function WeatherControl() {
       {error && <div className='error'><h2>Error: {error}</h2></div>}
       {isLoaded && (
         <React.Fragment>
+          <hr/>
           <div className='weather-components-container'>
             <div className='current-weather-for-location'>
               <ConditionsOverview

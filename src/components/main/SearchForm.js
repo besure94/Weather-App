@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import SearchOutlined from '@mui/icons-material/SearchOutlined';
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
 import { IconButton, InputAdornment } from "@mui/material";
@@ -22,22 +21,21 @@ function SearchForm(props) {
             <TextField
               type="text"
               name="city"
-              placeholder="Enter a city"
+              placeholder="Enter a city or region"
               slotProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton type="submit">
-                      <SearchIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-            }}
-            required/>
+                input: {
+                  startAdornment:
+                    <InputAdornment position="start">
+                      <IconButton type="submit">
+                        <SearchIcon />
+                      </IconButton>
+                    </InputAdornment>
+                },
+              }}
+              required/>
           </form>
         </div>
       </div>
-      <br/>
-      <br/>
     </React.Fragment>
   )
 }
