@@ -20,6 +20,12 @@ code {
 
 /* weather details styling */
 
+.celsius-switch {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: -0.5rem;
+}
+
 .current-weather-details {
   display: grid;
   grid-template-columns: 1fr 1fr;

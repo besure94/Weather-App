@@ -5,7 +5,11 @@ import { convertDateFormat, changeDateToWeekday } from '../utility-fns/convert-d
 import ConditionsOverview from './ConditionsOverview';
 import DetailedForecast from './DetailedForecast';
 import ThreeDayForecast from './ThreeDayForecast';
+import { Switch, FormGroup, FormControlLabel } from '@mui/material';
 
+// working on rendering different data based on whether 'Celsius' switch is toggled
+
+// only need to change temperature, wind (kmh), and rain/snow (cm)
 function WeatherControl() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -13,6 +17,7 @@ function WeatherControl() {
   const [city, setCity] = useState("");
   const [locationLocalTime, setLocationLocalTime] = useState(null);
   const [selectedForecastDay, setSelectedForecastDay] = useState(0);
+  const [isCelsiusSelected, setIsCelsiusSelected] = useState(false);
 
   useEffect(() => {
     async function getWeatherApiData() {
@@ -39,6 +44,10 @@ function WeatherControl() {
   const handleFormSubmission = (formInput) => {
     const { city } = formInput;
     setCity(city);
+  }
+
+  const handleCelsiusSwitchClick = () => {
+    setIsCelsiusSelected(!isCelsiusSelected);
   }
 
   const roundLocalTimeToHour = (localTime) => {
@@ -104,15 +113,22 @@ function WeatherControl() {
             <div className='current-weather-for-location'>
               <ConditionsOverview
                 weatherApiObject={weatherApiObject}
-                selectedForecastDay={selectedForecastDay}/>
+                selectedForecastDay={selectedForecastDay}
+                isCelsiusSelected={isCelsiusSelected}/>
             </div>
             <div className='three-day-forecast'>
+              <div className='celsius-switch'>
+                <FormGroup>
+                  <FormControlLabel onClick={handleCelsiusSwitchClick} control={<Switch/>} label={`\u00b0C`}/>
+                </FormGroup>
+              </div>
               <ThreeDayForecast
                 weatherApiObject={weatherApiObject}
                 onChanging3DayDateFormats={changeDateFormatsToWeekday}
                 onChangingFirstDayToSayToday={changeFirstDayToSayToday}
                 onSelectingForecastDay={handleSelectingForecastDay}
-                selectedForecastDay={selectedForecastDay}/>
+                selectedForecastDay={selectedForecastDay}
+                isCelsiusSelected={isCelsiusSelected}/>
             </div>
           </div>
           <DetailedForecast
@@ -121,7 +137,8 @@ function WeatherControl() {
             onRoundingTimeToHour={roundLocalTimeToHour}
             onConvertingTimeFormats={convertForecastTimeFormats}
             onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}
-            selectedForecastDay={selectedForecastDay}/>
+            selectedForecastDay={selectedForecastDay}
+            isCelsiusSelected={isCelsiusSelected}/>
         </React.Fragment>
       )}
     </div>

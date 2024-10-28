@@ -6,7 +6,8 @@ function ThreeDayForeCast(props) {
     onChanging3DayDateFormats,
     onChangingFirstDayToSayToday,
     onSelectingForecastDay,
-    selectedForecastDay} = props;
+    selectedForecastDay,
+    isCelsiusSelected} = props;
   const [threeDayForecast, setNew3DayForecast] = useState([]);
 
   useEffect(() => {
@@ -44,7 +45,8 @@ ThreeDayForeCast.propTypes = {
   onChanging3DayDateFormats: PropTypes.func,
   onChangingFirstDayToSayToday: PropTypes.func,
   onSelectingForecastDay: PropTypes.func,
-  selectedForecastDay: PropTypes.number
+  selectedForecastDay: PropTypes.number,
+  isCelsiusSelected: PropTypes.bool
 }
 
 export default ThreeDayForeCast;

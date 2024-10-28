@@ -20,7 +20,8 @@ function DetailedForecast(props) {
     onRoundingTimeToHour,
     onConvertingTimeFormats,
     onDisplayingUpdated24HrForecast,
-    selectedForecastDay } = props;
+    selectedForecastDay,
+    isCelsiusSelected } = props;
   const [detailedForecast, setDetailedForecast] = useState([]);
   const [activeIcon, setActiveIcon] = useState(null);
   const [rainLikely, setRainLikely] = useState(false);
@@ -143,7 +144,8 @@ DetailedForecast.propTypes = {
   onRoundingTimeToHour: PropTypes.func,
   onConvertingTimeFormats: PropTypes.func,
   onDisplayingUpdated24HrForecast: PropTypes.func,
-  selectedForecastDay: PropTypes.number
+  selectedForecastDay: PropTypes.number,
+  isCelsiusSelected: PropTypes.bool
 }
 
 export default DetailedForecast;

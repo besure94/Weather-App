@@ -5,7 +5,7 @@ import ConditionsDetails from './ConditionsDetails';
 import SunriseSunset from './SunriseSunset';
 
 function ConditionsOverview(props) {
-  const { weatherApiObject, selectedForecastDay } = props;
+  const { weatherApiObject, selectedForecastDay, isCelsiusSelected } = props;
   const [weatherConditionsByDay, setDisplayedWeatherByDay] = useState({});
   const [rainLikely, setRainLikely] = useState(false);
   const [snowLikely, setSnowLikely] = useState(false);
@@ -17,16 +17,23 @@ function ConditionsOverview(props) {
       icon: selectedForecastDay === 0
         ? weatherApiObject.current.condition.icon
         : forecast.day.condition.icon,
-      temp: selectedForecastDay === 0
-        ? `${weatherApiObject.current.temp_f}${'\u00b0'}F`
+      temp_f: selectedForecastDay === 0
+        ? `${weatherApiObject.current.temp_f}${'\u00b0'}`
+        : '',
+      temp_c: selectedForecastDay === 0
+        ? `${weatherApiObject.current.temp_c}${'\u00b0'}`
         : '',
       condition: selectedForecastDay === 0
         ? weatherApiObject.current.condition.text
         : forecast.day.condition.text,
-      feelsLike: `Feels like ${weatherApiObject.current.feelslike_f}${'\u00b0'}F`,
-      wind: selectedForecastDay === 0
+      feelsLike_f: `Feels like ${weatherApiObject.current.feelslike_f}${'\u00b0'}`,
+      feelsLike_c: `Feels like ${weatherApiObject.current.feelslike_c}${'\u00b0'}`,
+      wind_mph: selectedForecastDay === 0
         ? `${weatherApiObject.current.wind_mph}mph`
         : `${forecast.day.maxwind_mph}mph`,
+      wind_kph: selectedForecastDay === 0
+      ? `${weatherApiObject.current.wind_kph}kph`
+      : `${forecast.day.maxwind_kph}kph`,
       humidity: selectedForecastDay === 0
         ? `${weatherApiObject.current.humidity}%`
         : `${forecast.day.avghumidity}%`,
@@ -59,15 +66,17 @@ function ConditionsOverview(props) {
   return (
     <React.Fragment>
       <div className='temp-and-conditions'>
-        <h3>{weatherApiObject.location.name}, {weatherApiObject.location.region}</h3>
-        <h3>{weatherApiObject.location.country}</h3>
+        <h4>{weatherApiObject.location.name}, {weatherApiObject.location.region}</h4>
+        <h4>{weatherApiObject.location.country}</h4>
         <React.Fragment>
           <CurrentConditions
-            weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}/>
+            weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}
+            isCelsiusSelected={isCelsiusSelected}/>
           <ConditionsDetails
             weatherConditionsByDay={weatherConditionsByDay}
             rainLikely={rainLikely}
-            snowLikely={snowLikely}/>
+            snowLikely={snowLikely}
+            isCelsiusSelected={isCelsiusSelected}/>
           <SunriseSunset
             weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}/>
         </React.Fragment>
@@ -78,7 +87,8 @@ function ConditionsOverview(props) {
 
 ConditionsOverview.propTypes = {
   weatherApiObject: PropTypes.object,
-  selectedForecastDay: PropTypes.number
+  selectedForecastDay: PropTypes.number,
+  isCelsiusSelected: PropTypes.bool
 }
 
 export default ConditionsOverview;

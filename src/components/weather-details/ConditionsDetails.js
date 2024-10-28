@@ -6,13 +6,18 @@ import AcUnitIcon from '@mui/icons-material/AcUnit';
 import WaterDrop from '@mui/icons-material/WaterDrop';
 
 function ConditionsDetails(props) {
-  const { weatherConditionsByDay, rainLikely, snowLikely } = props;
+  const { weatherConditionsByDay, rainLikely, snowLikely, isCelsiusSelected } = props;
 
   return (
     <React.Fragment>
         <div className="humidity-wind-rain-snow">
         <h5><WaterIcon fontSize="large"/>&nbsp;{weatherConditionsByDay.humidity}</h5>
-        <h5><AirIcon fontSize='large'/>&nbsp;{weatherConditionsByDay.wind}</h5>
+        {isCelsiusSelected ?
+          <h5><AirIcon fontSize='large'/>&nbsp;{weatherConditionsByDay.wind_kph}</h5>
+          :
+          <h5><AirIcon fontSize='large'/>&nbsp;{weatherConditionsByDay.wind_mph}</h5>
+        }
+        {/* <h5><AirIcon fontSize='large'/>&nbsp;{weatherConditionsByDay.wind_mph}</h5> */}
         {rainLikely && (
           <h5><WaterDrop fontSize="large"/>&nbsp;{weatherConditionsByDay.chanceOfRain}</h5>
         )}
@@ -27,6 +32,7 @@ ConditionsDetails.propTypes = {
   weatherConditionsByDay: PropTypes.object,
   rainLikely: PropTypes.bool,
   snowLikely: PropTypes.bool,
+  isCelsiusSelected: PropTypes.bool
 }
 
 export default ConditionsDetails;
