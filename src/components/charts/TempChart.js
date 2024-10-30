@@ -8,7 +8,8 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  ResponsiveContainer
+  ResponsiveContainer,
+  Label
 } from 'recharts';
 
 function TempChart(props) {
@@ -20,7 +21,17 @@ function TempChart(props) {
         <LineChart data={detailedForecast}>
         <CartesianGrid strokeDasharray="3 3"/>
         <XAxis dataKey="time"/>
-        <YAxis yAxisId="left" domain={['auto', 'auto']}/>
+        {isCelsiusSelected ?
+          <YAxis
+            yAxisId="left"
+            domain={['auto', 'auto']}
+            label={{ value: 'Celsius', position: 'center', fontSize: "120%", angle: -90 }}/>
+          :
+          <YAxis
+            yAxisId="left"
+            domain={['auto', 'auto']}
+            label={{ value: 'Fahrenheit', position: 'center', fontSize: "120%", angle: -90 }}/>
+        }
         <Tooltip/>
         <Legend/>
         {isCelsiusSelected ?

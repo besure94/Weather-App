@@ -20,7 +20,17 @@ function WindChart(props) {
         <LineChart data={detailedForecast}>
         <CartesianGrid strokeDasharray="3 3"/>
         <XAxis dataKey="time"/>
-        <YAxis yAxisId="left" domain={[0, 'auto']}/>
+        {isCelsiusSelected ?
+          <YAxis
+            yAxisId="left"
+            domain={[0, 'auto']}
+            label={{ value: 'Kilometers per hour', position: 'center', fontSize: "110%", angle: -90 }}/>
+          :
+          <YAxis
+            yAxisId="left"
+            domain={[0, 'auto']}
+            label={{ value: 'Miles per hour', position: 'center', fontSize: "110%", angle: -90 }}/>
+        }
         <Tooltip/>
         <Legend/>
         {isCelsiusSelected ?
