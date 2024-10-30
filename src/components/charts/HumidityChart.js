@@ -19,7 +19,18 @@ function HumidityChart(props) {
       <LineChart data={detailedForecast}>
       <CartesianGrid strokeDasharray="3 3"/>
       <XAxis dataKey="time"/>
-      <YAxis yAxisId="left" domain={[0, 'auto']}/>
+      <YAxis
+        yAxisId="left"
+        domain={[0, 'auto']}
+        label={{
+          value: 'Percentage',
+          position: 'outsideLeft',
+          fontSize: "115%",
+          dx: -20,
+          angle: -90,
+        }}
+        tick={{ dx: -2.5 }}
+      />
       <Tooltip/>
       <Legend/>
       <Line type="monotone" yAxisId="left" dataKey="humidity" name="Humidity" stroke="#0d6efd" activeDot={{ r: 6 }}/>
