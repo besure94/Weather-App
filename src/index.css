@@ -62,7 +62,7 @@ code {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
-  margin-left: -2rem;
+  /* margin-left: -2rem; */
 }
 
 .humidity-wind-rain-snow {
