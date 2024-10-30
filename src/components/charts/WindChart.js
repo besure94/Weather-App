@@ -16,29 +16,20 @@ function WindChart(props) {
 
   return (
     <React.Fragment>
-      {isCelsiusSelected ?
-        <ResponsiveContainer width="100%" height={250}>
-          <LineChart data={detailedForecast}>
-          <CartesianGrid strokeDasharray="3 3"/>
-          <XAxis dataKey="time"/>
-          <YAxis yAxisId="left" domain={[0, 'auto']}/>
-          <Tooltip/>
-          <Legend/>
+      <ResponsiveContainer width="100%" height={250}>
+        <LineChart data={detailedForecast}>
+        <CartesianGrid strokeDasharray="3 3"/>
+        <XAxis dataKey="time"/>
+        <YAxis yAxisId="left" domain={[0, 'auto']}/>
+        <Tooltip/>
+        <Legend/>
+        {isCelsiusSelected ?
           <Line type="monotone" yAxisId="left" dataKey="wind_kph" name="Wind" stroke="#198754" activeDot={{ r: 6 }}/>
-          </LineChart>
-        </ResponsiveContainer>
-        :
-        <ResponsiveContainer width="100%" height={250}>
-          <LineChart data={detailedForecast}>
-          <CartesianGrid strokeDasharray="3 3"/>
-          <XAxis dataKey="time"/>
-          <YAxis yAxisId="left" domain={[0, 'auto']}/>
-          <Tooltip/>
-          <Legend/>
+          :
           <Line type="monotone" yAxisId="left" dataKey="wind_mph" name="Wind" stroke="#198754" activeDot={{ r: 6 }}/>
-          </LineChart>
-        </ResponsiveContainer>
-      }
+        }
+        </LineChart>
+      </ResponsiveContainer>
     </React.Fragment>
   )
 }

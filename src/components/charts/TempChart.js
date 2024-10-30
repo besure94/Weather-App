@@ -16,29 +16,20 @@ function TempChart(props) {
 
   return (
     <React.Fragment>
-      {isCelsiusSelected ?
-        <ResponsiveContainer width="100%" height={250}>
-          <LineChart data={detailedForecast}>
-          <CartesianGrid strokeDasharray="3 3"/>
-          <XAxis dataKey="time"/>
-          <YAxis yAxisId="left" domain={['auto', 'auto']}/>
-          <Tooltip/>
-          <Legend/>
+      <ResponsiveContainer width="100%" height={250}>
+        <LineChart data={detailedForecast}>
+        <CartesianGrid strokeDasharray="3 3"/>
+        <XAxis dataKey="time"/>
+        <YAxis yAxisId="left" domain={['auto', 'auto']}/>
+        <Tooltip/>
+        <Legend/>
+        {isCelsiusSelected ?
           <Line type="monotone" yAxisId="left" dataKey="temp_c" name="Temperature" stroke="#FF6384" activeDot={{ r: 6 }} />
-          </LineChart>
-        </ResponsiveContainer>
-        :
-        <ResponsiveContainer width="100%" height={250}>
-          <LineChart data={detailedForecast}>
-          <CartesianGrid strokeDasharray="3 3"/>
-          <XAxis dataKey="time"/>
-          <YAxis yAxisId="left" domain={['auto', 'auto']}/>
-          <Tooltip/>
-          <Legend/>
+          :
           <Line type="monotone" yAxisId="left" dataKey="temp_f" name="Temperature" stroke="#FF6384" activeDot={{ r: 6 }} />
-          </LineChart>
-        </ResponsiveContainer>
-      }
+        }
+        </LineChart>
+      </ResponsiveContainer>
     </React.Fragment>
   )
 }
