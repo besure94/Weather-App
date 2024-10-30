@@ -115,7 +115,8 @@ function DetailedForecast(props) {
         <br/>
         <div className="detailed-forecast">
           {activeIcon === 'temperature' && (
-            <TempChart detailedForecast={detailedForecast}/>
+            <TempChart
+              detailedForecast={detailedForecast} isCelsiusSelected={isCelsiusSelected}/>
           )}
 
           {activeIcon === 'humidity' && (
@@ -123,15 +124,21 @@ function DetailedForecast(props) {
           )}
 
           {activeIcon === 'wind' && (
-            <WindChart detailedForecast={detailedForecast}/>
+            <WindChart
+              detailedForecast={detailedForecast}
+              isCelsiusSelected={isCelsiusSelected}/>
           )}
 
           {activeIcon === 'rain' && (
-            <RainChart detailedForecast={detailedForecast}/>
+            <RainChart
+              detailedForecast={detailedForecast}
+              isCelsiusSelected={isCelsiusSelected}/>
           )}
 
           {activeIcon === 'snow' && (
-            <SnowChart detailedForecast={detailedForecast}/>
+            <SnowChart
+              detailedForecast={detailedForecast}
+              isCelsiusSelected={isCelsiusSelected}/>
           )}
         </div>
       </div>

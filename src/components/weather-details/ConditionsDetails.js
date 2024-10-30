@@ -17,7 +17,6 @@ function ConditionsDetails(props) {
           :
           <h5><AirIcon fontSize='large'/>&nbsp;{weatherConditionsByDay.wind_mph}</h5>
         }
-        {/* <h5><AirIcon fontSize='large'/>&nbsp;{weatherConditionsByDay.wind_mph}</h5> */}
         {rainLikely && (
           <h5><WaterDrop fontSize="large"/>&nbsp;{weatherConditionsByDay.chanceOfRain}</h5>
         )}
