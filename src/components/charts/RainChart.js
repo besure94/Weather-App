@@ -22,54 +22,28 @@ function RainChart(props) {
         <LineChart data={detailedForecast}>
         <CartesianGrid strokeDasharray="3 3"/>
         <XAxis dataKey="time"/>
-        {isCelsiusSelected ?
-          <YAxis
-            yAxisId="left"
-            domain={[0, 'auto']}
-            label={{
-              value: 'Millimeters',
-              position: 'outsideLeft',
-              fontSize: "115%",
-              dx: -30,
-              angle: -90
-            }}
-            tick={{ dx: -2.5 }}
-          />
-          :
-          <YAxis
-            yAxisId="left"
-            domain={[0, 'auto']}
-            label={{
-              value: 'Inches',
-              position: 'center',
-              fontSize: "115%",
-              dx: -30,
-              angle: -90
-            }}
-            tick={{ dx: -2.5 }}
-          />
-        }
+        <YAxis
+          yAxisId="left"
+          domain={[0, 'auto']}
+          label={{
+            value: isCelsiusSelected ? 'Millimeters' : 'Inches',
+            position: 'outsideLeft',
+            fontSize: "115%",
+            dx: -30,
+            angle: -90
+          }}
+          tick={{ dx: -2.5 }}
+        />
         <Tooltip/>
         <Legend/>
-        {isCelsiusSelected ?
-          <Line
-            type="monotone"
-            yAxisId="left"
-            dataKey="precip_mm"
-            name="Rain"
-            stroke="#0d6efd"
-            activeDot={{ r: 6 }}
-          />
-          :
-          <Line
-            type="monotone"
-            yAxisId="left"
-            dataKey="precip_in"
-            name="Rain"
-            stroke="#0d6efd"
-            activeDot={{ r: 6 }}
-          />
-        }
+        <Line
+          type="monotone"
+          yAxisId="left"
+          dataKey={isCelsiusSelected ? "precip_mm" : "precip_in"}
+          name="Rain"
+          stroke="#0d6efd"
+          activeDot={{ r: 6 }}
+        />
         </LineChart>
       </ResponsiveContainer>
     </React.Fragment>

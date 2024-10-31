@@ -22,55 +22,28 @@ function SnowChart(props) {
         <LineChart data={detailedForecast}>
         <CartesianGrid strokeDasharray="3 3"/>
         <XAxis dataKey="time"/>
-        {/* <YAxis yAxisId="left" domain={[0, 'auto']}/> */}
-        {isCelsiusSelected ?
-          <YAxis
-            yAxisId="left"
-            domain={[0, 'auto']}
-            label={{
-              value: 'Centimeters',
-              position: 'outsideLeft',
-              fontSize: "115%",
-              dx: -30,
-              angle: -90
-            }}
-            tick={{ dx: -2.5 }}
-          />
-          :
-          <YAxis
-            yAxisId="left"
-            domain={[0, 'auto']}
-            label={{
-              value: 'Inches',
-              position: 'outsideLeft',
-              fontSize: "115%",
-              dx: -30,
-              angle: -90
-            }}
-            tick={{ dx: -2.5 }}
-          />
-        }
+        <YAxis
+          yAxisId="left"
+          domain={[0, 'auto']}
+          label={{
+            value: isCelsiusSelected ? 'Centimeters' : 'Inches',
+            position: 'outsideLeft',
+            fontSize: "115%",
+            dx: -30,
+            angle: -90
+          }}
+          tick={{ dx: -2.5 }}
+        />
         <Tooltip/>
         <Legend/>
-        {isCelsiusSelected ?
-          <Line
-            type="monotone"
-            yAxisId="left"
-            dataKey="snow_cm"
-            name="Snow"
-            stroke="#0d6efd"
-            activeDot={{ r: 6 }}
-          />
-          :
-          <Line
-            type="monotone"
-            yAxisId="left"
-            dataKey="snow_in"
-            name="Snow"
-            stroke="#0d6efd"
-            activeDot={{ r: 6 }}
-          />
-        }
+        <Line
+          type="monotone"
+          yAxisId="left"
+          dataKey={isCelsiusSelected ? "snow_cm" : "snow_in"}
+          name="Snow"
+          stroke="#0d6efd"
+          activeDot={{ r: 6 }}
+        />
         </LineChart>
       </ResponsiveContainer>
     </React.Fragment>

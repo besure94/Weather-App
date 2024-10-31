@@ -21,7 +21,7 @@ function HumidityChart(props) {
       <XAxis dataKey="time"/>
       <YAxis
         yAxisId="left"
-        domain={[0, 'auto']}
+        domain={[0, 100]}
         label={{
           value: 'Percentage',
           position: 'outsideLeft',
@@ -33,7 +33,14 @@ function HumidityChart(props) {
       />
       <Tooltip/>
       <Legend/>
-      <Line type="monotone" yAxisId="left" dataKey="humidity" name="Humidity" stroke="#0d6efd" activeDot={{ r: 6 }}/>
+      <Line
+        type="monotone"
+        yAxisId="left"
+        dataKey="humidity"
+        name="Humidity"
+        stroke="#0d6efd"
+        activeDot={{ r: 6 }}
+      />
       </LineChart>
     </ResponsiveContainer>
   )
