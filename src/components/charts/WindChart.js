@@ -24,19 +24,49 @@ function WindChart(props) {
           <YAxis
             yAxisId="left"
             domain={[0, 'auto']}
-            label={{ value: 'Kilometers per hour', position: 'center', fontSize: "110%", angle: -90 }}/>
+            label={{
+              value: 'Kilometers per hour',
+              position: 'outsideLeft',
+              fontSize: "115%",
+              dx: -20,
+              angle: -90
+            }}
+            tick={{ dx: -5 }}
+          />
           :
           <YAxis
             yAxisId="left"
             domain={[0, 'auto']}
-            label={{ value: 'Miles per hour', position: 'center', fontSize: "110%", angle: -90 }}/>
+            label={{
+              value: 'Miles per hour',
+              position: 'outsideLeft',
+              fontSize: "115%",
+              dx: -20,
+              angle: -90
+            }}
+            tick={{ dx: -5 }}
+          />
         }
         <Tooltip/>
         <Legend/>
         {isCelsiusSelected ?
-          <Line type="monotone" yAxisId="left" dataKey="wind_kph" name="Wind" stroke="#198754" activeDot={{ r: 6 }}/>
+          <Line
+            type="monotone"
+            yAxisId="left"
+            dataKey="wind_kph"
+            name="Wind"
+            stroke="#198754"
+            activeDot={{ r: 6 }}
+          />
           :
-          <Line type="monotone" yAxisId="left" dataKey="wind_mph" name="Wind" stroke="#198754" activeDot={{ r: 6 }}/>
+          <Line
+            type="monotone"
+            yAxisId="left"
+            dataKey="wind_mph"
+            name="Wind"
+            stroke="#198754"
+            activeDot={{ r: 6 }}
+          />
         }
         </LineChart>
       </ResponsiveContainer>
