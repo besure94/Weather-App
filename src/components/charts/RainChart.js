@@ -11,6 +11,8 @@ import {
   ResponsiveContainer
 } from 'recharts';
 
+// look into formatting ticks to be a max of 1 or 2 decimal places
+
 function RainChart(props) {
   const { detailedForecast, isCelsiusSelected } = props;
 
@@ -24,19 +26,49 @@ function RainChart(props) {
           <YAxis
             yAxisId="left"
             domain={[0, 'auto']}
-            label={{ value: 'Millimeters', position: 'center', fontSize: "110%", angle: -90 }}/>
+            label={{
+              value: 'Millimeters',
+              position: 'outsideLeft',
+              fontSize: "115%",
+              dx: -30,
+              angle: -90
+            }}
+            tick={{ dx: -2.5 }}
+          />
           :
           <YAxis
             yAxisId="left"
             domain={[0, 'auto']}
-            label={{ value: 'Inches', position: 'center', fontSize: "110%", angle: -90 }}/>
+            label={{
+              value: 'Inches',
+              position: 'center',
+              fontSize: "115%",
+              dx: -30,
+              angle: -90
+            }}
+            tick={{ dx: -2.5 }}
+          />
         }
         <Tooltip/>
         <Legend/>
         {isCelsiusSelected ?
-          <Line type="monotone" yAxisId="left" dataKey="precip_mm" name="Rain" stroke="#0d6efd" activeDot={{ r: 6 }}/>
+          <Line
+            type="monotone"
+            yAxisId="left"
+            dataKey="precip_mm"
+            name="Rain"
+            stroke="#0d6efd"
+            activeDot={{ r: 6 }}
+          />
           :
-          <Line type="monotone" yAxisId="left" dataKey="precip_in" name="Rain" stroke="#0d6efd" activeDot={{ r: 6 }}/>
+          <Line
+            type="monotone"
+            yAxisId="left"
+            dataKey="precip_in"
+            name="Rain"
+            stroke="#0d6efd"
+            activeDot={{ r: 6 }}
+          />
         }
         </LineChart>
       </ResponsiveContainer>
