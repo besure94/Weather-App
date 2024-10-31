@@ -24,56 +24,28 @@ function TempChart(props) {
         <LineChart data={detailedForecast}>
         <CartesianGrid strokeDasharray="3 3"/>
         <XAxis dataKey="time"/>
-        {isCelsiusSelected ?
-          <YAxis
-            yAxisId="left"
-            domain={['auto', 'auto']}
-            label={{
-              value: 'Celsius',
-              position: 'outsideLeft',
-              fontSize: "115%",
-              dx: -20,
-              angle: -90,
-            }}
-            tick={{ dx: -5 }}
-            tickFormatter={(tick) => Math.round(tick)}
-          />
-          :
-          <YAxis
-            yAxisId="left"
-            domain={['auto', 'auto']}
-            label={{
-              value: 'Fahrenheit',
-              position: 'outsideLeft',
-              fontSize: "115%",
-              dx: -20,
-              angle: -90,
-            }}
-            tick={{ dx: -5 }}
-            tickFormatter={(tick) => Math.round(tick)}
-          />
-        }
+        <YAxis
+          yAxisId="left"
+          domain={['auto', 'auto']}
+          label={{
+            value: isCelsiusSelected ? 'Celsius' : 'Fahrenheit',
+            position: 'outsideLeft',
+            fontSize: "115%",
+            dx: -30,
+            angle: -90,
+          }}
+          tick={{ dx: -5 }}
+        />
         <Tooltip/>
         <Legend/>
-        {isCelsiusSelected ?
-          <Line
-            type="monotone"
-            yAxisId="left"
-            dataKey="temp_c"
-            name="Temperature"
-            stroke="#FF6384"
-            activeDot={{ r: 6 }}
-          />
-          :
-          <Line
-            type="monotone"
-            yAxisId="left"
-            dataKey="temp_f"
-            name="Temperature"
-            stroke="#FF6384"
-            activeDot={{ r: 6 }}
-          />
-        }
+        <Line
+          type="monotone"
+          yAxisId="left"
+          dataKey= {isCelsiusSelected ? "temp_c" : "temp_f"}
+          name="Temperature"
+          stroke="#FF6384"
+          activeDot={{ r: 6 }}
+        />
         </LineChart>
       </ResponsiveContainer>
     </React.Fragment>
