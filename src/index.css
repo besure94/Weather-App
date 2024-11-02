@@ -65,6 +65,11 @@ code {
   margin-left: -0.075rem;
 }
 
+/* .graph-icons {
+  display: flex;
+  justify-content: center;
+} */
+
 .humidity-wind-rain-snow {
   display: flex;
   flex-direction: row;
