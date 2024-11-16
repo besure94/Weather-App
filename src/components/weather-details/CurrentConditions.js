@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 function CurrentConditions(props) {
   const { weatherConditionsByDay, selectedForecastDay, isCelsiusSelected } = props;
 
+  console.log("Weather conditions by day: ", weatherConditionsByDay);
   return (
     <React.Fragment>
       <div className="icon-and-temp">

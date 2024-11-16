@@ -66,19 +66,17 @@ function ConditionsOverview(props) {
   return (
     <React.Fragment>
       <div className='temp-and-conditions'>
-        <h4>{weatherApiObject.location.name}, {weatherApiObject.location.region}</h4>
-        <h4>{weatherApiObject.location.country}</h4>
         <React.Fragment>
           <CurrentConditions
             weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}
             isCelsiusSelected={isCelsiusSelected}/>
-          <ConditionsDetails
+          {/* <ConditionsDetails
             weatherConditionsByDay={weatherConditionsByDay}
             rainLikely={rainLikely}
             snowLikely={snowLikely}
             isCelsiusSelected={isCelsiusSelected}/>
           <SunriseSunset
-            weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}/>
+            weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}/> */}
         </React.Fragment>
       </div>
     </React.Fragment>

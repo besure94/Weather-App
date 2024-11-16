@@ -109,13 +109,23 @@ function WeatherControl() {
       {isLoaded && (
         <React.Fragment>
           <hr/>
-          <div className='weather-components-container'>
+          <div className="location">
+            <h4>{weatherApiObject.location.name}, {weatherApiObject.location.region}</h4>
+            <h4>{weatherApiObject.location.country}</h4>
             <div className='current-weather-for-location'>
               <ConditionsOverview
                 weatherApiObject={weatherApiObject}
                 selectedForecastDay={selectedForecastDay}
                 isCelsiusSelected={isCelsiusSelected}/>
             </div>
+          </div>
+          <div className='weather-components-container'>
+            {/* <div className='current-weather-for-location'>
+              <ConditionsOverview
+                weatherApiObject={weatherApiObject}
+                selectedForecastDay={selectedForecastDay}
+                isCelsiusSelected={isCelsiusSelected}/>
+            </div> */}
             <div className='three-day-forecast'>
               <div className='celsius-switch'>
                 <FormGroup>
@@ -130,15 +140,23 @@ function WeatherControl() {
                 selectedForecastDay={selectedForecastDay}
                 isCelsiusSelected={isCelsiusSelected}/>
             </div>
+            <DetailedForecast
+              weatherApiObject={weatherApiObject}
+              locationLocalTime={locationLocalTime}
+              onRoundingTimeToHour={roundLocalTimeToHour}
+              onConvertingTimeFormats={convertForecastTimeFormats}
+              onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}
+              selectedForecastDay={selectedForecastDay}
+              isCelsiusSelected={isCelsiusSelected}/>
           </div>
-          <DetailedForecast
+          {/* <DetailedForecast
             weatherApiObject={weatherApiObject}
             locationLocalTime={locationLocalTime}
             onRoundingTimeToHour={roundLocalTimeToHour}
             onConvertingTimeFormats={convertForecastTimeFormats}
             onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}
             selectedForecastDay={selectedForecastDay}
-            isCelsiusSelected={isCelsiusSelected}/>
+            isCelsiusSelected={isCelsiusSelected}/> */}
         </React.Fragment>
       )}
     </div>
