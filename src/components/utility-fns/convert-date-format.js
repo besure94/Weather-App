@@ -11,5 +11,5 @@ export const trimTimeToHour = (date) => {
 
 export const changeDateToWeekday = (date) => {
   const isoDate = parseISO(date);
-  return format(new Date(isoDate), 'EEE');
+  return format(new Date(isoDate), 'EEEE');
 }

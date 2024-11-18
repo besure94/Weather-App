@@ -7,9 +7,6 @@ import DetailedForecast from './DetailedForecast';
 import ThreeDayForecast from './ThreeDayForecast';
 import { Switch, FormGroup, FormControlLabel } from '@mui/material';
 
-// working on rendering different data based on whether 'Celsius' switch is toggled
-
-// only need to change temperature, wind (kmh), and rain/snow (cm)
 function WeatherControl() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -119,13 +116,8 @@ function WeatherControl() {
                 isCelsiusSelected={isCelsiusSelected}/>
             </div>
           </div>
+          <br/>
           <div className='weather-components-container'>
-            {/* <div className='current-weather-for-location'>
-              <ConditionsOverview
-                weatherApiObject={weatherApiObject}
-                selectedForecastDay={selectedForecastDay}
-                isCelsiusSelected={isCelsiusSelected}/>
-            </div> */}
             <div className='three-day-forecast'>
               <div className='celsius-switch'>
                 <FormGroup>
@@ -149,14 +141,6 @@ function WeatherControl() {
               selectedForecastDay={selectedForecastDay}
               isCelsiusSelected={isCelsiusSelected}/>
           </div>
-          {/* <DetailedForecast
-            weatherApiObject={weatherApiObject}
-            locationLocalTime={locationLocalTime}
-            onRoundingTimeToHour={roundLocalTimeToHour}
-            onConvertingTimeFormats={convertForecastTimeFormats}
-            onDisplayingUpdated24HrForecast={displayUpdated24HourForecast}
-            selectedForecastDay={selectedForecastDay}
-            isCelsiusSelected={isCelsiusSelected}/> */}
         </React.Fragment>
       )}
     </div>

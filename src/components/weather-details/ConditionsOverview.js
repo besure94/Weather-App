@@ -44,6 +44,18 @@ function ConditionsOverview(props) {
         : '',
       sunset: selectedForecastDay !== 0
         ? `${forecast.astro.sunset}`
+        : '',
+      high_f: selectedForecastDay !== 0
+        ? `${forecast.day.maxtemp_f}${'\u00b0'}`
+        : '',
+      high_c: selectedForecastDay !== 0
+        ? `${forecast.day.maxtemp_c}${'\u00b0'}`
+        : '',
+      low_f: selectedForecastDay !== 0
+        ? `${forecast.day.mintemp_f}${'\u00b0'}`
+        : '',
+      low_c: selectedForecastDay !== 0
+        ? `${forecast.day.mintemp_c}${'\u00b0'}`
         : ''
     }
 
