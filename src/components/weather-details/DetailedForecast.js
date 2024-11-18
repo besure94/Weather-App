@@ -112,7 +112,7 @@ function DetailedForecast(props) {
             </IconButton>
           )}
         </div>
-        <br/>
+        {/* <br/> */}
         <div className="detailed-forecast">
           {activeIcon === 'temperature' && (
             <TempChart
