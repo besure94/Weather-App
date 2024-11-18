@@ -102,11 +102,29 @@ function WeatherControl() {
     <div>
       <br/>
       <SearchForm onFormSubmission={handleFormSubmission}/>
-      {error && <div className='error'><h2>Error: {error}</h2></div>}
+
+      {error &&
+        <React.Fragment>
+          <br/>
+          <div className='error'>
+            <h2>Error: {error}</h2>
+          </div>
+        </React.Fragment>
+      }
+
       {isLoaded && (
         <React.Fragment>
           <hr/>
           <div className="location">
+            <FormGroup>
+              <FormControlLabel
+                onClick={handleCelsiusSwitchClick}
+                control={<Switch/>}
+                label={
+                  <span style={{ fontSize: "1.2rem", fontWeight: '600'}}>{`\u00b0C`}</span>
+                }
+              />
+            </FormGroup>
             <h4>{weatherApiObject.location.name}, {weatherApiObject.location.region}</h4>
             <h4>{weatherApiObject.location.country}</h4>
             <div className='current-weather-for-location'>
@@ -119,11 +137,6 @@ function WeatherControl() {
           <br/>
           <div className='weather-components-container'>
             <div className='three-day-forecast'>
-              <div className='celsius-switch'>
-                <FormGroup>
-                  <FormControlLabel onClick={handleCelsiusSwitchClick} control={<Switch/>} label={`\u00b0C`}/>
-                </FormGroup>
-              </div>
               <ThreeDayForecast
                 weatherApiObject={weatherApiObject}
                 onChanging3DayDateFormats={changeDateFormatsToWeekday}
