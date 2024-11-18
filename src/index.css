@@ -71,6 +71,8 @@ code {
 .humidity-wind-rain-snow {
   display: flex;
   flex-direction: row;
+  /* display: grid; */
+  /* grid-template-columns: repeat(2, 1); */
   gap: 0.5rem;
 }
 
@@ -126,7 +128,7 @@ code {
 .three-day-forecast {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 30%;
   background-color: #EEEEEE;
   padding: 1rem;
   padding-top: 0.15rem;

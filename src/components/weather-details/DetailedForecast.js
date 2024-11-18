@@ -98,12 +98,10 @@ function DetailedForecast(props) {
             <AirIcon fontSize='large'/>
           </IconButton>
 
-          {rainLikely && (
-            <IconButton color="primary" onClick={() =>
-              handleSettingActiveIcon('rain')} className={activeIcon === 'rain' ? 'icon-active' : ''}>
-              <WaterDrop fontSize="large"/>
-            </IconButton>
-          )}
+          <IconButton color="primary" onClick={() =>
+            handleSettingActiveIcon('rain')} className={activeIcon === 'rain' ? 'icon-active' : ''}>
+            <WaterDrop fontSize="large"/>
+          </IconButton>
 
           {snowLikely && (
             <IconButton color="primary" onClick={() =>

@@ -82,12 +82,13 @@ function ConditionsOverview(props) {
           <CurrentConditions
             weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}
             isCelsiusSelected={isCelsiusSelected}/>
-          {/* <ConditionsDetails
+          <br/>
+          <ConditionsDetails
             weatherConditionsByDay={weatherConditionsByDay}
             rainLikely={rainLikely}
             snowLikely={snowLikely}
             isCelsiusSelected={isCelsiusSelected}/>
-          <SunriseSunset
+          {/* <SunriseSunset
             weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}/> */}
         </React.Fragment>
       </div>
