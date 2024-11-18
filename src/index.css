@@ -80,7 +80,7 @@ code {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin-bottom: -0.5rem;
+  margin-bottom: -1rem;
 }
 
 .location {
@@ -139,7 +139,7 @@ code {
 .weather-components-container {
   display: flex;
   flex-direction: row;
-  gap: 0.5rem;
+  gap: 0.25rem;
   padding-left: 5rem;
   padding-right: 5rem;
   padding-bottom: 1rem;
