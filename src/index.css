@@ -60,7 +60,7 @@ code {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
-  margin-left: -0.075rem;
+  /* margin-left: -0.075rem; */
 }
 
 .graph-icons {
@@ -127,7 +127,7 @@ code {
 .three-day-forecast {
   display: flex;
   flex-direction: column;
-  width: 35%;
+  width: 20%;
   /* justify-content: center; */
 }
 
@@ -136,7 +136,7 @@ code {
   /* grid-template-columns: 0.5fr 3.5fr; */
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  gap: 1rem;
   /* justify-content: space-evenly; */
   /* align-items: center; */
   /* display: flex; */
