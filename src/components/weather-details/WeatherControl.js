@@ -122,7 +122,11 @@ function WeatherControl() {
                   onClick={handleCelsiusSwitchClick}
                   control={<Switch/>}
                   label={
-                    <span style={{ fontSize: "1.2rem", fontWeight: '600'}}>{`\u00b0C`}</span>
+                    <span style={{
+                      fontSize: "1.2rem",
+                      fontWeight: '600'}}>
+                      {`\u00b0C`}
+                    </span>
                   }
                 />
               </FormGroup>
