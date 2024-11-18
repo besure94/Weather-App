@@ -8,7 +8,7 @@ function CurrentConditions(props) {
   return (
     <React.Fragment>
       <div className="icon-and-temp">
-        {/* <img className="current-weather-icon" src={weatherConditionsByDay.icon} alt="An icon showing current weather conditions."/> */}
+        <img className="current-weather-icon" src={weatherConditionsByDay.icon} alt="An icon showing current weather conditions."/>
         {isCelsiusSelected ?
           <h2>{weatherConditionsByDay.temp_c}</h2>
           :
