@@ -115,23 +115,25 @@ function WeatherControl() {
       {isLoaded && (
         <React.Fragment>
           <hr/>
-          <div className="location">
-            <FormGroup>
-              <FormControlLabel
-                onClick={handleCelsiusSwitchClick}
-                control={<Switch/>}
-                label={
-                  <span style={{ fontSize: "1.2rem", fontWeight: '600'}}>{`\u00b0C`}</span>
-                }
-              />
-            </FormGroup>
-            <h4>{weatherApiObject.location.name}, {weatherApiObject.location.region}</h4>
-            <h4>{weatherApiObject.location.country}</h4>
-            <div className='current-weather-for-location'>
-              <ConditionsOverview
-                weatherApiObject={weatherApiObject}
-                selectedForecastDay={selectedForecastDay}
-                isCelsiusSelected={isCelsiusSelected}/>
+          <div className='location-container'>
+            <div className="location">
+              <FormGroup>
+                <FormControlLabel
+                  onClick={handleCelsiusSwitchClick}
+                  control={<Switch/>}
+                  label={
+                    <span style={{ fontSize: "1.2rem", fontWeight: '600'}}>{`\u00b0C`}</span>
+                  }
+                />
+              </FormGroup>
+              <h4>{weatherApiObject.location.name}, {weatherApiObject.location.region}</h4>
+              <h4>{weatherApiObject.location.country}</h4>
+              <div className='current-weather-for-location'>
+                <ConditionsOverview
+                  weatherApiObject={weatherApiObject}
+                  selectedForecastDay={selectedForecastDay}
+                  isCelsiusSelected={isCelsiusSelected}/>
+              </div>
             </div>
           </div>
           <br/>

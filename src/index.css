@@ -20,11 +20,6 @@ code {
 
 /* weather details styling */
 
-.celsius-switch {
-  display: flex;
-  margin-right: -0.5rem;
-}
-
 .current-weather-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -35,14 +30,6 @@ code {
   flex-direction: row;
   align-items: center;
   width: 100%;
-}
-
-.details {
-  background-color: #eee;
-  padding: 1rem;
-  margin: 0.75rem;
-  border-radius: 0.325rem;
-  font-size: 1rem;
 }
 
 .error {
@@ -89,11 +76,22 @@ code {
   justify-content: flex-start;
 }
 
+.location-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: -0.5rem;
+}
+
 .location {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #EEEEEE;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 45%;
 }
 
 .location-weather-forecast {
@@ -144,6 +142,7 @@ code {
   gap: 0.5rem;
   padding-left: 5rem;
   padding-right: 5rem;
+  padding-bottom: 1rem;
 }
 
 .weather-forecast {
