@@ -18,7 +18,7 @@ function WindChart(props) {
     <React.Fragment>
       <ResponsiveContainer width="100%" height={250}>
         <LineChart data={detailedForecast}>
-        {/* <CartesianGrid strokeDasharray="3 3"/> */}
+        <CartesianGrid strokeDasharray="3 3"/>
         <XAxis dataKey="time" padding={{ left: 15, right: 15 }}/>
         <YAxis
           yAxisId="left"
