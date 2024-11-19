@@ -20,6 +20,20 @@ code {
 
 /* weather details styling */
 
+.astro-grid-item {
+  display: flex;
+  background-color: #EEEEEE;
+  padding: 1.75rem;
+  border-radius: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.conditions-details {
+  justify-content: center;
+  align-items: center;
+}
+
 .current-weather-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -55,12 +69,21 @@ code {
   justify-content: center;
 }
 
-.humidity-wind-rain-snow {
+.grid-item {
   display: flex;
-  flex-direction: row;
-  /* display: grid; */
-  /* grid-template-columns: repeat(2, 1); */
+  background-color: #EEEEEE;
+  padding: 1.75rem;
+  border-radius: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.humidity-wind-rain-snow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
 }
 
 .icon-active {
@@ -81,6 +104,7 @@ code {
   justify-content: center;
   width: 100%;
   margin-bottom: -1rem;
+  gap: 0.5rem;
 }
 
 .location {
@@ -92,6 +116,13 @@ code {
   padding: 1rem;
   border-radius: 1rem;
   width: 45%;
+}
+
+.location-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  width: 100%;
 }
 
 .location-weather-forecast {
@@ -111,9 +142,11 @@ code {
 }
 
 .sunrise-sunset {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  align-items: center;
   gap: 0.5rem;
+  width: 15%;
 }
 
 .temp-and-conditions {

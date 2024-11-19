@@ -12,8 +12,6 @@ import HumidityChart from "../charts/HumidityChart";
 import RainChart from "../charts/RainChart";
 import SnowChart from "../charts/SnowChart";
 
-// should upgrade Tooltip to be more detailed and include stuff like %, mph, F, etc
-
 function DetailedForecast(props) {
   const { weatherApiObject,
     locationLocalTime,
@@ -24,8 +22,8 @@ function DetailedForecast(props) {
     isCelsiusSelected } = props;
   const [detailedForecast, setDetailedForecast] = useState([]);
   const [activeIcon, setActiveIcon] = useState(null);
-  const [rainLikely, setRainLikely] = useState(false);
-  const [snowLikely, setSnowLikely] = useState(false);
+  // const [rainLikely, setRainLikely] = useState(false);
+  // const [snowLikely, setSnowLikely] = useState(false);
 
   useEffect(() => {
     const merged3DayForecastArray = weatherApiObject.forecast.forecastday.flatMap(day => day.hour);
@@ -54,17 +52,17 @@ function DetailedForecast(props) {
     setActiveIcon('temperature');
     const forecast = weatherApiObject.forecast.forecastday[selectedForecastDay];
 
-    if (forecast.day.daily_chance_of_rain.toString().replace(/[^0-9]/g, '') >= 10) {
-      setRainLikely(true);
-    } else {
-      setRainLikely(false);
-    }
+    // if (forecast.day.daily_chance_of_rain.toString().replace(/[^0-9]/g, '') >= 10) {
+    //   setRainLikely(true);
+    // } else {
+    //   setRainLikely(false);
+    // }
 
-    if (forecast.day.daily_chance_of_snow.toString().replace(/[^0-9]/g, '') >= 10) {
-      setSnowLikely(true);
-    } else {
-      setSnowLikely(false);
-    }
+    // if (forecast.day.daily_chance_of_snow.toString().replace(/[^0-9]/g, '') >= 10) {
+    //   setSnowLikely(true);
+    // } else {
+    //   setSnowLikely(false);
+    // }
 
   }, [weatherApiObject, locationLocalTime, selectedForecastDay]);
 
@@ -103,12 +101,10 @@ function DetailedForecast(props) {
             <WaterDrop fontSize="large"/>
           </IconButton>
 
-          {snowLikely && (
-            <IconButton color="primary" onClick={() =>
-              handleSettingActiveIcon('snow')} className={activeIcon === 'snow' ? 'icon-active' : ''}>
-              <AcUnitIcon fontSize="large"/>
-            </IconButton>
-          )}
+          <IconButton color="primary" onClick={() =>
+            handleSettingActiveIcon('snow')} className={activeIcon === 'snow' ? 'icon-active' : ''}>
+            <AcUnitIcon fontSize="large"/>
+          </IconButton>
         </div>
         {/* <br/> */}
         <div className="detailed-forecast">

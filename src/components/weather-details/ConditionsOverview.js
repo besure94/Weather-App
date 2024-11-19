@@ -7,8 +7,8 @@ import SunriseSunset from './SunriseSunset';
 function ConditionsOverview(props) {
   const { weatherApiObject, selectedForecastDay, isCelsiusSelected } = props;
   const [weatherConditionsByDay, setDisplayedWeatherByDay] = useState({});
-  const [rainLikely, setRainLikely] = useState(false);
-  const [snowLikely, setSnowLikely] = useState(false);
+  // const [rainLikely, setRainLikely] = useState(false);
+  // const [snowLikely, setSnowLikely] = useState(false);
 
   useEffect(() => {
     const forecast = weatherApiObject.forecast.forecastday[selectedForecastDay];
@@ -39,12 +39,8 @@ function ConditionsOverview(props) {
         : `${forecast.day.avghumidity}%`,
       chanceOfRain: `${forecast.day.daily_chance_of_rain}%`,
       chanceOfSnow: `${forecast.day.daily_chance_of_snow}%`,
-      sunrise: selectedForecastDay !== 0
-        ? `${forecast.astro.sunrise}`
-        : '',
-      sunset: selectedForecastDay !== 0
-        ? `${forecast.astro.sunset}`
-        : '',
+      sunrise: `${forecast.astro.sunrise}`,
+      sunset: `${forecast.astro.sunset}`,
       high_f: selectedForecastDay !== 0
         ? `${forecast.day.maxtemp_f}${'\u00b0'}`
         : '',
@@ -61,36 +57,43 @@ function ConditionsOverview(props) {
 
     setDisplayedWeatherByDay(dailyWeatherConditions);
 
-    if (dailyWeatherConditions.chanceOfRain.replace(/[^0-9]/g, '') >= 10) {
-      setRainLikely(true);
-    } else {
-      setRainLikely(false);
-    }
+    // if (dailyWeatherConditions.chanceOfRain.replace(/[^0-9]/g, '') >= 10) {
+    //   setRainLikely(true);
+    // } else {
+    //   setRainLikely(false);
+    // }
 
-    if (dailyWeatherConditions.chanceOfSnow.replace(/[^0-9]/g, '') >= 10) {
-      setSnowLikely(true);
-    } else {
-      setSnowLikely(false);
-    }
+    // if (dailyWeatherConditions.chanceOfSnow.replace(/[^0-9]/g, '') >= 10) {
+    //   setSnowLikely(true);
+    // } else {
+    //   setSnowLikely(false);
+    // }
 
   }, [weatherApiObject, selectedForecastDay]);
 
   return (
     <React.Fragment>
-      <div className='temp-and-conditions'>
-        <React.Fragment>
-          <CurrentConditions
-            weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}
-            isCelsiusSelected={isCelsiusSelected}/>
-          <br/>
-          <ConditionsDetails
-            weatherConditionsByDay={weatherConditionsByDay}
-            rainLikely={rainLikely}
-            snowLikely={snowLikely}
-            isCelsiusSelected={isCelsiusSelected}/>
-          {/* <SunriseSunset
-            weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}/> */}
-        </React.Fragment>
+      <div className="location-wrapper">
+        <div className='location-container'>
+          <div className="sunrise-sunset">
+            <SunriseSunset
+              weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}/>
+          </div>
+          <div className="location">
+            <h4>{weatherApiObject.location.name}, {weatherApiObject.location.region}</h4>
+            <h4>{weatherApiObject.location.country}</h4>
+            <div className='temp-and-conditions'>
+              <CurrentConditions
+                weatherConditionsByDay={weatherConditionsByDay} selectedForecastDay={selectedForecastDay}
+                isCelsiusSelected={isCelsiusSelected}/>
+            </div>
+          </div>
+          <div className="conditions-details">
+            <ConditionsDetails
+              weatherConditionsByDay={weatherConditionsByDay}
+              isCelsiusSelected={isCelsiusSelected}/>
+          </div>
+        </div>
       </div>
     </React.Fragment>
   )

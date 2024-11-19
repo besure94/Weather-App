@@ -24,6 +24,8 @@ function ThreeDayForeCast(props) {
   return (
     <React.Fragment>
       <div className="forecast-for-each-day">
+        <h4 style={{ textAlign: "center"}}>3 Day Forecast</h4>
+        <br/>
         <React.Fragment>
           {threeDayForecast.map((forecast, index) =>
             <div key={index} onClick={() => onSelectingForecastDay(index)}>
