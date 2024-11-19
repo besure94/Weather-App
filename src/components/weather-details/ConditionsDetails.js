@@ -11,20 +11,20 @@ function ConditionsDetails(props) {
   return (
     <React.Fragment>
       <div className="humidity-wind-rain-snow">
-        <div className="grid-item">
+        <div className="humidity">
           <h5><WaterIcon fontSize="large"/>&nbsp;{weatherConditionsByDay.humidity}</h5>
         </div>
-        <div className="grid-item">
+        <div className="wind">
           {isCelsiusSelected ?
             <h5><AirIcon fontSize='large'/>&nbsp;{weatherConditionsByDay.wind_kph}</h5>
             :
             <h5><AirIcon fontSize='large'/>&nbsp;{weatherConditionsByDay.wind_mph}</h5>
           }
         </div>
-        <div className="grid-item">
+        <div className="rain">
           <h5><WaterDrop fontSize="large"/>&nbsp;{weatherConditionsByDay.chanceOfRain}</h5>
         </div>
-        <div className="grid-item">
+        <div className="snow">
           <h5><AcUnitIcon fontSize="large"/>&nbsp;{weatherConditionsByDay.chanceOfSnow}</h5>
         </div>
       </div>

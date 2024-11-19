@@ -8,10 +8,10 @@ function SunriseSunset(props) {
 
   return (
     <React.Fragment>
-      <div className="astro-grid-item">
+      <div className="sunrise">
         <h5><Brightness6Icon fontSize="large"/>&nbsp;{weatherConditionsByDay.sunrise}</h5>
       </div>
-      <div className="astro-grid-item">
+      <div className="sunset">
         <h5><Brightness4Icon fontSize="large"/>&nbsp;{weatherConditionsByDay.sunset}</h5>
       </div>
     </React.Fragment>
