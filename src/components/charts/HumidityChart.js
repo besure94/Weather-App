@@ -38,7 +38,7 @@ function HumidityChart(props) {
         yAxisId="left"
         dataKey="humidity"
         name="Humidity"
-        stroke="#0d6efd"
+        stroke="#2196F3"
         activeDot={{ r: 6 }}
       />
       </LineChart>

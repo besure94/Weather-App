@@ -43,7 +43,7 @@ function TempChart(props) {
           yAxisId="left"
           dataKey= {isCelsiusSelected ? "temp_c" : "temp_f"}
           name="Temperature"
-          stroke="#FF6384"
+          stroke="#FF7043"
           activeDot={{ r: 6 }}
         />
         </LineChart>

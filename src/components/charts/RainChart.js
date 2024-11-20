@@ -42,7 +42,7 @@ function RainChart(props) {
           yAxisId="left"
           dataKey={isCelsiusSelected ? "precip_mm" : "precip_in"}
           name="Rain"
-          stroke="#0d6efd"
+          stroke="#1E88E5"
           activeDot={{ r: 6 }}
         />
         </LineChart>

@@ -42,7 +42,7 @@ function SnowChart(props) {
           yAxisId="left"
           dataKey={isCelsiusSelected ? "snow_cm" : "snow_in"}
           name="Snow"
-          stroke="#0d6efd"
+          stroke="#2196F3"
           activeDot={{ r: 6 }}
         />
         </LineChart>

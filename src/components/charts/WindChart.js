@@ -39,7 +39,7 @@ function WindChart(props) {
           yAxisId="left"
           dataKey={isCelsiusSelected ? "wind_kph" : "wind_mph"}
           name="Wind"
-          stroke="#198754"
+          stroke="#43A047"
           activeDot={{ r: 6 }}
         />
         </LineChart>

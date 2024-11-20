@@ -84,25 +84,37 @@ function DetailedForecast(props) {
       <br/>
       <div className='weather-forecast'>
         <div className="graph-icons">
-          <IconButton color="warning" onClick={() => handleSettingActiveIcon('temperature')} className={activeIcon === 'temperature' ? 'icon-active' : ''}>
+          <IconButton
+            sx={{ color: '#FF7043' }}
+            onClick={() => handleSettingActiveIcon('temperature')}
+            className={activeIcon === 'temperature' ? 'icon-active' : ''}>
             <DeviceThermostatIcon fontSize="large"/>
           </IconButton>
 
-          <IconButton color="primary" onClick={() => handleSettingActiveIcon('humidity')} className={activeIcon === 'humidity' ? 'icon-active' : ''}>
+          <IconButton
+            sx={{ color: '#2196F3' }}
+            onClick={() => handleSettingActiveIcon('humidity')}
+            className={activeIcon === 'humidity' ? 'icon-active' : ''}>
             <WaterIcon fontSize="large"/>
           </IconButton>
 
-          <IconButton color="success" onClick={() => handleSettingActiveIcon('wind')} className={activeIcon === 'wind' ? 'icon-active' : ''}>
+          <IconButton
+            sx={{ color: '#43A047' }}
+            onClick={() => handleSettingActiveIcon('wind')} className={activeIcon === 'wind' ? 'icon-active' : ''}>
             <AirIcon fontSize='large'/>
           </IconButton>
 
-          <IconButton color="primary" onClick={() =>
-            handleSettingActiveIcon('rain')} className={activeIcon === 'rain' ? 'icon-active' : ''}>
+          <IconButton
+            sx={{ color: '#1E88E5' }}
+            onClick={() => handleSettingActiveIcon('rain')}
+            className={activeIcon === 'rain' ? 'icon-active' : ''}>
             <WaterDrop fontSize="large"/>
           </IconButton>
 
-          <IconButton color="primary" onClick={() =>
-            handleSettingActiveIcon('snow')} className={activeIcon === 'snow' ? 'icon-active' : ''}>
+          <IconButton
+            sx={{ color: '#2196F3' }}
+            onClick={() => handleSettingActiveIcon('snow')}
+            className={activeIcon === 'snow' ? 'icon-active' : ''}>
             <AcUnitIcon fontSize="large"/>
           </IconButton>
         </div>
