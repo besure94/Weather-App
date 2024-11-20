@@ -22,6 +22,7 @@ function SearchForm(props) {
               type="text"
               name="city"
               placeholder="Enter a city or region"
+              variant="outlined"
               slotProps={{
                 input: {
                   startAdornment:

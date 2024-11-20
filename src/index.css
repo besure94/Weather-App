@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, #f0f4ff, #e9eff8, #dce7f5);
 }
 
 code {
@@ -34,9 +35,10 @@ code {
 
 .day {
   display: flex;
-  flex-direction: row;
   align-items: center;
+  padding: 0.125rem 1rem;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .error {
@@ -110,8 +112,6 @@ code {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* background-color: #EEEEEE; */
-  /* background-color: #E8EAF6; */
   background: linear-gradient(135deg, #B3E5FC, #FFCCBC, #F3E5F5);
   padding: 1rem;
   border-radius: 1rem;
@@ -146,6 +146,12 @@ code {
   width: 100%;
 }
 
+.selected {
+  background: linear-gradient(135deg, #B3E5FC, #81D4FA, #4FC3F7);
+  /* background: linear-gradient(135deg, #FFE5B4, #FFCC80, #FFB74D); */
+  border-radius: 1rem;
+}
+
 .snow {
   background: linear-gradient(135deg, #E3F2FD, #BBDEFB, #90CAF9);
   /* background: linear-gradient(135deg, #E3F2FD, #BBDEFB, #FFFFFF); */
@@ -153,8 +159,6 @@ code {
 
 .sunrise {
   display: flex;
-  /* background-color: #EEEEEE; */
-  /* background-color: #A6D1FF; */
   background: linear-gradient(135deg, #FFD1DC, #FFE7A9, #D0E1FF);
   padding: 1.75rem;
   border-radius: 1rem;
@@ -164,8 +168,6 @@ code {
 
 .sunset {
   display: flex;
-  /* background-color: #EEEEEE; */
-  /* background-color: #8C9EFF; */
   background: linear-gradient(135deg, #FF9E80, #FF80AB, #B388FF, #8C9EFF);
   padding: 1.75rem;
   border-radius: 1rem;
@@ -192,7 +194,6 @@ code {
   display: flex;
   flex-direction: column;
   width: 30%;
-  /* background-color: #EEEEEE; */
   background: linear-gradient(135deg, #FFE0B2, #FFCCBC, #D1C4E9);
   padding: 1rem;
   padding-top: 0.15rem;
@@ -213,7 +214,6 @@ code {
 
 .weather-forecast {
   width: 100%;
-  /* background-color: #EEEEEE; */
   background: linear-gradient(135deg, #E0F7FA, #B3E5FC, #D1C4E9);
   padding: 1rem;
   border-radius: 1rem;

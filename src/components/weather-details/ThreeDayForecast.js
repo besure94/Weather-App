@@ -30,7 +30,7 @@ function ThreeDayForeCast(props) {
           {threeDayForecast.map((forecast, index) =>
             <div key={index} onClick={() => onSelectingForecastDay(index)}>
               <div className={`day ${selectedForecastDay === index ? 'selected' : ''}`}>
-                <h5>{selectedForecastDay === index && '\u25CF'}&nbsp;{forecast.date}</h5>
+                <h5>{forecast.date}</h5>
                 <img className="three-day-forecast-icon" src={forecast.day.condition.icon} alt="An icon showing the general forecast for the day."/>
                 {isCelsiusSelected ?
                   <h5>{forecast.day.maxtemp_c}{'\u00b0'}/{forecast.day.mintemp_c}{'\u00b0'}</h5>
